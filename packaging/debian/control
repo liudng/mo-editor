@@ -1,0 +1,40 @@
+Source: hello
+Section: editors
+Priority: optional
+Maintainer: liudng <liudng@users.noreply.github.com>
+Build-Depends: debhelper-compat (= 13),
+ cmake,
+ ninja-build,
+ qt6-base-dev,
+ qt6-base-dev-tools,
+ qt6-tools-dev,
+ qt6-tools-dev-tools,
+ qt6-l10n-tools,
+ qt6-svg-dev,
+ libkf6syntaxhighlighting-dev,
+ libuchardet-dev,
+ libwayland-dev,
+ wayland-protocols,
+ libxkbcommon-dev
+Standards-Version: 4.7.0
+Homepage: https://github.com/liudng/hello
+Vcs-Git: https://github.com/liudng/hello.git
+Vcs-Browser: https://github.com/liudng/hello
+
+Package: hello
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ qt6-base-dev,
+ libkf6syntaxhighlighting-dev,
+ libuchardet-dev
+Description: A simple Qt6 text editor
+ Hello is a modern text editor built with Qt6 Widgets.
+ .
+ Features:
+  * Multi-tab interface
+  * Syntax highlighting (200+ languages via KSyntaxHighlighting)
+  * Automatic encoding detection (libuchardet)
+  * Session restore
+  * Find and replace
+  * Wayland native

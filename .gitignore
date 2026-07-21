@@ -1,0 +1,61 @@
+# Build directories
+build/
+build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+install_manifest.txt
+compile_commands.json
+.cmake/
+
+# Qt
+*.user
+*.user.*
+*.qm
+*.qmlc
+*.qmltc
+.qmake.stash
+qrc_*.cpp
+moc_*.cpp
+moc_*.h
+ui_*.h
+*.qmlproject.user*
+
+# IDE / Editor
+.vscode/
+.idea/
+.clangd/
+.cache/
+*.swp
+*.swo
+*~
+
+# Compiler / linker artifacts
+*.o
+*.obj
+*.so
+*.so.*
+*.a
+*.dylib
+*.exe
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local presets (user-specific)
+CMakeUserPresets.json
+
+# Node (for tooling, if any)
+node_modules/
+
+# Coverage / sanitizer output
+*.gcda
+*.gcno
+*.gcov
+*.asan
+*.tsan
+*.ubsan

@@ -1,0 +1,23 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -e
+
+if [ -x /usr/bin/update-desktop-database ]; then
+    update-desktop-database -q
+fi
+
+if [ -x /usr/bin/gtk-update-icon-cache ]; then
+    gtk-update-icon-cache -q /usr/share/icons/hicolor
+fi
+
+if [ -x /usr/bin/update-mime-database ]; then
+    update-mime-database /usr/share/mime
+fi
+
+# D-Bus session bus services are activated on demand, no reload needed.
+# if [ -x /usr/bin/dbus-send ]; then :; fi
+
+# dh_installdeb will replace this with shell fragments automatically.
+
+exit 0

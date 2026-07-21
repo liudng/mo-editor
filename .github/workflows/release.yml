@@ -1,0 +1,165 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2024 hello contributors
+#
+# Release workflow. Triggered by version tags (v*). Builds release
+# artifacts (tgz/deb/rpm), generates an SPDX SBOM, signs artifacts
+# with GPG, builds a Flatpak bundle, and publishes them to the
+# GitHub release associated with the tag.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build packages
+    runs-on: ubuntu-24.04
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: apt-${{ runner.os }}-${{ hashFiles('.github/workflows/release.yml') }}
+          restore-keys: |
+            apt-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            qt6-base-dev \
+            qt6-base-dev-tools \
+            qt6-tools-dev \
+            qt6-tools-dev-tools \
+            qt6-l10n-tools \
+            qt6-svg-dev \
+            libkf6syntaxhighlighting-dev \
+            libuchardet-dev \
+            libwayland-dev \
+            wayland-protocols \
+            libxkbcommon-dev \
+            ninja-build \
+            ccache \
+            clang \
+            clang-format \
+            clang-tidy \
+            rpm \
+            dpkg-dev \
+            gnupg
+
+      - name: Cache ccache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-release-${{ github.sha }}
+          restore-keys: |
+            ccache-release-
+
+      - name: Import GPG key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+
+      - name: Configure
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Package
+        working-directory: build
+        run: cpack -G "TGZ;DEB;RPM"
+
+      - name: Generate SBOM
+        run: cmake --build build --target hello_spdx_sbom
+
+      - name: Sign artifacts
+        env:
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        run: |
+          for artifact in build/*.tgz build/*.deb build/*.rpm; do
+            [ -f "$artifact" ] || continue
+            gpg --batch --yes --local-user "$GPG_KEY_ID" \
+                --detach-sign --armor "$artifact"
+          done
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-packages
+          path: |
+            build/*.tgz
+            build/*.deb
+            build/*.rpm
+            build/*.asc
+            build/*.spdx
+            build/*.spdx.json
+          if-no-files-found: warn
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/*.tgz
+            build/*.deb
+            build/*.rpm
+            build/*.asc
+            build/*.spdx
+            build/*.spdx.json
+          generate_release_notes: true
+          fail_on_unmatched_files: false
+
+  flatpak:
+    name: Build Flatpak
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install flatpak
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends flatpak flatpak-builder
+          sudo flatpak remote-add --if-not-exists flathub \
+            https://flathub.org/repo/flathub.flatpakrepo || true
+
+      - name: Build Flatpak bundle
+        run: |
+          flatpak-builder --user --install --force-clean build-dir \
+            packaging/flatpak/io.github.liudng.hello.yaml
+          flatpak build-bundle ~/.local/share/flatpak/repo \
+            io.github.liudng.hello.flatpak io.github.liudng.hello
+
+      - name: Upload Flatpak artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-flatpak
+          path: io.github.liudng.hello.flatpak
+          if-no-files-found: warn
+
+      - name: Publish Flatpak to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: io.github.liudng.hello.flatpak
+          generate_release_notes: true
+          fail_on_unmatched_files: false

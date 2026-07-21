@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.liudng.hello</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Hello</name>
+  <name xml:lang="zh_CN">Hello 编辑器</name>
+  <summary>A simple Qt6 text editor</summary>
+  <summary xml:lang="zh_CN">简单的 Qt6 文本编辑器</summary>
+  <description>
+    <p>
+      Hello is a modern text editor built with Qt6 Widgets. It is designed to be
+      fast, lightweight, and friendly for both casual note-taking and source code
+      editing on Wayland-based Linux desktops.
+    </p>
+    <p xml:lang="zh_CN">
+      Hello 是一款基于 Qt6 Widgets 构建的现代化文本编辑器，适用于基于 Wayland 的
+      Linux 桌面环境，既适合日常记事，也适合源代码编辑。
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Multi-tab interface for working with several files at once</li>
+      <li>Syntax highlighting for 200+ languages via KSyntaxHighlighting</li>
+      <li>Automatic encoding detection powered by libuchardet</li>
+      <li>Session restore to reopen files from the last run</li>
+      <li>Find and replace with case-sensitive and regex support</li>
+      <li>Wayland native, no X11 dependency</li>
+    </ul>
+  </description>
+  <developer_name>liudng</developer_name>
+  <url type="homepage">https://github.com/liudng/hello</url>
+  <url type="bugtracker">https://github.com/liudng/hello/issues</url>
+  <launchable type="desktop-id">io.github.liudng.hello.desktop</launchable>
+  <provides>
+    <binary>hello</binary>
+  </provides>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <display_wayland compare="ge">1.20</display_wayland>
+  </recommends>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+  <screensaver_theme>GNOME</screensaver_theme>
+  <screensaver_theme>KDE</screensaver_theme>
+  <releases>
+    <release version="0.1.0" date="2026-07-21">
+      <description>
+        <p>Initial release.</p>
+        <ul>
+          <li>Multi-tab editing with KSyntaxHighlighting</li>
+          <li>Automatic encoding detection via libuchardet</li>
+          <li>Session restore and find/replace</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

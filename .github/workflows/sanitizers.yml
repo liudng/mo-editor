@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2024 hello contributors
+#
+# Sanitizer build workflow. Runs AddressSanitizer, ThreadSanitizer, and
+# UndefinedBehaviorSanitizer configurations to catch memory, threading,
+# and undefined-behavior issues early in development.
+
+name: Sanitizers
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  sanitizer:
+    name: ${{ matrix.sanitizer }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer: [address, thread, undefined]
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/.ccache
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: apt-${{ runner.os }}-${{ hashFiles('.github/workflows/sanitizers.yml') }}
+          restore-keys: |
+            apt-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            qt6-base-dev \
+            qt6-base-dev-tools \
+            qt6-tools-dev \
+            qt6-tools-dev-tools \
+            qt6-l10n-tools \
+            qt6-svg-dev \
+            libkf6syntaxhighlighting-dev \
+            libuchardet-dev \
+            libwayland-dev \
+            wayland-protocols \
+            libxkbcommon-dev \
+            ninja-build \
+            ccache \
+            clang \
+            clang-format \
+            clang-tidy
+
+      - name: Cache ccache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-sanitizer-${{ matrix.sanitizer }}-${{ github.sha }}
+          restore-keys: |
+            ccache-sanitizer-${{ matrix.sanitizer }}-
+            ccache-sanitizer-
+
+      - name: Configure
+        run: |
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DHELLO_ENABLE_SANITIZER=${{ matrix.sanitizer }}
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        env:
+          ASAN_OPTIONS: detect_leaks=1:halt_on_error=1:abort_on_error=1:print_summary=1
+          TSAN_OPTIONS: halt_on_error=1:abort_on_error=1:print_summary=1
+          UBSAN_OPTIONS: halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1
+        run: ctest --test-dir build --output-on-failure

@@ -1,0 +1,78 @@
+/* SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+   SPDX-License-Identifier: GPL-3.0-or-later */
+
+QMainWindow, QWidget {
+    background-color: #ffffff;
+    color: #1e1e1e;
+}
+
+QMenuBar {
+    background-color: #f0f0f0;
+    color: #1e1e1e;
+}
+
+QMenuBar::item:selected {
+    background-color: #cbe8ff;
+}
+
+QMenu {
+    background-color: #ffffff;
+    color: #1e1e1e;
+    border: 1px solid #cccccc;
+}
+
+QMenu::item:selected {
+    background-color: #cbe8ff;
+}
+
+QTabWidget::pane {
+    border: 1px solid #cccccc;
+}
+
+QTabBar::tab {
+    background: #f0f0f0;
+    color: #1e1e1e;
+    padding: 6px 12px;
+    border: 1px solid #cccccc;
+}
+
+QTabBar::tab:selected {
+    background: #ffffff;
+    border-bottom: none;
+}
+
+QPlainTextEdit {
+    background-color: #ffffff;
+    color: #1e1e1e;
+    border: 1px solid #cccccc;
+    font-family: Monospace;
+}
+
+QToolBar {
+    background-color: #f0f0f0;
+    border: none;
+    spacing: 2px;
+}
+
+QStatusBar {
+    background-color: #007acc;
+    color: #ffffff;
+}
+
+QPushButton {
+    background-color: #f0f0f0;
+    color: #1e1e1e;
+    border: 1px solid #cccccc;
+    padding: 4px 12px;
+}
+
+QPushButton:hover {
+    background-color: #e0e0e0;
+}
+
+QLineEdit, QSpinBox, QFontComboBox, QComboBox {
+    background-color: #ffffff;
+    color: #1e1e1e;
+    border: 1px solid #cccccc;
+    padding: 2px;
+}

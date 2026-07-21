@@ -1,0 +1,9 @@
+#!/bin/sh
+# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -e
+
+# Cleanup on removal. Databases are refreshed by the postrm fragment injected
+# by dh_installdeb; keep this hook for any project-specific teardown.
+
+exit 0

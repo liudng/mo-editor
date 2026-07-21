@@ -1,0 +1,58 @@
+.TH HELLO 1 "2026-07-21" "0.1.0" "Hello Manual"
+.SH NAME
+hello \- a simple Qt6 text editor
+.SH SYNOPSIS
+.B hello
+[\fB\-\-new\fR]
+[\fB\-\-version\fR]
+[\fIfile\fR ...]
+.SH DESCRIPTION
+.B hello
+is a multi-tab text editor built with Qt6 Widgets. It is designed to be
+fast and lightweight while providing the features expected of a modern
+code editor: syntax highlighting for 200+ languages via KSyntaxHighlighting,
+automatic encoding detection via libuchardet, session restore, and a
+find/replace dock. It runs natively on Wayland and does not depend on X11.
+.SH OPTIONS
+.TP
+.BR \-\-new
+Start with a single empty untitled tab instead of restoring the previous
+session.
+.TP
+.BR \-\-version
+Print the version information and exit.
+.TP
+.BR \-h , \-\-help
+Print a brief help message and exit.
+.TP
+.I file ...
+One or more files to open in separate tabs. If a directory is given, its
+immediate children are listed in a new tab instead.
+.SH FILES
+.TP
+.I ~/.config/hello/hello.conf
+User settings (window geometry, recent files, feature flags).
+.TP
+.I ~/.local/share/hello/session.json
+Session snapshot used for restore on the next startup.
+.SH ENVIRONMENT
+.TP
+.B QT_QPA_PLATFORM
+Overrides the Qt platform plugin. Set to
+.B offscreen
+for headless testing.
+.TP
+.B XDG_CONFIG_HOME
+Overrides the location of the per-user configuration directory.
+.TP
+.B XDG_DATA_HOME
+Overrides the location of the per-user data directory.
+.SH BUGS
+Report bugs and feature requests at
+.UR https://github.com/liudng/hello/issues
+.UE .
+.SH AUTHOR
+.liudng <liudng@users.noreply.github.com>
+.SH "SEE ALSO"
+.BR editor (1),
+.BR nano (1)

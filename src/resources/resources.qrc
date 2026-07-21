@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/">
+    <file alias="styles/dark.qss">../ui/styles/dark.qss</file>
+    <file alias="styles/light.qss">../ui/styles/light.qss</file>
+    <file alias="icons/app.svg">icons/app.svg</file>
+  </qresource>
+</RCC>

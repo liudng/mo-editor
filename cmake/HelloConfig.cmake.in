@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(Qt6 6.8 COMPONENTS Widgets)
+
+include("${CMAKE_CURRENT_LIST_DIR}/HelloTargets.cmake")
+
+check_required_components(hello)

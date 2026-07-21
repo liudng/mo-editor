@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Hello
+Name[zh_CN]=Hello 编辑器
+GenericName=Text Editor
+GenericName[zh_CN]=文本编辑器
+Comment=A simple Qt6 text editor
+Comment[zh_CN]=简单的 Qt6 文本编辑器
+Exec=hello
+Icon=io.github.liudng.hello
+Terminal=false
+Categories=Qt;Utility;TextEditor;
+MimeType=text/plain;
+Keywords=text;editor;code;
+StartupNotify=true
+StartupWMClass=io.github.liudng.hello
