@@ -20,6 +20,7 @@
 #include <KSyntaxHighlighting/Definition>
 #include <KSyntaxHighlighting/Repository>
 #include <KSyntaxHighlighting/SyntaxHighlighter>
+#include <KSyntaxHighlighting/Theme>
 
 namespace mo::ui {
 
@@ -52,6 +53,7 @@ CodeEditor::CodeEditor(QWidget *parent)
         repository_ = new KSyntaxHighlighting::Repository();
     }
     highlighter_ = new KSyntaxHighlighting::SyntaxHighlighter(document());
+    applyHighlightingTheme();
 
     lineNumberArea_ = new LineNumberArea(this);
 
@@ -198,6 +200,20 @@ void CodeEditor::setLanguage(const QString &extension)
     const auto def = repository_->definitionForFileName(QStringLiteral("file.") + extension);
     if (def.isValid()) {
         highlighter_->setDefinition(def);
+    }
+}
+
+void CodeEditor::applyHighlightingTheme()
+{
+    if (!repository_ || !highlighter_) {
+        return;
+    }
+    // themeForPalette() picks a light or dark KSyntaxHighlighting theme that
+    // matches the current widget palette, so the syntax colors stay readable
+    // when the application switches between light and dark QSS stylesheets.
+    const auto theme = repository_->themeForPalette(palette());
+    if (theme.isValid()) {
+        highlighter_->setTheme(theme);
     }
 }
 

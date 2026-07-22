@@ -9,6 +9,7 @@
 namespace KSyntaxHighlighting {
 class Repository;
 class SyntaxHighlighter;
+class Theme;
 }
 
 namespace mo::ui {
@@ -31,6 +32,10 @@ public:
 
     void setLanguage(const QString &extension);
     void findNext(const QString &text);
+
+    // Re-applies the KSyntaxHighlighting color theme that best matches the
+    // current widget palette. Call after switching between light/dark themes.
+    void applyHighlightingTheme();
 
     int lineNumberAreaWidth();
 

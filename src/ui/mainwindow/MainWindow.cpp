@@ -128,6 +128,16 @@ void MainWindow::applyTheme()
         // System: clear custom sheet, follow the platform palette.
         setStyleSheet({});
     }
+
+    // The stylesheet change above may have flipped the widget palette, so we
+    // must refresh the KSyntaxHighlighting color theme on every open editor
+    // to keep syntax colors readable in both light and dark modes.
+    for (int i = 0; i < tabWidget_->count(); ++i) {
+        auto *editor = qobject_cast<CodeEditor *>(tabWidget_->widget(i));
+        if (editor) {
+            editor->applyHighlightingTheme();
+        }
+    }
 }
 
 void MainWindow::loadStyleSheet(const QString &name)
