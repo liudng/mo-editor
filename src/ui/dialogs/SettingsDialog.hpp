@@ -32,6 +32,7 @@ private:
     QFontComboBox *fontCombo_ = nullptr;
     QSpinBox *fontSizeSpin_ = nullptr;
     QComboBox *themeCombo_ = nullptr;
+    QComboBox *iconThemeCombo_ = nullptr;
     QSpinBox *tabWidthSpin_ = nullptr;
     QCheckBox *lineNumbersCheck_ = nullptr;
     QCheckBox *autoIndentCheck_ = nullptr;

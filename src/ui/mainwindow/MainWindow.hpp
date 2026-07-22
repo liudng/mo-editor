@@ -54,6 +54,7 @@ private:
     void buildMenus();
     void buildToolBar();
     void applyTheme();
+    void applyIconTheme();
     void updateRecentFilesMenu();
     void loadStyleSheet(const QString &name);
 

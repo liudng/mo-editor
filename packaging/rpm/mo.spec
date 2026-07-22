@@ -26,6 +26,7 @@ BuildRequires:  desktop-file-utils
 Requires:       qt6-qtbase
 Requires:       kf6-syntax-highlighting
 Requires:       uchardet
+Requires:       (breeze-icon-theme or papirus-icon-theme)
 
 %description
 Mo is a modern text editor built with Qt6 Widgets. It is designed to be

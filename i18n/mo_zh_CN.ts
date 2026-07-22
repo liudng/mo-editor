@@ -64,4 +64,43 @@
       <translation>关于 Qt(&amp;Q)</translation>
     </message>
   </context>
+  <context>
+    <name>SettingsDialog</name>
+    <message>
+      <source>Preferences</source>
+      <translation>首选项</translation>
+    </message>
+    <message>
+      <source>Font:</source>
+      <translation>字体：</translation>
+    </message>
+    <message>
+      <source>Font size:</source>
+      <translation>字号：</translation>
+    </message>
+    <message>
+      <source>Theme:</source>
+      <translation>主题：</translation>
+    </message>
+    <message>
+      <source>Icon theme:</source>
+      <translation>图标主题：</translation>
+    </message>
+    <message>
+      <source>System Default</source>
+      <translation>系统默认</translation>
+    </message>
+    <message>
+      <source>Tab width:</source>
+      <translation>制表符宽度：</translation>
+    </message>
+    <message>
+      <source>Show line numbers</source>
+      <translation>显示行号</translation>
+    </message>
+    <message>
+      <source>Auto indent</source>
+      <translation>自动缩进</translation>
+    </message>
+  </context>
 </TS>

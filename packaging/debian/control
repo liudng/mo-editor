@@ -27,7 +27,8 @@ Depends: ${shlibs:Depends},
  ${misc:Depends},
  qt6-base-dev,
  libkf6syntaxhighlighting-dev,
- libuchardet-dev
+ libuchardet-dev,
+ breeze-icon-theme | papirus-icon-theme
 Description: A simple Qt6 text editor
  Mo is a modern text editor built with Qt6 Widgets.
  .

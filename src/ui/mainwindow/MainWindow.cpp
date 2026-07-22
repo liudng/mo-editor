@@ -21,6 +21,7 @@
 #include <QKeySequence>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QIcon>
 #include <QTabWidget>
 #include <QToolBar>
 
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     buildMenus();
     buildToolBar();
     applyTheme();
+    applyIconTheme();
 
     connect(tabWidget_, &QTabWidget::currentChanged, this, &MainWindow::onTabChanged);
     connect(tabWidget_, &QTabWidget::tabCloseRequested, this, &MainWindow::onTabCloseRequested);
@@ -109,12 +111,22 @@ void MainWindow::buildToolBar()
 {
     auto *tb = addToolBar(tr("Main"));
     tb->setObjectName(QStringLiteral("MainToolBar"));
-    tb->addAction(QIcon::fromTheme(QStringLiteral("document-new")), tr("New"), this, &MainWindow::fileNew);
-    tb->addAction(QIcon::fromTheme(QStringLiteral("document-open")), tr("Open"), this, &MainWindow::fileOpen);
-    tb->addAction(QIcon::fromTheme(QStringLiteral("document-save")), tr("Save"), this, &MainWindow::fileSave);
-    tb->addAction(QIcon::fromTheme(QStringLiteral("document-save-as")), tr("Save As"), this, &MainWindow::fileSaveAs);
+
+    // Helper: add an action with a themed icon, storing the icon name on the
+    // action so applyIconTheme() can re-resolve it when the fallback changes.
+    auto addThemed = [tb, this](const QString &iconName, const QString &text,
+                                auto slot) {
+        auto *act = tb->addAction(QIcon::fromTheme(iconName), text, this, slot);
+        act->setData(iconName);
+        return act;
+    };
+
+    addThemed(QStringLiteral("document-new"), tr("New"), &MainWindow::fileNew);
+    addThemed(QStringLiteral("document-open"), tr("Open"), &MainWindow::fileOpen);
+    addThemed(QStringLiteral("document-save"), tr("Save"), &MainWindow::fileSave);
+    addThemed(QStringLiteral("document-save-as"), tr("Save As"), &MainWindow::fileSaveAs);
     tb->addSeparator();
-    tb->addAction(QIcon::fromTheme(QStringLiteral("edit-find")), tr("Find"), this, &MainWindow::editFind);
+    addThemed(QStringLiteral("edit-find"), tr("Find"), &MainWindow::editFind);
 }
 
 void MainWindow::applyTheme()
@@ -136,6 +148,32 @@ void MainWindow::applyTheme()
         auto *editor = qobject_cast<CodeEditor *>(tabWidget_->widget(i));
         if (editor) {
             editor->applyHighlightingTheme();
+        }
+    }
+}
+
+void MainWindow::applyIconTheme()
+{
+    // When the system icon theme (often Adwaita on GNOME) lacks standard
+    // action icons, QIcon::fromTheme returns empty pixmaps and the toolbar
+    // shows text-only buttons. Setting a well-stocked fallback theme (e.g.
+    // Breeze) fills those gaps so toolbar icons always render.
+    const auto iconTheme = mo::core::Settings::instance().iconTheme();
+    if (!iconTheme.isEmpty()) {
+        QIcon::setFallbackThemeName(iconTheme);
+    }
+    // Force toolbar and menu actions to re-resolve their icons against the
+    // updated fallback theme.
+    const auto toolBars = findChildren<QToolBar *>();
+    for (auto *tb : toolBars) {
+        const auto actions = tb->actions();
+        for (auto *act : actions) {
+            // Re-set the icon from the same theme name so Qt re-resolves it
+            // through the fallback chain.
+            const auto name = act->data().toString();
+            if (!name.isEmpty()) {
+                act->setIcon(QIcon::fromTheme(name));
+            }
         }
     }
 }
@@ -227,7 +265,11 @@ void MainWindow::onFileChanged(const QString &path)
     mo::core::Logger::info("File changed externally: " + path);
 }
 
-void MainWindow::onSettingsChanged() { applyTheme(); }
+void MainWindow::onSettingsChanged()
+{
+    applyTheme();
+    applyIconTheme();
+}
 
 void MainWindow::fileNew() { newTab(); }
 

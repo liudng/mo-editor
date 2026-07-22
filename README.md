@@ -39,7 +39,8 @@ sudo apt-get install -y \
     qt6-tools-dev-tools \
     qt6-svg-dev \
     libkf6syntaxhighlighting-dev \
-    libuchardet-dev
+    libuchardet-dev \
+    breeze-icon-theme
 ```
 
 Minimum versions: CMake 3.31, Qt 6.8, C++20 compiler (GCC 14+ or Clang 18+).
@@ -134,7 +135,8 @@ Mo 是一个基于 Qt6 Widgets 构建的轻量级多标签文本编辑器。它�
 sudo apt-get install -y \
     build-essential cmake ninja-build git extra-cmake-modules \
     qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-svg-dev \
-    libkf6syntaxhighlighting-dev libuchardet-dev
+    libkf6syntaxhighlighting-dev libuchardet-dev \
+    breeze-icon-theme
 ```
 
 最低版本要求：CMake 3.31、Qt 6.8、C++20 编译器（GCC 14+ 或 Clang 18+）。

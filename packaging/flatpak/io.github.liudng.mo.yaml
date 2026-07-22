@@ -11,6 +11,7 @@ finish-args:
   - --share=ipc
   - --filesystem=host
   - --device=dri
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/usr/share/icons
 cleanup:
   - /include
   - /lib/pkgconfig

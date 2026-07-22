@@ -19,9 +19,11 @@ Mo is organized into the following top-level modules under `src/`:
 
 `core` owns the editor's data model. `Document` wraps a single open file:
 its text content, file path, encoding, modification state and undo stack.
-`Settings` persists window geometry, recent files and feature flags via
-`QSettings`. Session restore is implemented on top of `Settings` plus a JSON
-snapshot of open tabs.
+`Settings` persists window geometry, recent files, theme, icon theme and
+feature flags via `QSettings`. Session restore is implemented on top of
+`Settings` plus a JSON snapshot of open tabs. The icon theme setting feeds
+`QIcon::setFallbackThemeName()` so that toolbar icons render even on desktops
+whose default icon theme (e.g. Adwaita) lacks standard action icons.
 
 ### models
 

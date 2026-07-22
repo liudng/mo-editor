@@ -30,6 +30,7 @@ void TestSettings::testDefaultValues() {
     QCOMPARE(settings.fontFamily(), QStringLiteral("Monospace"));
     QCOMPARE(settings.fontSize(), 11);
     QCOMPARE(settings.theme(), QStringLiteral("System"));
+    QCOMPARE(settings.iconTheme(), QStringLiteral("Breeze"));
     QCOMPARE(settings.tabWidth(), 4);
     QVERIFY(settings.showLineNumbers());
     QVERIFY(settings.autoIndent());
@@ -41,6 +42,7 @@ void TestSettings::testLoadSaveRoundtrip() {
     settings.setFontFamily(QStringLiteral("Noto Sans Mono"));
     settings.setFontSize(14);
     settings.setTheme(QStringLiteral("Dark"));
+    settings.setIconTheme(QStringLiteral("Papirus"));
     settings.setTabWidth(2);
     settings.setShowLineNumbers(false);
     settings.setAutoIndent(false);
@@ -50,11 +52,13 @@ void TestSettings::testLoadSaveRoundtrip() {
     settings.setFontFamily(QStringLiteral("temporary"));
     settings.setFontSize(99);
     settings.setTheme(QStringLiteral("Light"));
+    settings.setIconTheme(QStringLiteral("temporary"));
     settings.load();
 
     QCOMPARE(settings.fontFamily(), QStringLiteral("Noto Sans Mono"));
     QCOMPARE(settings.fontSize(), 14);
     QCOMPARE(settings.theme(), QStringLiteral("Dark"));
+    QCOMPARE(settings.iconTheme(), QStringLiteral("Papirus"));
     QCOMPARE(settings.tabWidth(), 2);
     QVERIFY(!settings.showLineNumbers());
     QVERIFY(!settings.autoIndent());

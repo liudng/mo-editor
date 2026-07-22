@@ -115,7 +115,15 @@ void CodeEditor::highlightCurrentLine()
     QList<QTextEdit::ExtraSelection> extraSelections;
     if (!isReadOnly()) {
         QTextEdit::ExtraSelection selection;
-        selection.format.setBackground(palette().color(QPalette::AlternateBase));
+        QColor lineColor;
+        if (highlightingTheme_.isValid()) {
+            lineColor = QColor::fromRgba(highlightingTheme_.editorColor(
+                KSyntaxHighlighting::Theme::EditorColorRole::CurrentLine));
+        }
+        if (!lineColor.isValid()) {
+            lineColor = palette().color(QPalette::AlternateBase);
+        }
+        selection.format.setBackground(lineColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
         selection.cursor.clearSelection();
@@ -127,17 +135,41 @@ void CodeEditor::highlightCurrentLine()
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea_);
-    painter.fillRect(event->rect(), palette().color(QPalette::Window));
+
+    // Prefer the KSyntaxHighlighting theme's line-number colors so the gutter
+    // tracks the same dark/light scheme as the syntax highlighting. Fall back
+    // to palette roles when no theme is loaded yet.
+    QColor bgColor;
+    QColor fgColor;
+    if (highlightingTheme_.isValid()) {
+        bgColor = QColor::fromRgba(highlightingTheme_.editorColor(
+            KSyntaxHighlighting::Theme::EditorColorRole::IconBorder));
+        fgColor = QColor::fromRgba(highlightingTheme_.editorColor(
+            KSyntaxHighlighting::Theme::EditorColorRole::LineNumbers));
+    }
+    if (!bgColor.isValid()) {
+        bgColor = palette().color(QPalette::Window);
+    }
+    if (!fgColor.isValid()) {
+        // BrightText is light on dark palettes and dark on light palettes,
+        // giving reasonable contrast for line numbers in both themes.
+        fgColor = palette().color(QPalette::BrightText);
+        if (!fgColor.isValid()) {
+            fgColor = palette().color(QPalette::Text);
+        }
+    }
+
+    painter.fillRect(event->rect(), bgColor);
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
     int top = qRound(blockBoundingGeometry(block).translated(contentOffset()).top());
     int bottom = top + qRound(blockBoundingRect(block).height());
 
+    painter.setPen(fgColor);
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             const QString number = QString::number(blockNumber + 1);
-            painter.setPen(palette().color(QPalette::Dark));
             painter.drawText(0, top, lineNumberArea_->width() - 2,
                              fontMetrics().height(), Qt::AlignRight, number);
         }
@@ -214,7 +246,14 @@ void CodeEditor::applyHighlightingTheme()
     const auto theme = repository_->themeForPalette(palette());
     if (theme.isValid()) {
         highlighter_->setTheme(theme);
+        highlightingTheme_ = theme;
     }
+    // Repaint the line-number area and current-line highlight so their colors
+    // track the new theme instead of keeping stale palette-based colors.
+    if (lineNumberArea_) {
+        lineNumberArea_->update();
+    }
+    highlightCurrentLine();
 }
 
 void CodeEditor::findNext(const QString &text)

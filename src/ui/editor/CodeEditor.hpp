@@ -6,10 +6,11 @@
 #include <QPlainTextEdit>
 #include <QString>
 
+#include <KSyntaxHighlighting/Theme>
+
 namespace KSyntaxHighlighting {
 class Repository;
 class SyntaxHighlighter;
-class Theme;
 }
 
 namespace mo::ui {
@@ -54,6 +55,7 @@ private:
     LineNumberArea *lineNumberArea_ = nullptr;
     QString filePath_;
     KSyntaxHighlighting::SyntaxHighlighter *highlighter_ = nullptr;
+    KSyntaxHighlighting::Theme highlightingTheme_;
     static KSyntaxHighlighting::Repository *repository_;
 };
 

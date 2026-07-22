@@ -52,7 +52,8 @@ sudo apt install -y --no-install-recommends \
 echo "==> Installing editor feature dependencies"
 sudo apt install -y --no-install-recommends \
     libkf6syntaxhighlighting-dev \
-    libuchardet-dev
+    libuchardet-dev \
+    breeze-icon-theme
 
 echo "==> Installing packaging tooling"
 sudo apt install -y --no-install-recommends \

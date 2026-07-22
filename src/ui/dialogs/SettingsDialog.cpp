@@ -8,9 +8,15 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialogButtonBox>
+#include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
 #include <QFontComboBox>
 #include <QFormLayout>
+#include <QIcon>
+#include <QSet>
 #include <QSpinBox>
+#include <QStandardPaths>
 #include <QVBoxLayout>
 
 namespace mo::ui {
@@ -28,6 +34,32 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
     themeCombo_->addItem(tr("Light"), QStringLiteral("Light"));
     themeCombo_->addItem(tr("Dark"), QStringLiteral("Dark"));
 
+    iconThemeCombo_ = new QComboBox(this);
+    iconThemeCombo_->setToolTip(tr("Fallback icon theme used when the system "
+                                    "theme is missing icons (e.g. Adwaita)."));
+    // Populate with icon themes found in standard search paths.
+    iconThemeCombo_->addItem(tr("System Default"), QString());
+    const auto iconPaths = QIcon::themeSearchPaths();
+    QSet<QString> seen;
+    for (const auto &path : iconPaths) {
+        QDir dir(path);
+        if (!dir.exists()) {
+            continue;
+        }
+        QDirIterator it(path, QDir::Dirs | QDir::NoDotAndDotDot);
+        while (it.hasNext()) {
+            it.next();
+            // Only list directories that look like icon themes (contain index.theme).
+            if (QFileInfo::exists(it.filePath() + QStringLiteral("/index.theme"))) {
+                const auto name = it.fileName();
+                if (!seen.contains(name)) {
+                    seen.insert(name);
+                    iconThemeCombo_->addItem(name, name);
+                }
+            }
+        }
+    }
+
     tabWidthSpin_ = new QSpinBox(this);
     tabWidthSpin_->setRange(1, 16);
 
@@ -38,6 +70,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
     form->addRow(tr("Font:"), fontCombo_);
     form->addRow(tr("Font size:"), fontSizeSpin_);
     form->addRow(tr("Theme:"), themeCombo_);
+    form->addRow(tr("Icon theme:"), iconThemeCombo_);
     form->addRow(tr("Tab width:"), tabWidthSpin_);
     form->addRow(lineNumbersCheck_);
     form->addRow(autoIndentCheck_);
@@ -67,6 +100,23 @@ void SettingsDialog::load()
             break;
         }
     }
+
+    const auto iconTheme = s.iconTheme();
+    bool found = false;
+    for (int i = 0; i < iconThemeCombo_->count(); ++i) {
+        const auto data = iconThemeCombo_->itemData(i).toString();
+        if (data == iconTheme || (data.isEmpty() && iconTheme.isEmpty())) {
+            iconThemeCombo_->setCurrentIndex(i);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        // The configured icon theme is not installed; show it as a custom entry.
+        iconThemeCombo_->insertItem(0, iconTheme, iconTheme);
+        iconThemeCombo_->setCurrentIndex(0);
+    }
+
     tabWidthSpin_->setValue(s.tabWidth());
     lineNumbersCheck_->setChecked(s.showLineNumbers());
     autoIndentCheck_->setChecked(s.autoIndent());
@@ -78,6 +128,7 @@ void SettingsDialog::save()
     s.setFontFamily(fontCombo_->currentFont().family());
     s.setFontSize(fontSizeSpin_->value());
     s.setTheme(themeCombo_->currentData().toString());
+    s.setIconTheme(iconThemeCombo_->currentData().toString());
     s.setTabWidth(tabWidthSpin_->value());
     s.setShowLineNumbers(lineNumbersCheck_->isChecked());
     s.setAutoIndent(autoIndentCheck_->isChecked());
