@@ -12,8 +12,8 @@ target_sources(mo_ui
         mainwindow/MainWindow.ui
         editor/CodeEditor.hpp
         editor/CodeEditor.cpp
-        dialogs/FindReplaceDialog.hpp
-        dialogs/FindReplaceDialog.cpp
+        dialogs/FindReplaceDock.hpp
+        dialogs/FindReplaceDock.cpp
         dialogs/SettingsDialog.hpp
         dialogs/SettingsDialog.cpp
 )

@@ -10,11 +10,13 @@
 class QFileSystemWatcher;
 class QMenu;
 class QTabWidget;
+class QToolBar;
+class QDockWidget;
 
 namespace mo::ui {
 
 class CodeEditor;
-class FindReplaceDialog;
+class FindReplaceDock;
 
 class MainWindow : public QMainWindow
 {
@@ -38,10 +40,27 @@ public slots:
     void fileOpen();
     void fileSave();
     void fileSaveAs();
+    void fileSaveAll();
+    void fileCloseTab();
     void fileQuit();
+
+    void editUndo();
+    void editRedo();
+    void editCut();
+    void editCopy();
+    void editPaste();
+    void editSelectAll();
     void editFind();
     void editFindNext();
+    void editFindPrev();
     void editPreferences();
+
+    void viewToggleLineNumbers(bool on);
+    void viewToggleToolBar(bool on);
+    void viewZoomIn();
+    void viewZoomOut();
+    void viewZoomReset();
+
     void helpAbout();
 
 private slots:
@@ -49,18 +68,26 @@ private slots:
     void onTabCloseRequested(int index);
     void onFileChanged(const QString &path);
     void onSettingsChanged();
+    void onEditorTitleChanged(const QString &title);
+    void onEditorModificationChanged(bool modified);
 
 private:
     void buildMenus();
     void buildToolBar();
     void applyTheme();
     void applyIconTheme();
+    void applyEditorSettingsToAll();
     void updateRecentFilesMenu();
     void loadStyleSheet(const QString &name);
+    void updateTabTitle(int index);
+    CodeEditor *currentEditor() const;
 
     QTabWidget *tabWidget_ = nullptr;
+    QToolBar *toolBar_ = nullptr;
     QMenu *recentFilesMenu_ = nullptr;
-    std::unique_ptr<FindReplaceDialog> findReplaceDialog_;
+    QAction *toggleLineNumbersAction_ = nullptr;
+    QAction *toggleToolBarAction_ = nullptr;
+    FindReplaceDock *findDock_ = nullptr;
     QFileSystemWatcher *fileWatcher_ = nullptr;
     QStringList recentFiles_;
 };

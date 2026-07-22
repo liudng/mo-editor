@@ -4,9 +4,12 @@
 #include "CodeEditor.hpp"
 
 #include "mo/core/Logger.hpp"
+#include "mo/core/Settings.hpp"
 
 #include <QFile>
 #include <QFileInfo>
+#include <QFont>
+#include <QKeyEvent>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPalette>
@@ -63,7 +66,10 @@ CodeEditor::CodeEditor(QWidget *parent)
             this, &CodeEditor::updateLineNumberArea);
     connect(this, &QPlainTextEdit::cursorPositionChanged,
             this, &CodeEditor::highlightCurrentLine);
+    connect(document(), &QTextDocument::modificationChanged,
+            this, &CodeEditor::onModificationChanged);
 
+    applyEditorSettings();
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 }
@@ -72,8 +78,25 @@ CodeEditor::~CodeEditor() = default;
 
 QString CodeEditor::filePath() const { return filePath_; }
 
+QString CodeEditor::tabTitle() const
+{
+    QString title;
+    if (filePath_.isEmpty()) {
+        title = tr("Untitled");
+    } else {
+        title = QFileInfo(filePath_).fileName();
+    }
+    if (document()->isModified()) {
+        title.prepend(QStringLiteral("* "));
+    }
+    return title;
+}
+
 int CodeEditor::lineNumberAreaWidth()
 {
+    if (!showLineNumbers_) {
+        return 0;
+    }
     int digits = 1;
     int max = qMax(1, blockCount());
     while (max >= 10) {
@@ -110,6 +133,39 @@ void CodeEditor::resizeEvent(QResizeEvent *event)
         QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void CodeEditor::keyPressEvent(QKeyEvent *event)
+{
+    // Auto-indent: when pressing Enter, copy leading whitespace from current line.
+    if (mo::core::Settings::instance().autoIndent()
+        && event->key() == Qt::Key_Return && !(event->modifiers() & Qt::ShiftModifier)) {
+        auto cursor = textCursor();
+        const QString lineText = cursor.block().text();
+        QString indent;
+        for (const auto ch : lineText) {
+            if (ch == QLatin1Char(' ') || ch == QLatin1Char('\t')) {
+                indent += ch;
+            } else {
+                break;
+            }
+        }
+        QPlainTextEdit::keyPressEvent(event);
+        if (!indent.isEmpty()) {
+            cursor = textCursor();
+            cursor.insertText(indent);
+        }
+        return;
+    }
+
+    // Tab key: insert spaces according to tabWidth setting.
+    if (event->key() == Qt::Key_Tab && !(event->modifiers() & Qt::ControlModifier)) {
+        const int tw = mo::core::Settings::instance().tabWidth();
+        insertPlainText(QString(tw, QLatin1Char(' ')));
+        return;
+    }
+
+    QPlainTextEdit::keyPressEvent(event);
+}
+
 void CodeEditor::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
@@ -136,9 +192,6 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea_);
 
-    // Prefer the KSyntaxHighlighting theme's line-number colors so the gutter
-    // tracks the same dark/light scheme as the syntax highlighting. Fall back
-    // to palette roles when no theme is loaded yet.
     QColor bgColor;
     QColor fgColor;
     if (highlightingTheme_.isValid()) {
@@ -151,8 +204,6 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         bgColor = palette().color(QPalette::Window);
     }
     if (!fgColor.isValid()) {
-        // BrightText is light on dark palettes and dark on light palettes,
-        // giving reasonable contrast for line numbers in both themes.
         fgColor = palette().color(QPalette::BrightText);
         if (!fgColor.isValid()) {
             fgColor = palette().color(QPalette::Text);
@@ -195,6 +246,7 @@ bool CodeEditor::loadFile(const QString &path)
     filePath_ = path;
     setLanguage(QFileInfo(path).suffix());
     document()->setModified(false);
+    updateTabTitle();
     return true;
 }
 
@@ -219,6 +271,7 @@ bool CodeEditor::saveAs(const QString &path)
     if (file.commit()) {
         filePath_ = path;
         document()->setModified(false);
+        updateTabTitle();
         return true;
     }
     return false;
@@ -240,20 +293,51 @@ void CodeEditor::applyHighlightingTheme()
     if (!repository_ || !highlighter_) {
         return;
     }
-    // themeForPalette() picks a light or dark KSyntaxHighlighting theme that
-    // matches the current widget palette, so the syntax colors stay readable
-    // when the application switches between light and dark QSS stylesheets.
     const auto theme = repository_->themeForPalette(palette());
     if (theme.isValid()) {
         highlighter_->setTheme(theme);
         highlightingTheme_ = theme;
     }
-    // Repaint the line-number area and current-line highlight so their colors
-    // track the new theme instead of keeping stale palette-based colors.
     if (lineNumberArea_) {
         lineNumberArea_->update();
     }
     highlightCurrentLine();
+}
+
+void CodeEditor::applyEditorSettings()
+{
+    auto &s = mo::core::Settings::instance();
+    QFont font(s.fontFamily(), s.fontSize());
+    font.setStyleHint(QFont::Monospace);
+    font.setFixedPitch(true);
+    setFont(font);
+
+    setShowLineNumbers(s.showLineNumbers());
+}
+
+void CodeEditor::setShowLineNumbers(bool show)
+{
+    showLineNumbers_ = show;
+    if (lineNumberArea_) {
+        lineNumberArea_->setVisible(show);
+    }
+    updateLineNumberAreaWidth(0);
+    if (lineNumberArea_) {
+        const QRect cr = contentsRect();
+        lineNumberArea_->setGeometry(
+            QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+    }
+}
+
+void CodeEditor::zoomFont(int delta)
+{
+    QFont f = font();
+    const int newSize = f.pointSize() + delta;
+    if (newSize < 6 || newSize > 48) {
+        return;
+    }
+    f.setPointSize(newSize);
+    setFont(f);
 }
 
 void CodeEditor::findNext(const QString &text)
@@ -269,6 +353,32 @@ void CodeEditor::findNext(const QString &text)
     if (!cursor.isNull()) {
         setTextCursor(cursor);
     }
+}
+
+void CodeEditor::findPrev(const QString &text)
+{
+    if (text.isEmpty()) {
+        return;
+    }
+    QTextCursor cursor = textCursor();
+    cursor = document()->find(text, cursor, QTextDocument::FindBackward);
+    if (cursor.isNull()) {
+        cursor = document()->find(text, QTextCursor(), QTextDocument::FindBackward);
+    }
+    if (!cursor.isNull()) {
+        setTextCursor(cursor);
+    }
+}
+
+void CodeEditor::onModificationChanged()
+{
+    updateTabTitle();
+    emit modificationChanged(document()->isModified());
+}
+
+void CodeEditor::updateTabTitle()
+{
+    emit titleChanged(tabTitle());
 }
 
 } // namespace mo::ui
