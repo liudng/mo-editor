@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -6,11 +6,11 @@
 #include <QApplication>
 #include <memory>
 
-namespace hello::ui {
+namespace mo::ui {
 class MainWindow;
 }
 
-namespace hello::app {
+namespace mo::app {
 
 class SingleInstance;
 
@@ -32,7 +32,7 @@ private:
     void initLogging();
 
     std::unique_ptr<SingleInstance> singleInstance_;
-    std::unique_ptr<hello::ui::MainWindow> mainWindow_;
+    std::unique_ptr<mo::ui::MainWindow> mainWindow_;
 };
 
-} // namespace hello::app
+} // namespace mo::app

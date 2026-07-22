@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
 
 #include <QString>
 
-namespace hello::core {
+namespace mo::core {
 
 class Logger
 {
@@ -18,4 +18,4 @@ public:
     static void error(const QString &message);
 };
 
-} // namespace hello::core
+} // namespace mo::core

@@ -1,7 +1,7 @@
-hello (0.1.0-1) unstable; urgency=medium
+mo (0.1.0-1) unstable; urgency=medium
 
   * Initial release.
   * Multi-tab Qt6 text editor with KSyntaxHighlighting and libuchardet.
   * Wayland native, session restore, find/replace.
 
- -- liudng <liudng@users.noreply.github.com>  Mon, 21 Jul 2026 00:00:00 +0000
+ -- Liu Dong <liudng@hotmail.com>  Mon, 21 Jul 2026 00:00:00 +0000

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Applies a strict modern warning set to the given target.
@@ -36,12 +36,12 @@ function(set_project_warnings target_name)
         -Wno-c++98-compat-pedantic
     )
 
-    add_library(hello_project_warnings INTERFACE)
-    target_compile_options(hello_project_warnings INTERFACE
+    add_library(mo_project_warnings INTERFACE)
+    target_compile_options(mo_project_warnings INTERFACE
         ${GCC_WARNINGS}
         $<$<CXX_COMPILER_ID:GNU>:${GCC_ONLY_WARNINGS}>
         $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:${CLANG_ONLY_WARNINGS}>
     )
 
-    target_link_libraries(${target_name} PRIVATE hello_project_warnings)
+    target_link_libraries(${target_name} PRIVATE mo_project_warnings)
 endfunction()

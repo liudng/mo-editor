@@ -1,14 +1,14 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "hello/core/Settings.hpp"
-#include "hello/core/Constants.hpp"
+#include "mo/core/Settings.hpp"
+#include "mo/core/Constants.hpp"
 
 #include <QDir>
 #include <QSettings>
 #include <QStandardPaths>
 
-namespace hello::core {
+namespace mo::core {
 
 Settings &Settings::instance()
 {
@@ -20,7 +20,7 @@ Settings::Settings()
 {
     const auto configDir = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
     QDir().mkpath(configDir);
-    const auto path = configDir + QDir::separator() + hello::core::constants::kSettingsFile;
+    const auto path = configDir + QDir::separator() + mo::core::constants::kSettingsFile;
     settings_ = std::make_unique<QSettings>(path, QSettings::IniFormat);
     // Qt6 reads/writes INI files as UTF-8 by default; no codec setup needed.
 }
@@ -131,4 +131,4 @@ void Settings::addRecentFile(const QString &path)
     emit recentFilesChanged(recentFiles_);
 }
 
-} // namespace hello::core
+} // namespace mo::core

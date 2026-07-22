@@ -1,7 +1,7 @@
-Source: hello
+Source: mo
 Section: editors
 Priority: optional
-Maintainer: liudng <liudng@users.noreply.github.com>
+Maintainer: Liu Dong <liudng@hotmail.com>
 Build-Depends: debhelper-compat (= 13),
  cmake,
  ninja-build,
@@ -17,11 +17,11 @@ Build-Depends: debhelper-compat (= 13),
  wayland-protocols,
  libxkbcommon-dev
 Standards-Version: 4.7.0
-Homepage: https://github.com/liudng/hello
-Vcs-Git: https://github.com/liudng/hello.git
-Vcs-Browser: https://github.com/liudng/hello
+Homepage: https://github.com/liudng/mo
+Vcs-Git: https://github.com/liudng/mo.git
+Vcs-Browser: https://github.com/liudng/mo
 
-Package: hello
+Package: mo
 Architecture: any
 Depends: ${shlibs:Depends},
  ${misc:Depends},
@@ -29,7 +29,7 @@ Depends: ${shlibs:Depends},
  libkf6syntaxhighlighting-dev,
  libuchardet-dev
 Description: A simple Qt6 text editor
- Hello is a modern text editor built with Qt6 Widgets.
+ Mo is a modern text editor built with Qt6 Widgets.
  .
  Features:
   * Multi-tab interface

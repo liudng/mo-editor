@@ -1,18 +1,18 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "SingleInstance.hpp"
-#include "hello/core/Constants.hpp"
-#include "hello/core/Logger.hpp"
+#include "mo/core/Constants.hpp"
+#include "mo/core/Logger.hpp"
 
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 
-namespace hello::app {
+namespace mo::app {
 
 SingleInstance::SingleInstance(QObject *parent)
     : QObject(parent)
-    , sharedMemory_(hello::core::constants::kSharedMemoryKey)
+    , sharedMemory_(mo::core::constants::kSharedMemoryKey)
 {
 }
 
@@ -25,12 +25,12 @@ bool SingleInstance::tryLock()
     // activation path for future instances.
     auto bus = QDBusConnection::sessionBus();
     if (bus.isConnected()) {
-        if (bus.registerService(hello::core::constants::kDBusServiceName)) {
+        if (bus.registerService(mo::core::constants::kDBusServiceName)) {
             locked_ = true;
-            hello::core::Logger::info("Single instance acquired via D-Bus");
+            mo::core::Logger::info("Single instance acquired via D-Bus");
             return true;
         }
-        hello::core::Logger::warning(
+        mo::core::Logger::warning(
             "D-Bus service already registered; another instance is running");
         return false;
     }
@@ -40,7 +40,7 @@ bool SingleInstance::tryLock()
         if (sharedMemory_.attach()) {
             sharedMemory_.detach();
         }
-        hello::core::Logger::warning(
+        mo::core::Logger::warning(
             "Another instance is already running (QSharedMemory fallback)");
         return false;
     }
@@ -49,4 +49,4 @@ bool SingleInstance::tryLock()
     return true;
 }
 
-} // namespace hello::app
+} // namespace mo::app

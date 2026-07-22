@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -6,7 +6,7 @@
 #include <QByteArray>
 #include <QString>
 
-namespace hello::services {
+namespace mo::services {
 
 class EncodingDetector
 {
@@ -16,4 +16,4 @@ public:
     static QString detect(const QByteArray &data);
 };
 
-} // namespace hello::services
+} // namespace mo::services

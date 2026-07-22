@@ -1,7 +1,7 @@
-Welcome to Hello's documentation!
+Welcome to Mo's documentation!
 =================================
 
-Hello is a simple Qt6 text editor focused on multi-tab editing, syntax
+Mo is a simple Qt6 text editor focused on multi-tab editing, syntax
 highlighting, automatic encoding detection, session restore and find/replace,
 running natively on Wayland.
 
@@ -25,25 +25,25 @@ API reference
 The C++ API reference is generated from the in-tree source by Doxygen and
 exposed here through Breathe.
 
-Hello modules
--------------
+Mo modules
+----------
 
 .. doxygengroup:: core
-   :project: hello
+   :project: mo
    :content-only:
 
 .. doxygengroup:: ui
-   :project: hello
+   :project: mo
    :content-only:
 
-.. doxygenclass:: hello::core::Document
-   :project: hello
+.. doxygenclass:: mo::core::Document
+   :project: mo
    :members:
 
-.. doxygenclass:: hello::core::Settings
-   :project: hello
+.. doxygenclass:: mo::core::Settings
+   :project: mo
    :members:
 
-.. doxygenclass:: hello::ui::MainWindow
-   :project: hello
+.. doxygenclass:: mo::ui::MainWindow
+   :project: mo
    :members:

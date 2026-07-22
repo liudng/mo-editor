@@ -1,12 +1,12 @@
-# Hello — A Qt6 Text Editor
+# Mo — A Qt6 Text Editor
 
-![CI](https://github.com/liudng/hello/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/liudng/mo/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)
 ![Qt](https://img.shields.io/badge/Qt-6.8%2B-green.svg)
 ![C++](https://img.shields.io/badge/C%2B%2B-20-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-Wayland-purple.svg)
 
-Hello is a lightweight, multi-tab text editor built with Qt6 Widgets. It targets
+Mo is a lightweight, multi-tab text editor built with Qt6 Widgets. It targets
 the Wayland desktop and focuses on fast editing of plain text and source code,
 with syntax highlighting, automatic encoding detection, and full session restore.
 
@@ -46,7 +46,7 @@ Minimum versions: CMake 3.31, Qt 6.8, C++20 compiler (GCC 14+ or Clang 18+).
 
 ## Build
 
-Hello uses CMake with the Ninja generator. The recommended way is via presets:
+Mo uses CMake with the Ninja generator. The recommended way is via presets:
 
 ```bash
 # Configure (default Debug build with Ninja)
@@ -70,7 +70,7 @@ ctest --test-dir build --output-on-failure
 ## Usage
 
 ```bash
-./build/src/hello [file1 file2 ...]
+./build/src/mo [file1 file2 ...]
 ```
 
 If no files are given and a previous session exists, the last session is
@@ -91,7 +91,7 @@ cmake --build build-release --target package-deb
 cmake --build build-release --target package-rpm
 
 # Flatpak (requires flatpak-builder)
-flatpak-builder --user --install build-flatpak packaging/flatpak/io.github.liudng.hello.json
+flatpak-builder --user --install build-flatpak packaging/flatpak/io.github.liudng.mo.yaml
 ```
 
 ## License
@@ -110,7 +110,7 @@ REUSE-compliant license files.
 
 ## 中文说明
 
-Hello 是一个基于 Qt6 Widgets 构建的轻量级多标签文本编辑器。它面向 Wayland
+Mo 是一个基于 Qt6 Widgets 构建的轻量级多标签文本编辑器。它面向 Wayland
 桌面，专注于快速编辑纯文本与源代码，提供语法高亮、自动编码检测以及完整的会话恢复功能。
 
 ### 功能特性
@@ -155,7 +155,7 @@ ctest --preset test
 ### 运行
 
 ```bash
-./build/src/hello [文件1 文件2 ...]
+./build/src/mo [文件1 文件2 ...]
 ```
 
 ### 打包

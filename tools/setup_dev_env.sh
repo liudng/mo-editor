@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-# Install all development dependencies for the hello Qt6 text editor on
+# Install all development dependencies for the mo Qt6 text editor on
 # Debian 13 (trixie). Re-run safely; existing packages are skipped.
 
 set -euo pipefail
@@ -66,6 +66,6 @@ sudo apt install -y --no-install-recommends \
 
 echo
 echo "==> All dependencies installed. You can now configure the project with:"
-echo "    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DHELLO_BUILD_TESTS=ON"
+echo "    cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DMO_BUILD_TESTS=ON"
 echo "    cmake --build build"
 echo "    ctest --test-dir build --output-on-failure"

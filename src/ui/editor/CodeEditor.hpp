@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -11,7 +11,7 @@ class Repository;
 class SyntaxHighlighter;
 }
 
-namespace hello::ui {
+namespace mo::ui {
 
 class LineNumberArea;
 
@@ -52,4 +52,4 @@ private:
     static KSyntaxHighlighting::Repository *repository_;
 };
 
-} // namespace hello::ui
+} // namespace mo::ui

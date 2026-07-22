@@ -1,13 +1,13 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Generates an SPDX 2.3 SBOM for the project using cdxgen (preferred) or
 # syft if available. The result is written to
-#   ${CMAKE_BINARY_DIR}/hello-${PROJECT_VERSION}.spdx.json
+#   ${CMAKE_BINARY_DIR}/mo-${PROJECT_VERSION}.spdx.json
 # and is produced when the `sbom` custom target is built.
 function(generate_sbom)
     set(SBOM_OUTPUT
-        "${CMAKE_BINARY_DIR}/hello-${PROJECT_VERSION}.spdx.json")
+        "${CMAKE_BINARY_DIR}/mo-${PROJECT_VERSION}.spdx.json")
 
     find_program(CDXGEN_BIN NAMES cdxgen)
     find_program(SYFT_BIN NAMES syft)

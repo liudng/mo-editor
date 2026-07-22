@@ -1,11 +1,11 @@
-# Doxyfile template for the Hello Qt6 text editor.
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# Doxyfile template for the Mo Qt6 text editor.
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # CMake will configure @PROJECT_VERSION@, @CMAKE_SOURCE_DIR@ and
 # @CMAKE_BINARY_DIR@ at configure time and write the result to the build tree.
 
-PROJECT_NAME           = "Hello"
+PROJECT_NAME           = "Mo"
 PROJECT_NUMBER         = @PROJECT_VERSION@
 PROJECT_BRIEF          = "A simple Qt6 text editor"
 PROJECT_LOGO           =

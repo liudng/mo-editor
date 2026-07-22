@@ -1,6 +1,6 @@
-# Contributing to Hello
+# Contributing to Mo
 
-Thanks for your interest in contributing to Hello! This document explains how to
+Thanks for your interest in contributing to Mo! This document explains how to
 set up a development environment and the conventions the project follows.
 Contributions in both English and Chinese are welcome.
 
@@ -52,12 +52,12 @@ Every source file must begin with the appropriate SPDX header:
 
 - C++ files:
   ```cpp
-  // SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+  // SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
   // SPDX-License-Identifier: GPL-3.0-or-later
   ```
 - CMake files:
   ```cmake
-  # SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+  # SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
   # SPDX-License-Identifier: GPL-3.0-or-later
   ```
 

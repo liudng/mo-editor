@@ -1,18 +1,18 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: hello
-Upstream-Contact: liudng <liudng@users.noreply.github.com>
-Source: https://github.com/liudng/hello
+Upstream-Name: mo
+Upstream-Contact: Liu Dong <liudng@hotmail.com>
+Source: https://github.com/liudng/mo
 
 Files: *
-Copyright: 2026 liudng <liudng@users.noreply.github.com>
+Copyright: 2026 Liu Dong <liudng@hotmail.com>
 License: GPL-3.0-or-later
 
 Files: debian/*
-Copyright: 2026 liudng <liudng@users.noreply.github.com>
+Copyright: 2026 Liu Dong <liudng@hotmail.com>
 License: GPL-3.0-or-later
 
-Files: data/icons/hicolor/scalable/apps/io.github.liudng.hello.svg
-Copyright: 2026 liudng <liudng@users.noreply.github.com>
+Files: data/icons/hicolor/scalable/apps/io.github.liudng.mo.svg
+Copyright: 2026 Liu Dong <liudng@hotmail.com>
 License: GPL-3.0-or-later
 
 License: GPL-3.0-or-later

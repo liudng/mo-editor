@@ -1,15 +1,15 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "hello/services/FileService.hpp"
-#include "hello/core/Logger.hpp"
+#include "mo/services/FileService.hpp"
+#include "mo/core/Logger.hpp"
 
 #include <QFile>
 #include <QSaveFile>
 #include <QStringConverter>
 #include <QTextStream>
 
-namespace hello::services {
+namespace mo::services {
 
 namespace {
 
@@ -37,7 +37,7 @@ QString FileService::readTextFile(const QString &path, const QString &encoding)
 {
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        hello::core::Logger::warning("Failed to open file: " + path);
+        mo::core::Logger::warning("Failed to open file: " + path);
         return {};
     }
     QTextStream in(&file);
@@ -49,7 +49,7 @@ bool FileService::writeTextFile(const QString &path, const QString &content, con
 {
     QSaveFile file(path);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        hello::core::Logger::warning("Failed to open file for writing: " + path);
+        mo::core::Logger::warning("Failed to open file for writing: " + path);
         return false;
     }
     QTextStream out(&file);
@@ -59,4 +59,4 @@ bool FileService::writeTextFile(const QString &path, const QString &content, con
     return file.commit();
 }
 
-} // namespace hello::services
+} // namespace mo::services

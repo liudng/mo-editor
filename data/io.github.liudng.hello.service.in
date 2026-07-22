@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=io.github.liudng.hello
-Exec=@CMAKE_INSTALL_FULL_BINDIR@/hello

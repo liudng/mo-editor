@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-app-id: io.github.liudng.hello
+app-id: io.github.liudng.mo
 runtime: org.kde.Platform
 runtime-version: '6.8'
 sdk: org.kde.Sdk
-command: hello
+command: mo
 finish-args:
   - --socket=wayland
   - --share=ipc
@@ -18,13 +18,13 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
-  - name: hello
+  - name: mo
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/app
-      - -DHELLO_BUILD_TESTS=OFF
-      - -DHELLO_BUILD_FUZZ=OFF
+      - -DMO_BUILD_TESTS=OFF
+      - -DMO_BUILD_FUZZ=OFF
     sources:
       - type: dir
         path: ../..

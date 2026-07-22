@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 include(GNUInstallDirs)
@@ -6,7 +6,7 @@ include(GNUInstallDirs)
 # ----------------------------------------------------------------------------
 # Executable
 # ----------------------------------------------------------------------------
-install(TARGETS hello
+install(TARGETS mo
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
@@ -15,33 +15,33 @@ install(TARGETS hello
 # ----------------------------------------------------------------------------
 # Render the .desktop and D-Bus service templates with the real install prefix.
 configure_file(
-    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.hello.desktop.in
-    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.hello.desktop
+    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.mo.desktop.in
+    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.mo.desktop
     @ONLY
 )
 configure_file(
-    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.hello.service.in
-    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.hello.service
+    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.mo.service.in
+    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.mo.service
     @ONLY
 )
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.hello.desktop
+    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.mo.desktop
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications
 )
 
 install(FILES
-    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.hello.metainfo.xml
+    ${CMAKE_SOURCE_DIR}/data/io.github.liudng.mo.metainfo.xml
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo
 )
 
 install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.hello.service
+    ${CMAKE_CURRENT_BINARY_DIR}/io.github.liudng.mo.service
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/dbus-1/services
 )
 
 install(FILES
-    ${CMAKE_SOURCE_DIR}/data/mime/io.github.liudng.hello.xml
+    ${CMAKE_SOURCE_DIR}/data/mime/io.github.liudng.mo.xml
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages
 )
 
@@ -49,7 +49,7 @@ install(FILES
 # Icons (hicolor)
 # ----------------------------------------------------------------------------
 install(FILES
-    ${CMAKE_SOURCE_DIR}/data/icons/hicolor/scalable/apps/io.github.liudng.hello.svg
+    ${CMAKE_SOURCE_DIR}/data/icons/hicolor/scalable/apps/io.github.liudng.mo.svg
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps
 )
 
@@ -57,8 +57,8 @@ install(FILES
 # Translations
 # ----------------------------------------------------------------------------
 install(FILES
-    ${CMAKE_BINARY_DIR}/i18n/hello_zh_CN.qm
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/hello/translations
+    ${CMAKE_BINARY_DIR}/i18n/mo_zh_CN.qm
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mo/translations
     OPTIONAL
 )
 
@@ -66,6 +66,6 @@ install(FILES
 # Man page
 # ----------------------------------------------------------------------------
 install(FILES
-    ${CMAKE_SOURCE_DIR}/docs/man/hello.1
+    ${CMAKE_SOURCE_DIR}/docs/man/mo.1
     DESTINATION ${CMAKE_INSTALL_MANDIR}/man1
 )

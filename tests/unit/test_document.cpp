@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QTemporaryDir>
@@ -6,7 +6,7 @@
 #include <QTextStream>
 #include <QtTest>
 
-#include "hello/models/Document.hpp"
+#include "mo/models/Document.hpp"
 
 class TestDocument : public QObject {
     Q_OBJECT
@@ -21,13 +21,13 @@ void TestDocument::testLoadExistingFile() {
     QVERIFY(tmp.open());
     {
         QTextStream out(&tmp);
-        out << QStringLiteral("Hello, Hello!\n");
+        out << QStringLiteral("Hello, Mo!\n");
     }
     tmp.close();
 
-    hello::models::Document doc;
+    mo::models::Document doc;
     QVERIFY(doc.load(tmp.fileName()));
-    QCOMPARE(doc.content(), QStringLiteral("Hello, Hello!\n"));
+    QCOMPARE(doc.content(), QStringLiteral("Hello, Mo!\n"));
     QCOMPARE(doc.filePath(), tmp.fileName());
     QVERIFY(!doc.isModified());
 }
@@ -37,20 +37,20 @@ void TestDocument::testSave() {
     QVERIFY(dir.isValid());
     const QString path = dir.path() + QStringLiteral("/out.txt");
 
-    hello::models::Document doc;
+    mo::models::Document doc;
     doc.setContent(QStringLiteral("line one\nline two\n"));
     QVERIFY(doc.saveAs(path));
     QVERIFY(QFile::exists(path));
     QVERIFY(!doc.isModified());
     QCOMPARE(doc.filePath(), path);
 
-    hello::models::Document reloaded;
+    mo::models::Document reloaded;
     QVERIFY(reloaded.load(path));
     QCOMPARE(reloaded.content(), QStringLiteral("line one\nline two\n"));
 }
 
 void TestDocument::testModifiedState() {
-    hello::models::Document doc;
+    mo::models::Document doc;
     QVERIFY(!doc.isModified());
 
     doc.setContent(QStringLiteral("edited"));
@@ -63,7 +63,7 @@ void TestDocument::testModifiedState() {
     QVERIFY(!doc.isModified());
 
     // save() without a file path returns false; saveAs is required first.
-    hello::models::Document empty;
+    mo::models::Document empty;
     QVERIFY(!empty.save());
 }
 

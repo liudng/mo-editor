@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QCoreApplication>
 #include <QStandardPaths>
 #include <QtTest>
 
-#include "hello/core/Settings.hpp"
+#include "mo/core/Settings.hpp"
 
 class TestSettings : public QObject {
     Q_OBJECT
@@ -20,13 +20,13 @@ void TestSettings::initTestCase() {
     // Redirect QStandardPaths locations to a sandbox so the singleton's
     // settings file does not clobber the developer's real config.
     QStandardPaths::setTestModeEnabled(true);
-    auto &settings = hello::core::Settings::instance();
+    auto &settings = mo::core::Settings::instance();
     settings.setRecentFiles({});
     settings.save();
 }
 
 void TestSettings::testDefaultValues() {
-    auto &settings = hello::core::Settings::instance();
+    auto &settings = mo::core::Settings::instance();
     QCOMPARE(settings.fontFamily(), QStringLiteral("Monospace"));
     QCOMPARE(settings.fontSize(), 11);
     QCOMPARE(settings.theme(), QStringLiteral("System"));
@@ -36,7 +36,7 @@ void TestSettings::testDefaultValues() {
 }
 
 void TestSettings::testLoadSaveRoundtrip() {
-    auto &settings = hello::core::Settings::instance();
+    auto &settings = mo::core::Settings::instance();
 
     settings.setFontFamily(QStringLiteral("Noto Sans Mono"));
     settings.setFontSize(14);
@@ -61,7 +61,7 @@ void TestSettings::testLoadSaveRoundtrip() {
 }
 
 void TestSettings::testRecentFilesList() {
-    auto &settings = hello::core::Settings::instance();
+    auto &settings = mo::core::Settings::instance();
     settings.setRecentFiles({});
     QVERIFY(settings.recentFiles().isEmpty());
 

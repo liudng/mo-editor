@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QPointer>
@@ -19,8 +19,8 @@ class TestMainWindow : public QObject {
     void testOpenFile();
 
   private:
-    static int tabCount(const hello::ui::MainWindow &mw);
-    QPointer<hello::ui::MainWindow> m_window;
+    static int tabCount(const mo::ui::MainWindow &mw);
+    QPointer<mo::ui::MainWindow> m_window;
 };
 
 void TestMainWindow::initTestCase() {
@@ -35,7 +35,7 @@ void TestMainWindow::cleanup() {
     m_window = nullptr;
 }
 
-int TestMainWindow::tabCount(const hello::ui::MainWindow &mw) {
+int TestMainWindow::tabCount(const mo::ui::MainWindow &mw) {
     const auto tabs = mw.findChildren<QTabWidget *>();
     if (tabs.isEmpty()) {
         return -1;
@@ -44,7 +44,7 @@ int TestMainWindow::tabCount(const hello::ui::MainWindow &mw) {
 }
 
 void TestMainWindow::testCreateWindow() {
-    m_window = new hello::ui::MainWindow;
+    m_window = new mo::ui::MainWindow;
     QVERIFY(m_window != nullptr);
     // The constructor opens one default "Untitled" tab when there is no
     // session to restore.
@@ -52,7 +52,7 @@ void TestMainWindow::testCreateWindow() {
 }
 
 void TestMainWindow::testOpenFile() {
-    m_window = new hello::ui::MainWindow;
+    m_window = new mo::ui::MainWindow;
     QCOMPARE(tabCount(*m_window), 1);
 
     QTemporaryFile tmp;

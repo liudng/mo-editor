@@ -1,12 +1,12 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 cmake_minimum_required(VERSION 3.31)
 
-project(hello
+project(mo
     VERSION 0.1.0
     DESCRIPTION "A Qt6 text editor"
-    HOMEPAGE_URL "https://github.com/liudng/hello"
+    HOMEPAGE_URL "https://github.com/liudng/mo"
     LANGUAGES CXX
 )
 
@@ -18,6 +18,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# ---------------------------------------------------------------------------
+# Build options
+# ---------------------------------------------------------------------------
+option(MO_BUILD_TESTS "Build the unit and integration tests" ON)
+option(MO_BUILD_FUZZ "Build the fuzz targets (requires a fuzzer-capable toolchain)" OFF)
 
 # ---------------------------------------------------------------------------
 # Dependencies
@@ -56,10 +62,10 @@ include(Coverage OPTIONAL)
 # ---------------------------------------------------------------------------
 # Generated version header
 # ---------------------------------------------------------------------------
-if(EXISTS "${CMAKE_SOURCE_DIR}/src/core/include/hello/core/Version.hpp.in")
+if(EXISTS "${CMAKE_SOURCE_DIR}/src/core/include/mo/core/Version.hpp.in")
     configure_file(
-        "${CMAKE_SOURCE_DIR}/src/core/include/hello/core/Version.hpp.in"
-        "${CMAKE_BINARY_DIR}/include/hello/core/Version.hpp"
+        "${CMAKE_SOURCE_DIR}/src/core/include/mo/core/Version.hpp.in"
+        "${CMAKE_BINARY_DIR}/include/mo/core/Version.hpp"
         @ONLY
     )
 endif()
@@ -77,7 +83,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/src/CMakeLists.txt")
     add_subdirectory(src)
 endif()
 
-# i18n must come after src/ so the hello target exists for qt_add_translations.
+# i18n must come after src/ so the mo target exists for qt_add_translations.
 if(EXISTS "${CMAKE_SOURCE_DIR}/i18n/CMakeLists.txt")
     add_subdirectory(i18n)
 endif()

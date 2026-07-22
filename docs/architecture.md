@@ -1,11 +1,11 @@
-# Hello architecture overview
+# Mo architecture overview
 
-This document describes the high-level structure of the Hello Qt6 text editor,
+This document describes the high-level structure of the Mo Qt6 text editor,
 the responsibilities of each module, and the key design decisions behind them.
 
 ## Module breakdown
 
-Hello is organized into the following top-level modules under `src/`:
+Mo is organized into the following top-level modules under `src/`:
 
 | Module      | Path             | Responsibility                                              |
 |-------------|------------------|-------------------------------------------------------------|
@@ -49,7 +49,7 @@ through `Document`.
 ### app
 
 `app` wires everything together: it parses command-line arguments, ensures a
-single running instance (via the D-Bus service `io.github.liudng.hello`),
+single running instance (via the D-Bus service `io.github.liudng.mo`),
 restores the previous session and constructs the `MainWindow`.
 
 ## Dependency graph
@@ -93,19 +93,19 @@ logic testable without a `QGuiApplication`.
 Qt's built-in `QSyntaxHighlighter` requires hand-written rules for every
 language. KDE's `KSyntaxHighlighting` ships definition files for 200+ languages
 and is already packaged on every major Linux distribution. Using it gives
-Hello first-class syntax support with negligible maintenance cost.
+Mo first-class syntax support with negligible maintenance cost.
 
 ### libuchardet for encoding detection
 
 Detecting the encoding of arbitrary text is hard. libuchardet is the de facto
 standard library for this on Linux (used by Firefox, VS Code's terminal, etc.)
-and handles UTF-8, GB18030, Shift-JIS, Big5 and many more. Hello defers all
+and handles UTF-8, GB18030, Shift-JIS, Big5 and many more. Mo defers all
 encoding decisions to libuchardet and falls back to UTF-8 with replacement
 characters on failure.
 
 ### Wayland only
 
-Hello targets Linux desktops running Wayland. Dropping X11 support simplifies
+Mo targets Linux desktops running Wayland. Dropping X11 support simplifies
 the build (no `qt5compat` or `xcb-*` dependencies), enables zero-copy buffer
 paths and matches the reality of modern distributions. The offscreen QPA
 platform is used for headless testing.

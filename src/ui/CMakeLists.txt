@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-qt_add_library(hello_ui STATIC)
+qt_add_library(mo_ui STATIC)
 
-add_library(Hello::Ui ALIAS hello_ui)
+add_library(Mo::Ui ALIAS mo_ui)
 
-target_sources(hello_ui
+target_sources(mo_ui
     PRIVATE
         mainwindow/MainWindow.hpp
         mainwindow/MainWindow.cpp
@@ -18,16 +18,16 @@ target_sources(hello_ui
         dialogs/SettingsDialog.cpp
 )
 
-target_include_directories(hello_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(mo_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_compile_features(hello_ui PUBLIC cxx_std_20)
+target_compile_features(mo_ui PUBLIC cxx_std_20)
 
-target_link_libraries(hello_ui
+target_link_libraries(mo_ui
     PUBLIC
         Qt6::Widgets
-        Hello::Core
-        Hello::Models
-        Hello::Services
+        Mo::Core
+        Mo::Models
+        Mo::Services
     PRIVATE
         KF6::SyntaxHighlighting
 )

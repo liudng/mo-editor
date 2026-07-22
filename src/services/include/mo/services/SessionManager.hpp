@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -9,7 +9,7 @@
 #include <QStringList>
 #include <optional>
 
-namespace hello::services {
+namespace mo::services {
 
 struct SessionState
 {
@@ -31,4 +31,4 @@ public:
     void clearSession();
 };
 
-} // namespace hello::services
+} // namespace mo::services

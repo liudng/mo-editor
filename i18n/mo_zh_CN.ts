@@ -56,8 +56,8 @@
       <translation>帮助(&amp;H)</translation>
     </message>
     <message>
-      <source>About &amp;Hello</source>
-      <translation>关于 Hello(&amp;H)</translation>
+      <source>About &amp;Mo</source>
+      <translation>关于 Mo(&amp;M)</translation>
     </message>
     <message>
       <source>About &amp;Qt</source>

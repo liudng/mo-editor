@@ -1,14 +1,14 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "hello/models/Document.hpp"
+#include "mo/models/Document.hpp"
 
 #include <QFile>
 #include <QFileInfo>
 #include <QStringConverter>
 #include <QTextStream>
 
-namespace hello::models {
+namespace mo::models {
 
 Document::Document(QObject *parent) : QObject(parent) {}
 
@@ -100,4 +100,4 @@ void Document::setFilePath(const QString &path)
     }
 }
 
-} // namespace hello::models
+} // namespace mo::models

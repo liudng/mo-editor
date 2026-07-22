@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "hello/services/EncodingDetector.hpp"
+#include "mo/services/EncodingDetector.hpp"
 
 #include <uchardet/uchardet.h>
 
-namespace hello::services {
+namespace mo::services {
 
 QString EncodingDetector::detect(const QByteArray &data)
 {
@@ -28,4 +28,4 @@ QString EncodingDetector::detect(const QByteArray &data)
     return result;
 }
 
-} // namespace hello::services
+} // namespace mo::services

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "FindReplaceDialog.hpp"
@@ -11,7 +11,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-namespace hello::ui {
+namespace mo::ui {
 
 FindReplaceDialog::FindReplaceDialog(QWidget *parent)
     : QDialog(parent)
@@ -84,4 +84,4 @@ void FindReplaceDialog::replaceAll()
                              caseSensitive(), wholeWords(), useRegex());
 }
 
-} // namespace hello::ui
+} // namespace mo::ui

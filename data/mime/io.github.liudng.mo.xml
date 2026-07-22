@@ -4,8 +4,8 @@
     <comment>Plain text document</comment>
     <glob pattern="*.txt"/>
   </mime-type>
-  <mime-type type="application/x-hello-project">
-    <comment>Hello project file</comment>
-    <glob pattern="*.hello"/>
+  <mime-type type="application/x-mo-project">
+    <comment>Mo project file</comment>
+    <glob pattern="*.mo"/>
   </mime-type>
 </mime-info>

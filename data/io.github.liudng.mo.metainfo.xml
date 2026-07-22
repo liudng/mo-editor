@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.liudng.hello</id>
+  <id>io.github.liudng.mo</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-  <name>Hello</name>
-  <name xml:lang="zh_CN">Hello 编辑器</name>
+  <name>Mo</name>
+  <name xml:lang="zh_CN">Mo 编辑器</name>
   <summary>A simple Qt6 text editor</summary>
   <summary xml:lang="zh_CN">简单的 Qt6 文本编辑器</summary>
   <description>
     <p>
-      Hello is a modern text editor built with Qt6 Widgets. It is designed to be
+      Mo is a modern text editor built with Qt6 Widgets. It is designed to be
       fast, lightweight, and friendly for both casual note-taking and source code
       editing on Wayland-based Linux desktops.
     </p>
     <p xml:lang="zh_CN">
-      Hello 是一款基于 Qt6 Widgets 构建的现代化文本编辑器，适用于基于 Wayland 的
+      Mo 是一款基于 Qt6 Widgets 构建的现代化文本编辑器，适用于基于 Wayland 的
       Linux 桌面环境，既适合日常记事，也适合源代码编辑。
     </p>
     <p>Features:</p>
@@ -28,11 +28,11 @@
     </ul>
   </description>
   <developer_name>liudng</developer_name>
-  <url type="homepage">https://github.com/liudng/hello</url>
-  <url type="bugtracker">https://github.com/liudng/hello/issues</url>
-  <launchable type="desktop-id">io.github.liudng.hello.desktop</launchable>
+  <url type="homepage">https://github.com/liudng/mo</url>
+  <url type="bugtracker">https://github.com/liudng/mo/issues</url>
+  <launchable type="desktop-id">io.github.liudng.mo.desktop</launchable>
   <provides>
-    <binary>hello</binary>
+    <binary>mo</binary>
   </provides>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>

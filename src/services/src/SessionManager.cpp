@@ -1,21 +1,21 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "hello/services/SessionManager.hpp"
-#include "hello/core/Constants.hpp"
+#include "mo/services/SessionManager.hpp"
+#include "mo/core/Constants.hpp"
 
 #include <QDir>
 #include <QSettings>
 #include <QStandardPaths>
 
-namespace hello::services {
+namespace mo::services {
 
 namespace {
 
 QString settingsPath()
 {
     const auto configDir = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
-    return configDir + QDir::separator() + hello::core::constants::kSettingsFile;
+    return configDir + QDir::separator() + mo::core::constants::kSettingsFile;
 }
 
 } // namespace
@@ -63,4 +63,4 @@ void SessionManager::clearSession()
     settings.sync();
 }
 
-} // namespace hello::services
+} // namespace mo::services

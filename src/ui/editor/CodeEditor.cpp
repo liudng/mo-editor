@@ -1,9 +1,9 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "CodeEditor.hpp"
 
-#include "hello/core/Logger.hpp"
+#include "mo/core/Logger.hpp"
 
 #include <QFile>
 #include <QFileInfo>
@@ -21,7 +21,7 @@
 #include <KSyntaxHighlighting/Repository>
 #include <KSyntaxHighlighting/SyntaxHighlighter>
 
-namespace hello::ui {
+namespace mo::ui {
 
 KSyntaxHighlighting::Repository *CodeEditor::repository_ = nullptr;
 
@@ -150,7 +150,7 @@ bool CodeEditor::loadFile(const QString &path)
 {
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        hello::core::Logger::warning("Failed to open: " + path);
+        mo::core::Logger::warning("Failed to open: " + path);
         return false;
     }
     QTextStream in(&file);
@@ -216,4 +216,4 @@ void CodeEditor::findNext(const QString &text)
     }
 }
 
-} // namespace hello::ui
+} // namespace mo::ui

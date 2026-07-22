@@ -1,9 +1,9 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "SettingsDialog.hpp"
 
-#include "hello/core/Settings.hpp"
+#include "mo/core/Settings.hpp"
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -13,7 +13,7 @@
 #include <QSpinBox>
 #include <QVBoxLayout>
 
-namespace hello::ui {
+namespace mo::ui {
 
 SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
 {
@@ -56,7 +56,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
 
 void SettingsDialog::load()
 {
-    auto &s = hello::core::Settings::instance();
+    auto &s = mo::core::Settings::instance();
     fontCombo_->setCurrentFont(QFont(s.fontFamily()));
     fontSizeSpin_->setValue(s.fontSize());
 
@@ -74,7 +74,7 @@ void SettingsDialog::load()
 
 void SettingsDialog::save()
 {
-    auto &s = hello::core::Settings::instance();
+    auto &s = mo::core::Settings::instance();
     s.setFontFamily(fontCombo_->currentFont().family());
     s.setFontSize(fontSizeSpin_->value());
     s.setTheme(themeCombo_->currentData().toString());
@@ -91,4 +91,4 @@ void SettingsDialog::onAccept()
     accept();
 }
 
-} // namespace hello::ui
+} // namespace mo::ui

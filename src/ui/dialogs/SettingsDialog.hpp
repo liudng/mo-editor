@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -10,7 +10,7 @@ class QComboBox;
 class QFontComboBox;
 class QSpinBox;
 
-namespace hello::ui {
+namespace mo::ui {
 
 class SettingsDialog : public QDialog
 {
@@ -37,4 +37,4 @@ private:
     QCheckBox *autoIndentCheck_ = nullptr;
 };
 
-} // namespace hello::ui
+} // namespace mo::ui

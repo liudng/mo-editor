@@ -1,13 +1,13 @@
-# SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-Name:           hello
+Name:           mo
 Version:        0.1.0
 Release:        1%{?dist}
 Summary:        A simple Qt6 text editor
 
 License:        GPL-3.0-or-later
-URL:            https://github.com/liudng/hello
+URL:            https://github.com/liudng/mo
 Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
@@ -28,7 +28,7 @@ Requires:       kf6-syntax-highlighting
 Requires:       uchardet
 
 %description
-Hello is a modern text editor built with Qt6 Widgets. It is designed to be
+Mo is a modern text editor built with Qt6 Widgets. It is designed to be
 fast, lightweight, and friendly for both casual note-taking and source code
 editing on Wayland-based Linux desktops.
 
@@ -47,27 +47,27 @@ Features:
 %cmake -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=%{_prefix} \
-    -DHELLO_BUILD_TESTS=OFF
+    -DMO_BUILD_TESTS=OFF
 %cmake_build
 
 %install
 %cmake_install
 
 %check
-desktop-file-validate %{buildroot}%{_datadir}/applications/io.github.liudng.hello.desktop || :
+desktop-file-validate %{buildroot}%{_datadir}/applications/io.github.liudng.mo.desktop || :
 
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/hello
-%{_datadir}/applications/io.github.liudng.hello.desktop
-%{_datadir}/metainfo/io.github.liudng.hello.metainfo.xml
-%{_datadir}/dbus-1/services/io.github.liudng.hello.service
-%{_datadir}/mime/packages/io.github.liudng.hello.xml
-%{_datadir}/icons/hicolor/scalable/apps/io.github.liudng.hello.svg
-%{_datadir}/hello/translations/hello_zh_CN.qm
-%{_mandir}/man1/hello.1*
+%{_bindir}/mo
+%{_datadir}/applications/io.github.liudng.mo.desktop
+%{_datadir}/metainfo/io.github.liudng.mo.metainfo.xml
+%{_datadir}/dbus-1/services/io.github.liudng.mo.service
+%{_datadir}/mime/packages/io.github.liudng.mo.xml
+%{_datadir}/icons/hicolor/scalable/apps/io.github.liudng.mo.svg
+%{_datadir}/mo/translations/mo_zh_CN.qm
+%{_mandir}/man1/mo.1*
 
 %changelog
-* Mon Jul 21 2026 liudng <liudng@users.noreply.github.com> - 0.1.0-1
+* Mon Jul 21 2026 Liu Dong <liudng@hotmail.com> - 0.1.0-1
 - Initial RPM release.

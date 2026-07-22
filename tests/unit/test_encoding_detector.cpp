@@ -1,12 +1,12 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QByteArray>
 #include <QtTest>
 
-#include "hello/services/EncodingDetector.hpp"
+#include "mo/services/EncodingDetector.hpp"
 
-using hello::services::EncodingDetector;
+using mo::services::EncodingDetector;
 
 class TestEncodingDetector : public QObject {
     Q_OBJECT

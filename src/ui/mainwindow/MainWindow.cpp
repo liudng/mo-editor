@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "MainWindow.hpp"
@@ -6,10 +6,10 @@
 #include "dialogs/FindReplaceDialog.hpp"
 #include "dialogs/SettingsDialog.hpp"
 #include "editor/CodeEditor.hpp"
-#include "hello/core/Constants.hpp"
-#include "hello/core/Logger.hpp"
-#include "hello/core/Settings.hpp"
-#include "hello/services/SessionManager.hpp"
+#include "mo/core/Constants.hpp"
+#include "mo/core/Logger.hpp"
+#include "mo/core/Settings.hpp"
+#include "mo/services/SessionManager.hpp"
 
 #include <QAction>
 #include <QApplication>
@@ -26,12 +26,12 @@
 
 #include <algorithm>
 
-namespace hello::ui {
+namespace mo::ui {
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setWindowTitle(hello::core::constants::kApplicationName);
+    setWindowTitle(mo::core::constants::kApplicationName);
     resize(1024, 768);
 
     tabWidget_ = new QTabWidget(this);
@@ -52,14 +52,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(tabWidget_, &QTabWidget::currentChanged, this, &MainWindow::onTabChanged);
     connect(tabWidget_, &QTabWidget::tabCloseRequested, this, &MainWindow::onTabCloseRequested);
 
-    recentFiles_ = hello::core::Settings::instance().recentFiles();
+    recentFiles_ = mo::core::Settings::instance().recentFiles();
     updateRecentFilesMenu();
 
-    connect(&hello::core::Settings::instance(), &hello::core::Settings::themeChanged,
+    connect(&mo::core::Settings::instance(), &mo::core::Settings::themeChanged,
             this, &MainWindow::applyTheme);
 
     // Restore previous session if any.
-    hello::services::SessionManager sm(this);
+    mo::services::SessionManager sm(this);
     if (auto session = sm.loadSession()) {
         for (const auto &f : session->openFiles) {
             openFile(f);
@@ -119,7 +119,7 @@ void MainWindow::buildToolBar()
 
 void MainWindow::applyTheme()
 {
-    const auto theme = hello::core::Settings::instance().theme();
+    const auto theme = mo::core::Settings::instance().theme();
     if (theme == QStringLiteral("Dark")) {
         loadStyleSheet(QStringLiteral("dark"));
     } else if (theme == QStringLiteral("Light")) {
@@ -194,7 +194,7 @@ void MainWindow::openFile(const QString &path)
     while (recentFiles_.size() > 10) {
         recentFiles_.removeLast();
     }
-    hello::core::Settings::instance().setRecentFiles(recentFiles_);
+    mo::core::Settings::instance().setRecentFiles(recentFiles_);
     updateRecentFilesMenu();
 }
 
@@ -214,7 +214,7 @@ void MainWindow::onTabCloseRequested(int index) { closeTab(index); }
 
 void MainWindow::onFileChanged(const QString &path)
 {
-    hello::core::Logger::info("File changed externally: " + path);
+    mo::core::Logger::info("File changed externally: " + path);
 }
 
 void MainWindow::onSettingsChanged() { applyTheme(); }
@@ -278,11 +278,11 @@ void MainWindow::editPreferences()
 
 void MainWindow::helpAbout()
 {
-    QMessageBox::about(this, tr("About hello"),
-        tr("<h3>hello %1</h3>"
+    QMessageBox::about(this, tr("About mo"),
+        tr("<h3>mo %1</h3>"
            "<p>A simple Qt6 text editor.</p>"
            "<p>License: GPL-3.0-or-later</p>")
-            .arg(hello::core::constants::kApplicationVersion));
+            .arg(mo::core::constants::kApplicationVersion));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -293,8 +293,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::saveSession()
 {
-    hello::services::SessionManager sm(this);
-    hello::services::SessionState state;
+    mo::services::SessionManager sm(this);
+    mo::services::SessionState state;
     for (int i = 0; i < tabWidget_->count(); ++i) {
         auto *editor = qobject_cast<CodeEditor *>(tabWidget_->widget(i));
         if (editor && !editor->filePath().isEmpty()) {
@@ -306,4 +306,4 @@ void MainWindow::saveSession()
     sm.saveSession(state);
 }
 
-} // namespace hello::ui
+} // namespace mo::ui

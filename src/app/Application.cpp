@@ -1,11 +1,11 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "Application.hpp"
 #include "SingleInstance.hpp"
-#include "hello/core/Constants.hpp"
-#include "hello/core/Logger.hpp"
-#include "hello/core/Settings.hpp"
+#include "mo/core/Constants.hpp"
+#include "mo/core/Logger.hpp"
+#include "mo/core/Settings.hpp"
 #include "mainwindow/MainWindow.hpp"
 
 #include <QLibraryInfo>
@@ -14,29 +14,29 @@
 #include <QStandardPaths>
 #include <QTranslator>
 
-namespace hello::app {
+namespace mo::app {
 
 Application::Application(int &argc, char **argv)
     : QApplication(argc, argv)
 {
-    setOrganizationName(hello::core::constants::kOrganizationName);
-    setApplicationName(hello::core::constants::kApplicationName);
-    setApplicationDisplayName(hello::core::constants::kApplicationName);
-    setApplicationVersion(hello::core::constants::kApplicationVersion);
-    setDesktopFileName(hello::core::constants::kApplicationId);
+    setOrganizationName(mo::core::constants::kOrganizationName);
+    setApplicationName(mo::core::constants::kApplicationName);
+    setApplicationDisplayName(mo::core::constants::kApplicationName);
+    setApplicationVersion(mo::core::constants::kApplicationVersion);
+    setDesktopFileName(mo::core::constants::kApplicationId);
 
     initLogging();
     loadTranslation();
 
     singleInstance_ = std::make_unique<SingleInstance>(this);
     if (!singleInstance_->tryLock()) {
-        hello::core::Logger::warning("Another instance is already running; exiting");
+        mo::core::Logger::warning("Another instance is already running; exiting");
         return;
     }
 
-    hello::core::Settings::instance().load();
+    mo::core::Settings::instance().load();
 
-    mainWindow_ = std::make_unique<hello::ui::MainWindow>();
+    mainWindow_ = std::make_unique<mo::ui::MainWindow>();
     mainWindow_->show();
 }
 
@@ -57,7 +57,7 @@ void Application::saveSession()
     if (mainWindow_) {
         mainWindow_->saveSession();
     }
-    hello::core::Settings::instance().save();
+    mo::core::Settings::instance().save();
 }
 
 void Application::loadTranslation()
@@ -73,17 +73,17 @@ void Application::loadTranslation()
     static QTranslator appTranslator;
     const auto locale = QLocale().name();
     if (locale.startsWith(QStringLiteral("zh"))) {
-        if (appTranslator.load(QStringLiteral(":/i18n/hello_zh_CN.qm"))) {
+        if (appTranslator.load(QStringLiteral(":/i18n/mo_zh_CN.qm"))) {
             installTranslator(&appTranslator);
         } else {
-            hello::core::Logger::warning("Failed to load zh_CN translation resource");
+            mo::core::Logger::warning("Failed to load zh_CN translation resource");
         }
     }
 }
 
 void Application::initLogging()
 {
-    hello::core::Logger::init();
+    mo::core::Logger::init();
 }
 
-} // namespace hello::app
+} // namespace mo::app

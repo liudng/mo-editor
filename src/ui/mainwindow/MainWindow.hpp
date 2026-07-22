@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 liudng <liudng@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -11,7 +11,7 @@ class QFileSystemWatcher;
 class QMenu;
 class QTabWidget;
 
-namespace hello::ui {
+namespace mo::ui {
 
 class CodeEditor;
 class FindReplaceDialog;
@@ -64,4 +64,4 @@ private:
     QStringList recentFiles_;
 };
 
-} // namespace hello::ui
+} // namespace mo::ui
