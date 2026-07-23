@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: [gcc-14, clang-18]
+        compiler: [gcc, clang]
         build_type: [Debug, Release]
     env:
       CCACHE_DIR: ${{ github.workspace }}/.ccache
@@ -41,6 +41,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
+            build-essential \
             qt6-base-dev \
             qt6-base-dev-tools \
             qt6-tools-dev \
