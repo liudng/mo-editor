@@ -9,6 +9,9 @@ target_link_libraries(test_mainwindow PRIVATE
     Qt6::Test
     Mo::Ui
 )
+# Explicitly link the C++ standard library — see tests/unit/CMakeLists.txt
+# for the rationale (DSO missing from command line when linking static libs).
+target_link_libraries(test_mainwindow PRIVATE stdc++)
 
 # Run on the offscreen QPA platform so the suite works in headless CI.
 set_target_properties(test_mainwindow PROPERTIES

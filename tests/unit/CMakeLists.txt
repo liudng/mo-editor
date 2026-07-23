@@ -10,8 +10,10 @@ target_link_libraries(test_settings PRIVATE
 # Explicitly link the C++ standard library. When linking a static library
 # (Mo::Core) into a test executable, the linker may not pull in libstdc++
 # automatically, causing "DSO missing from command line" errors for
-# operator new/delete symbols.
-target_link_options(test_settings PRIVATE -lstdc++)
+# operator new/delete symbols. Using target_link_libraries (not
+# target_link_options) ensures the library appears after object files
+# in the link command, so the linker resolves backward references.
+target_link_libraries(test_settings PRIVATE stdc++)
 add_test(NAME test_settings COMMAND test_settings)
 
 qt_add_executable(test_document test_document.cpp)
@@ -20,7 +22,7 @@ target_link_libraries(test_document PRIVATE
     Qt6::Test
     Mo::Models
 )
-target_link_options(test_document PRIVATE -lstdc++)
+target_link_libraries(test_document PRIVATE stdc++)
 add_test(NAME test_document COMMAND test_document)
 
 qt_add_executable(test_encoding_detector test_encoding_detector.cpp)
@@ -29,5 +31,5 @@ target_link_libraries(test_encoding_detector PRIVATE
     Qt6::Test
     Mo::Services
 )
-target_link_options(test_encoding_detector PRIVATE -lstdc++)
+target_link_libraries(test_encoding_detector PRIVATE stdc++)
 add_test(NAME test_encoding_detector COMMAND test_encoding_detector)
