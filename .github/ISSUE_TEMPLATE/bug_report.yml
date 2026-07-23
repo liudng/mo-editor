@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
-# GitHub issue form for reporting bugs in the hello text editor.
+# GitHub issue form for reporting bugs in the mo text editor.
 
 name: Bug Report
-description: Report a bug or unexpected behavior in hello
+description: Report a bug or unexpected behavior in mo
 labels: [bug]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug in hello! Please fill
+        Thanks for taking the time to report a bug in mo! Please fill
         out the following sections to help us reproduce and fix the issue.
 
   - type: textarea
@@ -27,7 +27,7 @@ body:
       label: Steps to reproduce
       description: Detailed steps to reproduce the behavior.
       placeholder: |
-        1. Open hello
+        1. Open mo
         2. Open a file with ...
         3. Perform ...
         4. See error
@@ -56,9 +56,9 @@ body:
       label: Environment
       description: Information about your environment.
       placeholder: |
-        - OS: (e.g. Debian 13, Ubuntu 24.04)
+        - OS: (e.g. Debian 13, Ubuntu 26.04)
         - Qt version: (e.g. 6.8.0)
-        - hello version: (e.g. 1.0.0)
+        - mo version: (e.g. 0.1.0)
         - Installation method: (e.g. deb, flatpak, built from source)
     validations:
       required: true
@@ -68,7 +68,7 @@ body:
     attributes:
       label: Logs
       description: |
-        Relevant log output. Run hello from a terminal and paste the
+        Relevant log output. Run mo from a terminal and paste the
         output here. No need for backticks, the output is rendered as
         shell text.
       render: shell

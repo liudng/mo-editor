@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
 # Documentation build and deploy workflow. Builds Doxygen/Sphinx docs
 # (with Breathe bridging) and publishes them to GitHub Pages from the
@@ -17,7 +17,7 @@ permissions:
 jobs:
   build:
     name: Build Docs
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout
@@ -46,6 +46,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build \
             doxygen \
             graphviz \

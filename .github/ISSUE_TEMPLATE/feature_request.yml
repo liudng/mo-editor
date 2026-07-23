@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
-# GitHub issue form for requesting new features in the hello text editor.
+# GitHub issue form for requesting new features in the mo text editor.
 
 name: Feature Request
-description: Suggest a new feature or enhancement for hello
+description: Suggest a new feature or enhancement for mo
 labels: [enhancement]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a feature for hello! Please describe the
+        Thanks for suggesting a feature for mo! Please describe the
         problem your idea solves and the proposed solution.
 
   - type: textarea

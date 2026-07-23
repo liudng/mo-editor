@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
 # Code coverage workflow. Builds the project with coverage instrumentation,
 # runs the test suite, generates an lcov report, and uploads the result
@@ -16,7 +16,7 @@ on:
 jobs:
   coverage:
     name: Code coverage
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     env:
       CCACHE_DIR: ${{ github.workspace }}/.ccache
 
@@ -47,6 +47,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build \
             ccache \
             clang \
@@ -67,7 +68,7 @@ jobs:
         run: |
           cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
-            -DHELLO_ENABLE_COVERAGE=ON
+            -DMO_ENABLE_COVERAGE=ON
 
       - name: Build
         run: cmake --build build

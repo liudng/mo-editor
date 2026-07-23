@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
 # Sanitizer build workflow. Runs AddressSanitizer, ThreadSanitizer, and
 # UndefinedBehaviorSanitizer configurations to catch memory, threading,
@@ -16,7 +16,7 @@ on:
 jobs:
   sanitizer:
     name: ${{ matrix.sanitizer }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -51,6 +51,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build \
             ccache \
             clang \
@@ -70,7 +71,7 @@ jobs:
         run: |
           cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Debug \
-            -DHELLO_ENABLE_SANITIZER=${{ matrix.sanitizer }}
+            -DMO_ENABLE_SANITIZER=${{ matrix.sanitizer }}
 
       - name: Build
         run: cmake --build build

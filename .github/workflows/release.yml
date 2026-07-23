@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
 # Release workflow. Triggered by version tags (v*). Builds release
 # artifacts (tgz/deb/rpm), generates an SPDX SBOM, signs artifacts
@@ -19,7 +19,7 @@ permissions:
 jobs:
   build:
     name: Build packages
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     env:
       CCACHE_DIR: ${{ github.workspace }}/.ccache
 
@@ -50,6 +50,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build \
             ccache \
             clang \
@@ -90,7 +91,7 @@ jobs:
         run: cpack -G "TGZ;DEB;RPM"
 
       - name: Generate SBOM
-        run: cmake --build build --target hello_spdx_sbom
+        run: cmake --build build --target sbom
 
       - name: Sign artifacts
         env:
@@ -130,7 +131,7 @@ jobs:
 
   flatpak:
     name: Build Flatpak
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout
@@ -146,20 +147,20 @@ jobs:
       - name: Build Flatpak bundle
         run: |
           flatpak-builder --user --install --force-clean build-dir \
-            packaging/flatpak/io.github.liudng.hello.yaml
+            packaging/flatpak/io.github.liudng.mo.yaml
           flatpak build-bundle ~/.local/share/flatpak/repo \
-            io.github.liudng.hello.flatpak io.github.liudng.hello
+            io.github.liudng.mo.flatpak io.github.liudng.mo
 
       - name: Upload Flatpak artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-flatpak
-          path: io.github.liudng.hello.flatpak
+          path: io.github.liudng.mo.flatpak
           if-no-files-found: warn
 
       - name: Publish Flatpak to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: io.github.liudng.hello.flatpak
+          files: io.github.liudng.mo.flatpak
           generate_release_notes: true
           fail_on_unmatched_files: false

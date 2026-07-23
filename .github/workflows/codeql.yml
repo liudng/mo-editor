@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
 # CodeQL static analysis workflow. Performs SAST on C++ sources on push
 # and pull request, and runs on a weekly schedule to detect newly
@@ -23,7 +23,7 @@ permissions:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 60
 
     steps:
@@ -53,6 +53,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build
 
       - name: Initialize CodeQL

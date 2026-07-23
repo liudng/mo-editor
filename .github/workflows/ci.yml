@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2024 hello contributors
+# SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 #
-# Continuous Integration workflow for the hello Qt6 text editor.
+# Continuous Integration workflow for the mo Qt6 text editor.
 # Runs matrix builds across supported compilers and build types on
 # every push and pull request targeting the main and develop branches.
 
@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     name: Build (${{ matrix.compiler }}, ${{ matrix.build_type }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -52,6 +52,7 @@ jobs:
             libwayland-dev \
             wayland-protocols \
             libxkbcommon-dev \
+            breeze-icon-theme \
             ninja-build \
             ccache \
             clang \
