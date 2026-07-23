@@ -80,6 +80,8 @@ jobs:
         run: cmake --build build
 
       - name: Test
+        env:
+          QT_QPA_PLATFORM: offscreen
         run: ctest --test-dir build --output-on-failure
 
       - name: Upload compile_commands

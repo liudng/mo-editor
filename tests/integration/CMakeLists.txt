@@ -11,8 +11,13 @@ target_link_libraries(test_mainwindow PRIVATE
 )
 
 # Run on the offscreen QPA platform so the suite works in headless CI.
+# Both the target ENVIRONMENT property and the CTest ENVIRONMENT property
+# are set to ensure the variable reaches the test process.
 set_target_properties(test_mainwindow PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
 
 add_test(NAME test_mainwindow COMMAND test_mainwindow)
+set_tests_properties(test_mainwindow PROPERTIES
+    ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+)

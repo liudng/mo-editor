@@ -35,6 +35,7 @@ link_libraries(stdc++)
 # ---------------------------------------------------------------------------
 option(MO_BUILD_TESTS "Build the unit and integration tests" ON)
 option(MO_BUILD_FUZZ "Build the fuzz targets (requires a fuzzer-capable toolchain)" OFF)
+option(BUILD_DOCS "Build API documentation (Doxygen + Sphinx)" OFF)
 
 # ---------------------------------------------------------------------------
 # Dependencies
@@ -112,3 +113,48 @@ endif()
 # ---------------------------------------------------------------------------
 include(Packaging OPTIONAL)
 include(Sbom OPTIONAL)
+
+# ---------------------------------------------------------------------------
+# Documentation (Doxygen + Sphinx)
+# ---------------------------------------------------------------------------
+# Enabled with -DBUILD_DOCS=ON. Produces HTML output in build/docs/html.
+# The 'docs' target runs Doxygen to extract XML, then Sphinx (with Breathe)
+# to produce the final HTML. If Sphinx is not available, Doxygen HTML is
+# generated directly as a fallback.
+if(BUILD_DOCS)
+    find_package(Doxygen)
+    if(DOXYGEN_FOUND)
+        configure_file(
+            ${CMAKE_SOURCE_DIR}/docs/Doxyfile.in
+            ${CMAKE_BINARY_DIR}/Doxyfile
+            @ONLY
+        )
+        add_custom_target(docs_doxygen
+            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Generating Doxygen XML/HTML documentation"
+            VERBATIM
+        )
+
+        find_program(SPHINX_BUILD_EXECUTABLE sphinx-build)
+        if(SPHINX_BUILD_EXECUTABLE)
+            add_custom_target(docs
+                COMMAND ${SPHINX_BUILD_EXECUTABLE}
+                    -b html
+                    ${CMAKE_SOURCE_DIR}/docs/sphinx
+                    ${CMAKE_BINARY_DIR}/docs/html
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                DEPENDS docs_doxygen
+                COMMENT "Generating Sphinx HTML documentation"
+                VERBATIM
+            )
+        else()
+            add_custom_target(docs
+                DEPENDS docs_doxygen
+                COMMENT "Doxygen-only docs (Sphinx not found)"
+            )
+        endif()
+    else()
+        message(STATUS "BUILD_DOCS=ON but Doxygen not found; skipping docs target")
+    endif()
+endif()
