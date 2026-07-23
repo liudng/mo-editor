@@ -20,6 +20,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---------------------------------------------------------------------------
+# Globally link the C++ standard library.
+# ---------------------------------------------------------------------------
+# On some toolchains (notably GCC/Clang on Ubuntu 26.04 with gold/bfd ld),
+# linking a static library into an executable does not automatically pull in
+# libstdc++, causing "DSO missing from command line" errors for operator
+# new/delete and std::terminate. link_libraries() applies to all targets
+# created after this point, ensuring libstdc++ appears in the correct link
+# position (after object files).
+link_libraries(stdc++)
+
+# ---------------------------------------------------------------------------
 # Build options
 # ---------------------------------------------------------------------------
 option(MO_BUILD_TESTS "Build the unit and integration tests" ON)
