@@ -1,0 +1,9 @@
+<map id="src/ui/editor/CodeEditor.hpp" name="src/ui/editor/CodeEditor.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="79,5,279,33"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,90,121,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,33,95,83,92,78,158,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="144,90,214,117"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,32,181,75,177,73,177,36"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="238,81,392,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="202,31,269,72,263,73,200,36"/>
+</map>

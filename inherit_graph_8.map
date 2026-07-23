@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,84,79,112"/>
+<area shape="rect" id="Node000001" href="$classmo_1_1app_1_1SingleInstance.html" title=" " alt="" coords="148,5,325,33"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="73,73,126,43,165,32,161,35,128,48,76,77"/>
+<area shape="rect" id="Node000002" href="$classmo_1_1core_1_1Settings.html" title=" " alt="" coords="167,57,306,85"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="93,88,168,79,164,83,94,93"/>
+<area shape="rect" id="Node000003" href="$classmo_1_1models_1_1Document.html" title=" " alt="" coords="150,109,323,137"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="93,102,151,110,147,113,94,107"/>
+<area shape="rect" id="Node000004" href="$classmo_1_1services_1_1SessionManager.html" title=" " alt="" coords="127,161,346,189"/>
+<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="76,118,128,146,166,160,160,161,126,151,75,123"/>
+</map>

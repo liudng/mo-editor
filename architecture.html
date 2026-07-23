@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mo architecture overview &mdash; Mo 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=98b44b8a" />
+
+  
+      <script src="_static/jquery.js?v=958b65b0"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Mo’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mo
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mo architecture overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-breakdown">Module breakdown</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core">core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#services">services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ui">ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app">app</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dependency-graph">Dependency graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-design-decisions">Key design decisions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ksyntaxhighlighting-over-qsyntaxhighlighter">KSyntaxHighlighting over QSyntaxHighlighter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libuchardet-for-encoding-detection">libuchardet for encoding detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wayland-only">Wayland only</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#session-restore-as-a-first-class-feature">Session restore as a first-class feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#find-replace-as-a-dock-not-a-dialog">Find/replace as a dock, not a dialog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mo</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mo architecture overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/architecture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mo-architecture-overview">
+<h1>Mo architecture overview<a class="headerlink" href="#mo-architecture-overview" title="Link to this heading"></a></h1>
+<p>This document describes the high-level structure of the Mo Qt6 text editor,
+the responsibilities of each module, and the key design decisions behind them.</p>
+<section id="module-breakdown">
+<h2>Module breakdown<a class="headerlink" href="#module-breakdown" title="Link to this heading"></a></h2>
+<p>Mo is organized into the following top-level modules under <code class="docutils literal notranslate"><span class="pre">src/</span></code>:</p>
+<section id="core">
+<h3>core<a class="headerlink" href="#core" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">core</span></code> owns the editor’s data model. <code class="docutils literal notranslate"><span class="pre">Document</span></code> wraps a single open file:
+its text content, file path, encoding, modification state and undo stack.
+<code class="docutils literal notranslate"><span class="pre">Settings</span></code> persists window geometry, recent files, theme, icon theme and
+feature flags via <code class="docutils literal notranslate"><span class="pre">QSettings</span></code>. Session restore is implemented on top of
+<code class="docutils literal notranslate"><span class="pre">Settings</span></code> plus a JSON snapshot of open tabs. The icon theme setting feeds
+<code class="docutils literal notranslate"><span class="pre">QIcon::setFallbackThemeName()</span></code> so that toolbar icons render even on desktops
+whose default icon theme (e.g. Adwaita) lacks standard action icons.</p>
+</section>
+<section id="models">
+<h3>models<a class="headerlink" href="#models" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">models</span></code> exposes Qt-style item models so the UI layer never touches core
+types directly. The recent-files model and the find/replace history model
+live here.</p>
+</section>
+<section id="services">
+<h3>services<a class="headerlink" href="#services" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">services</span></code> collects stateless, side-effect-free helpers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EncodingDetector</span></code> wraps libuchardet to guess the encoding of bytes read
+from disk before they are decoded into a <code class="docutils literal notranslate"><span class="pre">QString</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileService</span></code> provides atomic file read/write with encoding conversion.</p></li>
+</ul>
+</section>
+<section id="ui">
+<h3>ui<a class="headerlink" href="#ui" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">ui</span></code> contains all widgets. <code class="docutils literal notranslate"><span class="pre">MainWindow</span></code> owns the <code class="docutils literal notranslate"><span class="pre">QTabWidget</span></code>, the
+find/replace dock and the menu bar. Each tab holds a <code class="docutils literal notranslate"><span class="pre">CodeEditor</span></code> that
+combines a <code class="docutils literal notranslate"><span class="pre">QPlainTextEdit</span></code> with a syntax highlighter. The UI talks to
+<code class="docutils literal notranslate"><span class="pre">core</span></code> and <code class="docutils literal notranslate"><span class="pre">services</span></code> only; it never touches the filesystem directly
+except through <code class="docutils literal notranslate"><span class="pre">Document</span></code>.</p>
+</section>
+<section id="app">
+<h3>app<a class="headerlink" href="#app" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">app</span></code> wires everything together: it parses command-line arguments, ensures a
+single running instance (via the D-Bus service <code class="docutils literal notranslate"><span class="pre">io.github.liudng.mo</span></code>),
+restores the previous session and constructs the <code class="docutils literal notranslate"><span class="pre">MainWindow</span></code>.</p>
+</section>
+</section>
+<section id="dependency-graph">
+<h2>Dependency graph<a class="headerlink" href="#dependency-graph" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      <span class="o">+-------+</span>
+      <span class="o">|</span>  <span class="n">app</span>  <span class="o">|</span>
+      <span class="o">+---+---+</span>
+          <span class="o">|</span>
+          <span class="n">v</span>
+      <span class="o">+---+---+</span>
+      <span class="o">|</span>  <span class="n">ui</span>   <span class="o">|</span>
+      <span class="o">+---+---+</span>
+          <span class="o">|</span>
+    <span class="o">+-----+-----+</span>
+    <span class="o">|</span>           <span class="o">|</span>
+    <span class="n">v</span>           <span class="n">v</span>
+<span class="o">+---+---+</span>   <span class="o">+---+--------+</span>
+<span class="o">|</span> <span class="n">models</span><span class="o">|</span>   <span class="o">|</span> <span class="n">services</span>   <span class="o">|</span>
+<span class="o">+---+---+</span>   <span class="o">+---+--------+</span>
+    <span class="o">|</span>           <span class="o">|</span>
+    <span class="n">v</span>           <span class="n">v</span>
+<span class="o">+---+-----------+---+</span>
+<span class="o">|</span>       <span class="n">core</span>       <span class="o">|</span>
+<span class="o">+------------------+</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">app</span></code> depends on <code class="docutils literal notranslate"><span class="pre">ui</span></code>, <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">services</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ui</span></code> depends on <code class="docutils literal notranslate"><span class="pre">models</span></code>, <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">services</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">models</span></code> depends on <code class="docutils literal notranslate"><span class="pre">core</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">services</span></code> depends on <code class="docutils literal notranslate"><span class="pre">core</span></code> (and external libraries only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">core</span></code> depends only on Qt6 Core.</p></li>
+</ul>
+<p>This layering keeps the domain model free of UI concerns and makes the core
+logic testable without a <code class="docutils literal notranslate"><span class="pre">QGuiApplication</span></code>.</p>
+</section>
+<section id="key-design-decisions">
+<h2>Key design decisions<a class="headerlink" href="#key-design-decisions" title="Link to this heading"></a></h2>
+<section id="ksyntaxhighlighting-over-qsyntaxhighlighter">
+<h3>KSyntaxHighlighting over QSyntaxHighlighter<a class="headerlink" href="#ksyntaxhighlighting-over-qsyntaxhighlighter" title="Link to this heading"></a></h3>
+<p>Qt’s built-in <code class="docutils literal notranslate"><span class="pre">QSyntaxHighlighter</span></code> requires hand-written rules for every
+language. KDE’s <code class="docutils literal notranslate"><span class="pre">KSyntaxHighlighting</span></code> ships definition files for 200+
+languages and is already packaged on every major Linux distribution. Using it
+gives Mo first-class syntax support with negligible maintenance cost.</p>
+</section>
+<section id="libuchardet-for-encoding-detection">
+<h3>libuchardet for encoding detection<a class="headerlink" href="#libuchardet-for-encoding-detection" title="Link to this heading"></a></h3>
+<p>Detecting the encoding of arbitrary text is hard. libuchardet is the de facto
+standard library for this on Linux (used by Firefox, VS Code’s terminal, etc.)
+and handles UTF-8, GB18030, Shift-JIS, Big5 and many more. Mo defers all
+encoding decisions to libuchardet and falls back to UTF-8 with replacement
+characters on failure.</p>
+</section>
+<section id="wayland-only">
+<h3>Wayland only<a class="headerlink" href="#wayland-only" title="Link to this heading"></a></h3>
+<p>Mo targets Linux desktops running Wayland. Dropping X11 support simplifies
+the build (no <code class="docutils literal notranslate"><span class="pre">qt5compat</span></code> or <code class="docutils literal notranslate"><span class="pre">xcb-*</span></code> dependencies), enables zero-copy
+buffer paths and matches the reality of modern distributions. The offscreen
+QPA platform is used for headless testing.</p>
+</section>
+<section id="session-restore-as-a-first-class-feature">
+<h3>Session restore as a first-class feature<a class="headerlink" href="#session-restore-as-a-first-class-feature" title="Link to this heading"></a></h3>
+<p>Session state is persisted whenever a tab is opened, closed or modified, not
+only on quit. This makes crash recovery cheap and keeps the restore path
+identical to the normal startup path.</p>
+</section>
+<section id="find-replace-as-a-dock-not-a-dialog">
+<h3>Find/replace as a dock, not a dialog<a class="headerlink" href="#find-replace-as-a-dock-not-a-dialog" title="Link to this heading"></a></h3>
+<p>The find/replace UI is a docked widget at the bottom of the main window.
+Keeping the matching logic in the dock makes it reusable for batch operations
+(replace in files) and unit-testable without a separate dialog window.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Mo’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Liu Dong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

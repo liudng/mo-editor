@@ -1,0 +1,11 @@
+<map id="src/core/include/mo/core/Settings.hpp" name="src/core/include/mo/core/Settings.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="116,5,264,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,79,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,51,80,92,78,88,148,50"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="103,98,173,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,49,156,87,153,83,174,52"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="197,98,290,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,48,229,85,224,84,203,53"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="313,98,390,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="233,48,315,90,309,91,232,53"/>
+</map>

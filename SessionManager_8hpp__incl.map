@@ -1,0 +1,13 @@
+<map id="src/services/include/mo/services/SessionManager.hpp" name="src/services/include/mo/services/SessionManager.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="138,5,380,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,102,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,53,101,94,99,89,203,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="126,98,200,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,49,191,90,189,85,231,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="224,98,294,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="261,48,261,84,257,81,257,52"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="318,98,410,126"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="287,48,338,88,333,88,286,53"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="435,98,509,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="316,48,427,92,421,92,315,53"/>
+</map>

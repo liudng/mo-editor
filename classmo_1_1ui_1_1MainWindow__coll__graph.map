@@ -1,0 +1,9 @@
+<map id="mo::ui::MainWindow" name="mo::ui::MainWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="7,183,162,211"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,82,121,110"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,123,84,183,79,182,67,127"/>
+<area shape="rect" id="Node000003" href="$classmo_1_1ui_1_1FindReplaceDock.html" title=" " alt="" coords="145,82,328,110"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,120,106,185,103,180,201,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="181,5,292,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="238,46,239,83,234,81,235,51"/>
+</map>
