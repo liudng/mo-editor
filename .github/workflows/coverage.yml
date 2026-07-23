@@ -74,6 +74,8 @@ jobs:
         run: cmake --build build
 
       - name: Test
+        env:
+          QT_QPA_PLATFORM: offscreen
         run: ctest --test-dir build --output-on-failure
 
       - name: Generate lcov report
@@ -83,6 +85,8 @@ jobs:
             '/usr/*' \
             '*/build/_deps/*' \
             '*/test/*' \
+            '*/tests/*' \
+            '*/autogen/*' \
             --output-file coverage.info
           lcov --list coverage.info
 

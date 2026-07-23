@@ -71,6 +71,10 @@ include(ReproducibleBuilds OPTIONAL)
 include(StaticAnalyzers OPTIONAL)
 include(Coverage OPTIONAL)
 
+# Apply global coverage instrumentation (must come after Coverage.cmake is
+# included and before any add_subdirectory / target creation).
+mo_enable_global_coverage()
+
 # ---------------------------------------------------------------------------
 # Generated version header
 # ---------------------------------------------------------------------------
