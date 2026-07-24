@@ -1,6 +1,6 @@
 # Mo — A Qt6 Text Editor
 
-![CI](https://github.com/liudng/mo/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/liudng/mo-editor/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue.svg)
 ![Qt](https://img.shields.io/badge/Qt-6.8%2B-green.svg)
 ![C++](https://img.shields.io/badge/C%2B%2B-20-orange.svg)

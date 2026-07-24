@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.31)
 project(mo
     VERSION 0.1.0
     DESCRIPTION "A Qt6 text editor"
-    HOMEPAGE_URL "https://github.com/liudng/mo"
+    HOMEPAGE_URL "https://github.com/liudng/mo-editor"
     LANGUAGES CXX
 )
 

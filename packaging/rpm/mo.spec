@@ -7,7 +7,7 @@ Release:        1%{?dist}
 Summary:        A simple Qt6 text editor
 
 License:        GPL-3.0-or-later
-URL:            https://github.com/liudng/mo
+URL:            https://github.com/liudng/mo-editor
 Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cmake

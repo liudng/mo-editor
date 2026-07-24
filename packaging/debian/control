@@ -17,9 +17,9 @@ Build-Depends: debhelper-compat (= 13),
  wayland-protocols,
  libxkbcommon-dev
 Standards-Version: 4.7.0
-Homepage: https://github.com/liudng/mo
-Vcs-Git: https://github.com/liudng/mo.git
-Vcs-Browser: https://github.com/liudng/mo
+Homepage: https://github.com/liudng/mo-editor
+Vcs-Git: https://github.com/liudng/mo-editor.git
+Vcs-Browser: https://github.com/liudng/mo-editor
 
 Package: mo
 Architecture: any

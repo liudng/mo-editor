@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mo
 Upstream-Contact: Liu Dong <liudng@hotmail.com>
-Source: https://github.com/liudng/mo
+Source: https://github.com/liudng/mo-editor
 
 Files: *
 Copyright: 2026 Liu Dong <liudng@hotmail.com>

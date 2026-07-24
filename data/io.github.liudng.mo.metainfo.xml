@@ -28,8 +28,8 @@
     </ul>
   </description>
   <developer_name>liudng</developer_name>
-  <url type="homepage">https://github.com/liudng/mo</url>
-  <url type="bugtracker">https://github.com/liudng/mo/issues</url>
+  <url type="homepage">https://github.com/liudng/mo-editor</url>
+  <url type="bugtracker">https://github.com/liudng/mo-editor/issues</url>
   <launchable type="desktop-id">io.github.liudng.mo.desktop</launchable>
   <provides>
     <binary>mo</binary>
