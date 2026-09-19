@@ -16,5 +16,6 @@ var searchData=
   ['fontfamily_13',['fontFamily',['../classmo_1_1core_1_1Settings.html#a5714e7bc9e30bcd1af87278dfa61449e',1,'mo::core::Settings']]],
   ['fontfamilychanged_14',['fontFamilyChanged',['../classmo_1_1core_1_1Settings.html#a4de6ceb1e2de05993d82fea9f0b0caa2',1,'mo::core::Settings']]],
   ['fontsize_15',['fontSize',['../classmo_1_1core_1_1Settings.html#a6154713dbf893f3ead105c699143de65',1,'mo::core::Settings']]],
-  ['fontsizechanged_16',['fontSizeChanged',['../classmo_1_1core_1_1Settings.html#af81a164ecfc35b84a6b53da6f2f5396d',1,'mo::core::Settings']]]
+  ['fontsizechanged_16',['fontSizeChanged',['../classmo_1_1core_1_1Settings.html#af81a164ecfc35b84a6b53da6f2f5396d',1,'mo::core::Settings']]],
+  ['forwardtorunninginstance_17',['forwardToRunningInstance',['../classmo_1_1app_1_1SingleInstance.html#ae7508c7f63da0b032980077c9a7858dc',1,'mo::app::SingleInstance']]]
 ];

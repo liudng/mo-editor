@@ -1,7 +1,9 @@
 <map id="src/app/SingleInstance.hpp" name="src/app/SingleInstance.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="7,5,202,33"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="70,5,265,33"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,81,79,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,32,65,71,61,67,91,35"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,34,78,75,76,71,142,33"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="102,81,232,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="117,31,149,69,144,69,115,36"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,32,170,67,165,64,166,36"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="257,81,350,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="192,31,268,73,263,74,191,36"/>
 </map>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['main_0',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
   ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['mainwindow_2',['MainWindow',['../classmo_1_1ui_1_1MainWindow.html',1,'mo::ui::MainWindow'],['../classmo_1_1ui_1_1MainWindow.html#a5370427ab5f3f8a962f107bed59c4230',1,'mo::ui::MainWindow::MainWindow()']]],
+  ['mainwindow_2',['MainWindow',['../classmo_1_1ui_1_1MainWindow.html',1,'mo::ui::MainWindow'],['../classmo_1_1ui_1_1MainWindow.html#a73fee6e0024c790570de04bd69012c9f',1,'mo::ui::MainWindow::MainWindow()']]],
   ['mainwindow_2ecpp_3',['MainWindow.cpp',['../MainWindow_8cpp.html',1,'']]],
   ['mainwindow_2ehpp_4',['MainWindow.hpp',['../MainWindow_8hpp.html',1,'']]],
   ['mainwindow_5f_5',['mainWindow_',['../classmo_1_1app_1_1Application.html#a3ed823e7b347ae4a31e2bbf703ce8b86',1,'mo::app::Application']]],
