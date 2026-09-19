@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "mo::ui::CodeEditor::ColumnPoint", "structmo_1_1ui_1_1CodeEditor_1_1ColumnPoint.html", null ],
     [ "mo::services::EncodingDetector", "classmo_1_1services_1_1EncodingDetector.html", null ],
     [ "mo::services::FileService", "classmo_1_1services_1_1FileService.html", null ],
     [ "mo::core::Logger", "classmo_1_1core_1_1Logger.html", null ],

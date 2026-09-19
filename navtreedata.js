@@ -76,7 +76,7 @@ var NAVTREEINDEX =
 [
 "Application_8cpp.html",
 "classmo_1_1models_1_1Document.html#aa2098f5c99586fa72bcb2eaaaa560150",
-"classmo_1_1ui_1_1MainWindow.html#ad89fa827b1998814855360d6e14f71c1"
+"classmo_1_1ui_1_1MainWindow.html#a638e437fb76f7dd778458264a503c391"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

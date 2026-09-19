@@ -10,6 +10,7 @@ var classmo_1_1ui_1_1MainWindow =
     [ "closeEvent", "classmo_1_1ui_1_1MainWindow.html#a2dfd3cebe997aca10702d8862796cbc0", null ],
     [ "closeTab", "classmo_1_1ui_1_1MainWindow.html#a700557b6ea0024ca49705154327d93fe", null ],
     [ "currentEditor", "classmo_1_1ui_1_1MainWindow.html#ab661502df5c2ab2b03e0a00a362f34e2", null ],
+    [ "editColumnSelection", "classmo_1_1ui_1_1MainWindow.html#a638e437fb76f7dd778458264a503c391", null ],
     [ "editCopy", "classmo_1_1ui_1_1MainWindow.html#a2d17af8d32dcecc0f468466134721205", null ],
     [ "editCut", "classmo_1_1ui_1_1MainWindow.html#aadb5badc1b8e687d9cbceabd439b0234", null ],
     [ "editFind", "classmo_1_1ui_1_1MainWindow.html#ad89fa827b1998814855360d6e14f71c1", null ],

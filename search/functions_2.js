@@ -1,11 +1,25 @@
 var searchData=
 [
-  ['clearsession_0',['clearSession',['../classmo_1_1services_1_1SessionManager.html#abf9e87f72ef524bdb2a69228773aa7eb',1,'mo::services::SessionManager']]],
-  ['closeevent_1',['closeEvent',['../classmo_1_1ui_1_1MainWindow.html#a2dfd3cebe997aca10702d8862796cbc0',1,'mo::ui::MainWindow']]],
-  ['closetab_2',['closeTab',['../classmo_1_1ui_1_1MainWindow.html#a700557b6ea0024ca49705154327d93fe',1,'mo::ui::MainWindow']]],
-  ['codeeditor_3',['CodeEditor',['../classmo_1_1ui_1_1CodeEditor.html#aebe5415b190393a1f1311f2d0448661f',1,'mo::ui::CodeEditor']]],
-  ['content_4',['content',['../classmo_1_1models_1_1Document.html#a0fe3260b32fb888047941d07312319a4',1,'mo::models::Document']]],
-  ['contentchanged_5',['contentChanged',['../classmo_1_1models_1_1Document.html#a54e3c5631cc568fbed28d7994c46e1ae',1,'mo::models::Document']]],
-  ['critical_6',['critical',['../classmo_1_1core_1_1Logger.html#ae56f4c65faa24a9e9551a09c9d903be1',1,'mo::core::Logger']]],
-  ['currenteditor_7',['currentEditor',['../classmo_1_1ui_1_1FindReplaceDock.html#afb12740e92d6563f6f8013409d2abe3d',1,'mo::ui::FindReplaceDock::currentEditor()'],['../classmo_1_1ui_1_1MainWindow.html#ab661502df5c2ab2b03e0a00a362f34e2',1,'mo::ui::MainWindow::currentEditor()']]]
+  ['cancelcolumnselection_0',['cancelColumnSelection',['../classmo_1_1ui_1_1CodeEditor.html#a69d5a9e75fe466e756e28a165a316e01',1,'mo::ui::CodeEditor']]],
+  ['clearsession_1',['clearSession',['../classmo_1_1services_1_1SessionManager.html#abf9e87f72ef524bdb2a69228773aa7eb',1,'mo::services::SessionManager']]],
+  ['closeevent_2',['closeEvent',['../classmo_1_1ui_1_1MainWindow.html#a2dfd3cebe997aca10702d8862796cbc0',1,'mo::ui::MainWindow']]],
+  ['closetab_3',['closeTab',['../classmo_1_1ui_1_1MainWindow.html#a700557b6ea0024ca49705154327d93fe',1,'mo::ui::MainWindow']]],
+  ['codeeditor_4',['CodeEditor',['../classmo_1_1ui_1_1CodeEditor.html#aebe5415b190393a1f1311f2d0448661f',1,'mo::ui::CodeEditor']]],
+  ['columncopy_5',['columnCopy',['../classmo_1_1ui_1_1CodeEditor.html#ab6f2237b5ce796071eb84111d01a8ac2',1,'mo::ui::CodeEditor']]],
+  ['columncut_6',['columnCut',['../classmo_1_1ui_1_1CodeEditor.html#a722f8d1c487ee7249520ec28e283c54f',1,'mo::ui::CodeEditor']]],
+  ['columndelete_7',['columnDelete',['../classmo_1_1ui_1_1CodeEditor.html#af0c898692b611c0c53bcf43a570545ad',1,'mo::ui::CodeEditor']]],
+  ['columndeleteblock_8',['columnDeleteBlock',['../classmo_1_1ui_1_1CodeEditor.html#ae9ed00422228acbc7427a68b3cdfd768',1,'mo::ui::CodeEditor']]],
+  ['columnfirstline_9',['columnFirstLine',['../classmo_1_1ui_1_1CodeEditor.html#a43ee0562c45953277dd091558d8b042e',1,'mo::ui::CodeEditor']]],
+  ['columninserttext_10',['columnInsertText',['../classmo_1_1ui_1_1CodeEditor.html#a4f4df7e0199434f45ef624ab1c584dfc',1,'mo::ui::CodeEditor']]],
+  ['columnlastline_11',['columnLastLine',['../classmo_1_1ui_1_1CodeEditor.html#af74fe2a8f98126937646673fea420e4e',1,'mo::ui::CodeEditor']]],
+  ['columnmovecaret_12',['columnMoveCaret',['../classmo_1_1ui_1_1CodeEditor.html#a8ce28a12299ddcaa7473f4e6e06ca559',1,'mo::ui::CodeEditor']]],
+  ['columnmovecorner_13',['columnMoveCorner',['../classmo_1_1ui_1_1CodeEditor.html#a33f18917422b9635564d744749133f46',1,'mo::ui::CodeEditor']]],
+  ['columnpaste_14',['columnPaste',['../classmo_1_1ui_1_1CodeEditor.html#abb2f0198ed6b58353c62155ed456d713',1,'mo::ui::CodeEditor']]],
+  ['columnrectleft_15',['columnRectLeft',['../classmo_1_1ui_1_1CodeEditor.html#af78a3c19fd5e0ea18ebc620a8124d756',1,'mo::ui::CodeEditor']]],
+  ['columnrectright_16',['columnRectRight',['../classmo_1_1ui_1_1CodeEditor.html#aab1ceed53a8172dec81d1056b341fd7a',1,'mo::ui::CodeEditor']]],
+  ['columnupdatecaret_17',['columnUpdateCaret',['../classmo_1_1ui_1_1CodeEditor.html#a93e2a468f785c789847247692174b956',1,'mo::ui::CodeEditor']]],
+  ['content_18',['content',['../classmo_1_1models_1_1Document.html#a0fe3260b32fb888047941d07312319a4',1,'mo::models::Document']]],
+  ['contentchanged_19',['contentChanged',['../classmo_1_1models_1_1Document.html#a54e3c5631cc568fbed28d7994c46e1ae',1,'mo::models::Document']]],
+  ['critical_20',['critical',['../classmo_1_1core_1_1Logger.html#ae56f4c65faa24a9e9551a09c9d903be1',1,'mo::core::Logger']]],
+  ['currenteditor_21',['currentEditor',['../classmo_1_1ui_1_1FindReplaceDock.html#afb12740e92d6563f6f8013409d2abe3d',1,'mo::ui::FindReplaceDock::currentEditor()'],['../classmo_1_1ui_1_1MainWindow.html#ab661502df5c2ab2b03e0a00a362f34e2',1,'mo::ui::MainWindow::currentEditor()']]]
 ];

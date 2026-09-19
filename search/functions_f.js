@@ -25,5 +25,6 @@ var searchData=
   ['showlinenumbers_22',['showLineNumbers',['../classmo_1_1core_1_1Settings.html#a6147cfd0d67798db996db4e74ffc664f',1,'mo::core::Settings']]],
   ['showlinenumberschanged_23',['showLineNumbersChanged',['../classmo_1_1core_1_1Settings.html#a12c56c46b5965a005cf598baf51ab97a',1,'mo::core::Settings']]],
   ['singleinstance_24',['SingleInstance',['../classmo_1_1app_1_1SingleInstance.html#aefb193d29b0275ae424b8e43851b754d',1,'mo::app::SingleInstance']]],
-  ['sizehint_25',['sizeHint',['../classmo_1_1ui_1_1LineNumberArea.html#a6493a72742f8dc00f6b0840eb7480b07',1,'mo::ui::LineNumberArea']]]
+  ['sizehint_25',['sizeHint',['../classmo_1_1ui_1_1LineNumberArea.html#a6493a72742f8dc00f6b0840eb7480b07',1,'mo::ui::LineNumberArea']]],
+  ['startcolumnselection_26',['startColumnSelection',['../classmo_1_1ui_1_1CodeEditor.html#a0e5370cbf4ab2c1fd861e4ab99c7a0b1',1,'mo::ui::CodeEditor']]]
 ];

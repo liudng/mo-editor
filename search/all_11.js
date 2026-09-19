@@ -43,6 +43,7 @@ var searchData=
   ['singleinstance_2ehpp_40',['SingleInstance.hpp',['../SingleInstance_8hpp.html',1,'']]],
   ['singleinstance_5f_41',['singleInstance_',['../classmo_1_1app_1_1Application.html#adfeb079e28100d6acf5ef46f235401f3',1,'mo::app::Application']]],
   ['sizehint_42',['sizeHint',['../classmo_1_1ui_1_1LineNumberArea.html#a6493a72742f8dc00f6b0840eb7480b07',1,'mo::ui::LineNumberArea']]],
-  ['statuslabel_5f_43',['statusLabel_',['../classmo_1_1ui_1_1FindReplaceDock.html#ad5e1311d8f231fe0efdb3ec1afad36cc',1,'mo::ui::FindReplaceDock']]],
-  ['system_44',['System',['../classmo_1_1core_1_1Settings.html#a03f621ae8501d41fa6a5ff5ea4092a1eaa45da96d0bf6575970f2d27af22be28a',1,'mo::core::Settings']]]
+  ['startcolumnselection_43',['startColumnSelection',['../classmo_1_1ui_1_1CodeEditor.html#a0e5370cbf4ab2c1fd861e4ab99c7a0b1',1,'mo::ui::CodeEditor']]],
+  ['statuslabel_5f_44',['statusLabel_',['../classmo_1_1ui_1_1FindReplaceDock.html#ad5e1311d8f231fe0efdb3ec1afad36cc',1,'mo::ui::FindReplaceDock']]],
+  ['system_45',['System',['../classmo_1_1core_1_1Settings.html#a03f621ae8501d41fa6a5ff5ea4092a1eaa45da96d0bf6575970f2d27af22be28a',1,'mo::core::Settings']]]
 ];

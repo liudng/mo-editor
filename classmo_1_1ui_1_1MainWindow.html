@@ -120,6 +120,7 @@ Public Slots</h2></td></tr>
 <tr class="memitem:a2d17af8d32dcecc0f468466134721205" id="r_a2d17af8d32dcecc0f468466134721205"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d17af8d32dcecc0f468466134721205">editCopy</a> ()</td></tr>
 <tr class="memitem:a10cf76556ec435e63da4bea34829adce" id="r_a10cf76556ec435e63da4bea34829adce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10cf76556ec435e63da4bea34829adce">editPaste</a> ()</td></tr>
 <tr class="memitem:af26bdaa3c92a9994ca10147972cde98f" id="r_af26bdaa3c92a9994ca10147972cde98f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af26bdaa3c92a9994ca10147972cde98f">editSelectAll</a> ()</td></tr>
+<tr class="memitem:a638e437fb76f7dd778458264a503c391" id="r_a638e437fb76f7dd778458264a503c391"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a638e437fb76f7dd778458264a503c391">editColumnSelection</a> ()</td></tr>
 <tr class="memitem:ad89fa827b1998814855360d6e14f71c1" id="r_ad89fa827b1998814855360d6e14f71c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad89fa827b1998814855360d6e14f71c1">editFind</a> ()</td></tr>
 <tr class="memitem:ac6f905f82b5cbbe212fd2c9c5e040fec" id="r_ac6f905f82b5cbbe212fd2c9c5e040fec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6f905f82b5cbbe212fd2c9c5e040fec">editFindNext</a> ()</td></tr>
 <tr class="memitem:a63e1679adfaf622e69817c392e146c9d" id="r_a63e1679adfaf622e69817c392e146c9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63e1679adfaf622e69817c392e146c9d">editFindPrev</a> ()</td></tr>
@@ -209,7 +210,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00032">32</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00229">applyIconTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00210">applyTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00092">fileWatcher_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00091">findDock_</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="Constants_8hpp_source.html#l00009">mo::core::constants::kApplicationName</a>, <a class="el" href="SessionManager_8cpp_source.html#l00039">mo::services::SessionManager::loadSession()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00382">onFileChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00378">onTabChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00380">onTabCloseRequested()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>, <a class="el" href="Settings_8hpp_source.html#l00025">mo::core::Settings::recentFiles</a>, <a class="el" href="MainWindow_8hpp_source.html#l00093">recentFiles_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, <a class="el" href="classmo_1_1core_1_1Settings.html#a633a2b946af948edd0304c89fa1adc92">mo::core::Settings::themeChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00232">applyIconTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00213">applyTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00093">fileWatcher_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00092">findDock_</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="Constants_8hpp_source.html#l00009">mo::core::constants::kApplicationName</a>, <a class="el" href="SessionManager_8cpp_source.html#l00039">mo::services::SessionManager::loadSession()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00385">onFileChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00381">onTabChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00383">onTabCloseRequested()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>, <a class="el" href="Settings_8hpp_source.html#l00025">mo::core::Settings::recentFiles</a>, <a class="el" href="MainWindow_8hpp_source.html#l00094">recentFiles_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, <a class="el" href="classmo_1_1core_1_1Settings.html#a633a2b946af948edd0304c89fa1adc92">mo::core::Settings::themeChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
 </div>
 </div>
@@ -262,11 +263,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00247">247</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00250">250</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00089">toggleLineNumbersAction_</a>.</p>
+<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00090">toggleLineNumbersAction_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00411">onSettingsChanged()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00414">onSettingsChanged()</a>.</p>
 
 </div>
 </div>
@@ -293,11 +294,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00229">229</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00232">232</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Settings_8hpp_source.html#l00021">mo::core::Settings::iconTheme</a>, and <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00411">onSettingsChanged()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00414">onSettingsChanged()</a>.</p>
 
 </div>
 </div>
@@ -324,11 +325,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00210">210</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00213">213</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00260">loadStyleSheet()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, and <a class="el" href="Settings_8hpp_source.html#l00020">mo::core::Settings::theme</a>.</p>
+<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00263">loadStyleSheet()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, and <a class="el" href="Settings_8hpp_source.html#l00020">mo::core::Settings::theme</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00411">onSettingsChanged()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00414">onSettingsChanged()</a>.</p>
 
 </div>
 </div>
@@ -357,7 +358,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00099">99</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00514">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00509">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00529">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00536">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00541">editFindPrev()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00519">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00546">editPreferences()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00504">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00524">editSelectAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00499">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00490">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00441">fileNew()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00443">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00495">fileQuit()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00451">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00474">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00459">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00597">helpAbout()</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00088">recentFilesMenu_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00089">toggleLineNumbersAction_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00090">toggleToolBarAction_</a>, <a class="el" href="MainWindow_8cpp_source.html#l00555">viewToggleLineNumbers()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00567">viewToggleToolBar()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00574">viewZoomIn()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00579">viewZoomOut()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00584">viewZoomReset()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00545">editColumnSelection()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00523">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00512">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00557">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00564">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00569">editFindPrev()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00534">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00574">editPreferences()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00507">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00552">editSelectAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00502">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00493">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00444">fileNew()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00446">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00498">fileQuit()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00454">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00477">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00462">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00625">helpAbout()</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00089">recentFilesMenu_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00090">toggleLineNumbersAction_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00091">toggleToolBarAction_</a>, <a class="el" href="MainWindow_8cpp_source.html#l00583">viewToggleLineNumbers()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00595">viewToggleToolBar()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00602">viewZoomIn()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00607">viewZoomOut()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00612">viewZoomReset()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
@@ -386,9 +387,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00183">183</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00186">186</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00514">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00509">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00529">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00519">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00504">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00499">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00441">fileNew()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00443">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00451">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00474">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00459">fileSaveAs()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">toolBar_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00523">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00512">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00557">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00534">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00507">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00502">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00444">fileNew()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00446">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00454">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00477">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00462">fileSaveAs()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00088">toolBar_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
@@ -417,9 +418,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00606">606</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00634">634</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00627">saveSession()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00655">saveSession()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
 </div>
 </div>
@@ -438,11 +439,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00344">344</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00347">347</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00490">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00382">onFileChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00380">onTabCloseRequested()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00493">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00385">onFileChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00383">onTabCloseRequested()</a>.</p>
 
 </div>
 </div>
@@ -471,9 +472,40 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00094">94</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00514">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00509">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00536">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00541">editFindPrev()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00519">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00504">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00524">editSelectAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00499">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00451">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00459">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00574">viewZoomIn()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00579">viewZoomOut()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00584">viewZoomReset()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00545">editColumnSelection()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00523">editCopy()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00512">editCut()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00564">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00569">editFindPrev()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00534">editPaste()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00507">editRedo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00552">editSelectAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00502">editUndo()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00454">fileSave()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00462">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00602">viewZoomIn()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00607">viewZoomOut()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00612">viewZoomReset()</a>.</p>
+
+</div>
+</div>
+<a id="a638e437fb76f7dd778458264a503c391" name="a638e437fb76f7dd778458264a503c391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a638e437fb76f7dd778458264a503c391">&#9670;&#160;</a></span>editColumnSelection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mo::ui::MainWindow::editColumnSelection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel slot">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00545">545</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
 </div>
 </div>
@@ -500,11 +532,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00514">514</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00523">523</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -531,11 +563,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00509">509</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00512">512</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -562,11 +594,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00529">529</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00557">557</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00091">findDock_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00092">findDock_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -593,9 +625,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00536">536</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00564">564</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00091">findDock_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00092">findDock_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -624,9 +656,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00541">541</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00569">569</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00091">findDock_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00092">findDock_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -655,11 +687,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00519">519</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00534">534</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -686,9 +718,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00546">546</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00574">574</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00411">onSettingsChanged()</a>, and <a class="el" href="classmo_1_1ui_1_1SettingsDialog.html#a40b42c298d1e0988c33c91c0c461b38a">mo::ui::SettingsDialog::settingsChanged()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00414">onSettingsChanged()</a>, and <a class="el" href="classmo_1_1ui_1_1SettingsDialog.html#a40b42c298d1e0988c33c91c0c461b38a">mo::ui::SettingsDialog::settingsChanged()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -717,11 +749,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00504">504</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00507">507</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -748,7 +780,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00524">524</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00552">552</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
@@ -779,11 +811,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00499">499</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00502">502</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -810,9 +842,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00490">490</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00493">493</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00344">closeTab()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00347">closeTab()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -841,11 +873,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00441">441</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00444">444</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -872,11 +904,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00443">443</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00446">446</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -903,7 +935,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00495">495</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00498">498</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -932,11 +964,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00451">451</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00454">454</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -963,11 +995,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00474">474</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00477">477</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00459">fileSaveAs()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00462">fileSaveAs()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>.</p>
 
 </div>
 </div>
@@ -994,11 +1026,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00459">459</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00462">462</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00474">fileSaveAll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00477">fileSaveAll()</a>.</p>
 
 </div>
 </div>
@@ -1025,7 +1057,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00597">597</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00625">625</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Constants_8hpp_source.html#l00011">mo::core::constants::kApplicationVersion</a>.</p>
 
@@ -1056,9 +1088,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00260">260</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00263">263</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00210">applyTheme()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00213">applyTheme()</a>.</p>
 
 </div>
 </div>
@@ -1077,11 +1109,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00298">298</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00301">301</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a2022c1c19bdd5018fad36b4ec094ddaf">mo::ui::CodeEditor::modificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00428">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00418">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, and <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a1db3bc70f63a8c55a9c45954a51c5b84">mo::ui::CodeEditor::titleChanged()</a>.</p>
+<p class="reference">References <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a2022c1c19bdd5018fad36b4ec094ddaf">mo::ui::CodeEditor::modificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00431">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00421">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, and <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a1db3bc70f63a8c55a9c45954a51c5b84">mo::ui::CodeEditor::titleChanged()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00344">closeTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00441">fileNew()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00347">closeTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00444">fileNew()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
 </div>
 </div>
@@ -1108,11 +1140,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00428">428</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00431">431</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>.</p>
 
 </div>
 </div>
@@ -1139,11 +1171,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00418">418</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00421">421</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>.</p>
 
 </div>
 </div>
@@ -1170,9 +1202,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00382">382</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00385">385</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00344">closeTab()</a>, <a class="el" href="Logger_8cpp_source.html#l00028">mo::core::Logger::info()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00347">closeTab()</a>, <a class="el" href="Logger_8cpp_source.html#l00028">mo::core::Logger::info()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
@@ -1201,11 +1233,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00411">411</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00414">414</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00247">applyEditorSettingsToAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00229">applyIconTheme()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00210">applyTheme()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00250">applyEditorSettingsToAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00232">applyIconTheme()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00213">applyTheme()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00546">editPreferences()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00574">editPreferences()</a>.</p>
 
 </div>
 </div>
@@ -1232,7 +1264,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00378">378</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00381">381</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
@@ -1261,9 +1293,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00380">380</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00383">383</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00344">closeTab()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00347">closeTab()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
@@ -1284,11 +1316,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00307">307</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00310">310</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00092">fileWatcher_</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a2022c1c19bdd5018fad36b4ec094ddaf">mo::ui::CodeEditor::modificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00428">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00418">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00093">recentFiles_</a>, <a class="el" href="Settings_8cpp_source.html#l00128">mo::core::Settings::setRecentFiles()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a1db3bc70f63a8c55a9c45954a51c5b84">mo::ui::CodeEditor::titleChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00093">fileWatcher_</a>, <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a2022c1c19bdd5018fad36b4ec094ddaf">mo::ui::CodeEditor::modificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00431">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00421">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00094">recentFiles_</a>, <a class="el" href="Settings_8cpp_source.html#l00128">mo::core::Settings::setRecentFiles()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, <a class="el" href="classmo_1_1ui_1_1CodeEditor.html#a1db3bc70f63a8c55a9c45954a51c5b84">mo::ui::CodeEditor::titleChanged()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00443">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00446">fileOpen()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
 </div>
 </div>
@@ -1307,11 +1339,11 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00627">627</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00655">655</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="SessionManager_8hpp_source.html#l00016">mo::services::SessionState::openFiles</a>, <a class="el" href="SessionManager_8cpp_source.html#l00025">mo::services::SessionManager::saveSession()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>, <a class="el" href="SessionManager_8hpp_source.html#l00018">mo::services::SessionState::windowGeometry</a>, and <a class="el" href="SessionManager_8hpp_source.html#l00019">mo::services::SessionState::windowState</a>.</p>
+<p class="reference">References <a class="el" href="SessionManager_8hpp_source.html#l00016">mo::services::SessionState::openFiles</a>, <a class="el" href="SessionManager_8cpp_source.html#l00025">mo::services::SessionManager::saveSession()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>, <a class="el" href="SessionManager_8hpp_source.html#l00018">mo::services::SessionState::windowGeometry</a>, and <a class="el" href="SessionManager_8hpp_source.html#l00019">mo::services::SessionState::windowState</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00606">closeEvent()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00634">closeEvent()</a>.</p>
 
 </div>
 </div>
@@ -1338,11 +1370,11 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00272">272</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00275">275</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00093">recentFiles_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00088">recentFilesMenu_</a>, <a class="el" href="Settings_8cpp_source.html#l00128">mo::core::Settings::setRecentFiles()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>, <a class="el" href="MainWindow_8hpp_source.html#l00094">recentFiles_</a>, <a class="el" href="MainWindow_8hpp_source.html#l00089">recentFilesMenu_</a>, <a class="el" href="Settings_8cpp_source.html#l00128">mo::core::Settings::setRecentFiles()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
 </div>
 </div>
@@ -1369,9 +1401,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00367">367</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00370">370</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
 </div>
 </div>
@@ -1398,9 +1430,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00555">555</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00583">583</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="Settings_8cpp_source.html#l00043">mo::core::Settings::save()</a>, <a class="el" href="Settings_8cpp_source.html#l00108">mo::core::Settings::setShowLineNumbers()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00086">tabWidget_</a>.</p>
+<p class="reference">References <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>, <a class="el" href="Settings_8cpp_source.html#l00043">mo::core::Settings::save()</a>, <a class="el" href="Settings_8cpp_source.html#l00108">mo::core::Settings::setShowLineNumbers()</a>, and <a class="el" href="MainWindow_8hpp_source.html#l00087">tabWidget_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -1429,9 +1461,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00567">567</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00595">595</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00087">toolBar_</a>.</p>
+<p class="reference">References <a class="el" href="MainWindow_8hpp_source.html#l00088">toolBar_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -1460,7 +1492,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00574">574</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00602">602</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
@@ -1491,7 +1523,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00579">579</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00607">607</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>.</p>
 
@@ -1522,7 +1554,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00584">584</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8cpp_source.html#l00612">612</a> of file <a class="el" href="MainWindow_8cpp_source.html">MainWindow.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, and <a class="el" href="Settings_8cpp_source.html#l00013">mo::core::Settings::instance()</a>.</p>
 
@@ -1551,9 +1583,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00092">92</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00093">93</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>.</p>
 
 </div>
 </div>
@@ -1577,9 +1609,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00091">91</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00092">92</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00529">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00536">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00541">editFindPrev()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00557">editFind()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00564">editFindNext()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00569">editFindPrev()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>.</p>
 
 </div>
 </div>
@@ -1603,9 +1635,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00093">93</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00094">94</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
 </div>
 </div>
@@ -1629,9 +1661,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00088">88</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00089">89</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00272">updateRecentFilesMenu()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00275">updateRecentFilesMenu()</a>.</p>
 
 </div>
 </div>
@@ -1655,9 +1687,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00086">86</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00087">87</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00247">applyEditorSettingsToAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00210">applyTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00606">closeEvent()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00344">closeTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00490">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00474">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00459">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00298">newTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00428">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00418">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00382">onFileChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00307">openFile()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00627">saveSession()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00367">updateTabTitle()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00555">viewToggleLineNumbers()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00250">applyEditorSettingsToAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00213">applyTheme()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00634">closeEvent()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00347">closeTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00094">currentEditor()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00493">fileCloseTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00477">fileSaveAll()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00462">fileSaveAs()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00032">MainWindow()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00301">newTab()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00431">onEditorModificationChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00421">onEditorTitleChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00385">onFileChanged()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00310">openFile()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00655">saveSession()</a>, <a class="el" href="MainWindow_8cpp_source.html#l00370">updateTabTitle()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00583">viewToggleLineNumbers()</a>.</p>
 
 </div>
 </div>
@@ -1681,9 +1713,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00089">89</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00090">90</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00247">applyEditorSettingsToAll()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00250">applyEditorSettingsToAll()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
 </div>
 </div>
@@ -1707,7 +1739,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00090">90</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00091">91</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00099">buildMenus()</a>.</p>
 
@@ -1733,9 +1765,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00087">87</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MainWindow_8hpp_source.html#l00088">88</a> of file <a class="el" href="MainWindow_8hpp_source.html">MainWindow.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00183">buildToolBar()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00567">viewToggleToolBar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="MainWindow_8cpp_source.html#l00186">buildToolBar()</a>, and <a class="el" href="MainWindow_8cpp_source.html#l00595">viewToggleToolBar()</a>.</p>
 
 </div>
 </div>
