@@ -17,6 +17,7 @@ class TestMainWindow : public QObject {
     void cleanup();
     void testCreateWindow();
     void testOpenFile();
+    void testOpenFilesFromCommandLine();
 
   private:
     static int tabCount(const mo::ui::MainWindow &mw);
@@ -66,6 +67,20 @@ void TestMainWindow::testOpenFile() {
     const int before = tabCount(*m_window);
     m_window->openFile(tmp.fileName());
     QCOMPARE(tabCount(*m_window), before + 1);
+}
+
+void TestMainWindow::testOpenFilesFromCommandLine() {
+    QTemporaryFile tmp1;
+    QTemporaryFile tmp2;
+    QVERIFY(tmp1.open());
+    QVERIFY(tmp2.open());
+    tmp1.close();
+    tmp2.close();
+
+    // Files given on the command line open in their own tabs, and no extra
+    // "Untitled" tab is created.
+    m_window = new mo::ui::MainWindow(QStringList{tmp1.fileName(), tmp2.fileName()});
+    QCOMPARE(tabCount(*m_window), 2);
 }
 
 QTEST_MAIN(TestMainWindow)

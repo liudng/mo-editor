@@ -10,6 +10,7 @@ inline constexpr auto kApplicationName = "mo";
 inline constexpr auto kOrganizationName = "liudng";
 inline constexpr auto kApplicationVersion = "0.1.0";
 inline constexpr auto kDBusServiceName = "io.github.liudng.mo";
+inline constexpr auto kDBusObjectPath = "/io/github/liudng/mo";
 inline constexpr auto kSharedMemoryKey = "io.github.liudng.mo.single";
 inline constexpr auto kSettingsFile = "mo.ini";
 

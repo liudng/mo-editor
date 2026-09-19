@@ -7,6 +7,7 @@
 
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
+#include <QDBusMessage>
 
 namespace mo::app {
 
@@ -26,6 +27,12 @@ bool SingleInstance::tryLock()
     auto bus = QDBusConnection::sessionBus();
     if (bus.isConnected()) {
         if (bus.registerService(mo::core::constants::kDBusServiceName)) {
+            // Expose the "openFiles" method so that later instances can hand
+            // their command-line file arguments over to this instance.
+            if (!bus.registerObject(mo::core::constants::kDBusObjectPath, this,
+                                    QDBusConnection::ExportAllSlots)) {
+                mo::core::Logger::warning("Failed to register D-Bus object");
+            }
             locked_ = true;
             mo::core::Logger::info("Single instance acquired via D-Bus");
             return true;
@@ -46,6 +53,33 @@ bool SingleInstance::tryLock()
     }
 
     locked_ = true;
+    return true;
+}
+
+void SingleInstance::openFiles(const QStringList &files)
+{
+    emit openFilesRequested(files);
+}
+
+bool SingleInstance::forwardToRunningInstance(const QStringList &files) const
+{
+    auto bus = QDBusConnection::sessionBus();
+    if (!bus.isConnected()) {
+        mo::core::Logger::warning("Cannot forward files: no D-Bus session bus");
+        return false;
+    }
+
+    auto message = QDBusMessage::createMethodCall(
+        mo::core::constants::kDBusServiceName,
+        mo::core::constants::kDBusObjectPath,
+        mo::core::constants::kDBusServiceName,
+        QStringLiteral("openFiles"));
+    message.setArguments({QVariant::fromValue(files)});
+    if (!bus.send(message)) {
+        mo::core::Logger::warning("Failed to forward files to the running instance");
+        return false;
+    }
+    mo::core::Logger::info("Forwarded files to the running instance");
     return true;
 }
 

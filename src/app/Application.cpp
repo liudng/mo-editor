@@ -8,6 +8,8 @@
 #include "mo/core/Settings.hpp"
 #include "mainwindow/MainWindow.hpp"
 
+#include <QCommandLineParser>
+#include <QFileInfo>
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QSettings>
@@ -27,16 +29,35 @@ Application::Application(int &argc, char **argv)
 
     initLogging();
     loadTranslation();
+    parseCommandLine();
 
     singleInstance_ = std::make_unique<SingleInstance>(this);
     if (!singleInstance_->tryLock()) {
         mo::core::Logger::warning("Another instance is already running; exiting");
+        if (!filesToOpen_.isEmpty()) {
+            // Hand the file arguments over to the running instance.
+            singleInstance_->forwardToRunningInstance(filesToOpen_);
+        }
         return;
     }
 
+    // A second instance may hand over its file arguments while we run.
+    connect(singleInstance_.get(), &SingleInstance::openFilesRequested, this,
+            [this](const QStringList &files) {
+                if (!mainWindow_) {
+                    return;
+                }
+                for (const auto &file : files) {
+                    mainWindow_->openFile(file);
+                }
+                mainWindow_->show();
+                mainWindow_->raise();
+                mainWindow_->activateWindow();
+            });
+
     mo::core::Settings::instance().load();
 
-    mainWindow_ = std::make_unique<mo::ui::MainWindow>();
+    mainWindow_ = std::make_unique<mo::ui::MainWindow>(filesToOpen_);
     mainWindow_->show();
 }
 
@@ -84,6 +105,25 @@ void Application::loadTranslation()
 void Application::initLogging()
 {
     mo::core::Logger::init();
+}
+
+void Application::parseCommandLine()
+{
+    QCommandLineParser parser;
+    parser.setApplicationDescription(
+        tr("A fast and lightweight multi-tab text editor"));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument(QStringLiteral("files"),
+                                 tr("Files to open, each in its own tab."),
+                                 QStringLiteral("[files...]"));
+    parser.process(*this);
+
+    // Normalize to absolute paths so that later session restore and recent
+    // files work regardless of the working directory.
+    for (const auto &file : parser.positionalArguments()) {
+        filesToOpen_.append(QFileInfo(file).absoluteFilePath());
+    }
 }
 
 } // namespace mo::app

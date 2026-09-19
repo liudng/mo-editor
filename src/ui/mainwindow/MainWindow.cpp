@@ -29,7 +29,7 @@
 
 namespace mo::ui {
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(const QStringList &filesToOpen, QWidget *parent)
     : QMainWindow(parent)
 {
     setWindowTitle(mo::core::constants::kApplicationName);
@@ -77,6 +77,11 @@ MainWindow::MainWindow(QWidget *parent)
         if (!session->windowState.isEmpty()) {
             restoreState(session->windowState);
         }
+    }
+
+    // Files requested on the command line.
+    for (const auto &file : filesToOpen) {
+        openFile(file);
     }
 
     if (tabWidget_->count() == 0) {

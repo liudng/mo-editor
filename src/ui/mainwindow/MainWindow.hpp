@@ -23,7 +23,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(const QStringList &filesToOpen = QStringList(),
+                        QWidget *parent = nullptr);
     ~MainWindow() override;
 
     void openFile(const QString &path);

@@ -4,6 +4,7 @@
 #pragma once
 
 #include <QApplication>
+#include <QStringList>
 #include <memory>
 
 namespace mo::ui {
@@ -30,9 +31,11 @@ private slots:
 private:
     void loadTranslation();
     void initLogging();
+    void parseCommandLine();
 
     std::unique_ptr<SingleInstance> singleInstance_;
     std::unique_ptr<mo::ui::MainWindow> mainWindow_;
+    QStringList filesToOpen_;
 };
 
 } // namespace mo::app
