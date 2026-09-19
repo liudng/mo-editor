@@ -24,3 +24,12 @@ target_link_libraries(test_encoding_detector PRIVATE
     Mo::Services
 )
 add_test(NAME test_encoding_detector COMMAND test_encoding_detector)
+
+qt_add_executable(test_codeeditor test_codeeditor.cpp)
+target_compile_features(test_codeeditor PRIVATE cxx_std_20)
+target_link_libraries(test_codeeditor PRIVATE
+    Qt6::Test
+    Mo::Ui
+    KF6::SyntaxHighlighting
+)
+add_test(NAME test_codeeditor COMMAND test_codeeditor)

@@ -143,6 +143,9 @@ void MainWindow::buildMenus()
     pasteAct->setData(QStringLiteral("edit-paste"));
     editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
                         tr("Select &All"), QKeySequence::SelectAll, this, &MainWindow::editSelectAll);
+    auto *columnAct = editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-column")),
+                        tr("Start Co&lumn Selection"), this, &MainWindow::editColumnSelection);
+    columnAct->setStatusTip(tr("Start a column selection at the cursor; extend it with Alt+Shift+Arrows"));
     editMenu->addSeparator();
     editMenu->addAction(QIcon::fromTheme(QStringLiteral("edit-find")),
                         tr("&Find..."), QKeySequence::Find, this, &MainWindow::editFind);
@@ -508,17 +511,42 @@ void MainWindow::editRedo()
 
 void MainWindow::editCut()
 {
-    if (auto *e = currentEditor()) e->cut();
+    if (auto *e = currentEditor()) {
+        if (e->hasColumnSelection()) {
+            e->columnCut();
+        } else {
+            e->cut();
+        }
+    }
 }
 
 void MainWindow::editCopy()
 {
-    if (auto *e = currentEditor()) e->copy();
+    if (auto *e = currentEditor()) {
+        if (e->hasColumnSelection()) {
+            e->columnCopy();
+        } else {
+            e->copy();
+        }
+    }
 }
 
 void MainWindow::editPaste()
 {
-    if (auto *e = currentEditor()) e->paste();
+    if (auto *e = currentEditor()) {
+        if (e->hasColumnSelection()) {
+            e->columnPaste();
+        } else {
+            e->paste();
+        }
+    }
+}
+
+void MainWindow::editColumnSelection()
+{
+    if (auto *e = currentEditor()) {
+        e->startColumnSelection();
+    }
 }
 
 void MainWindow::editSelectAll()

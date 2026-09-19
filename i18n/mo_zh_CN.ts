@@ -146,6 +146,14 @@
       <translation>全选(&amp;A)</translation>
     </message>
     <message>
+      <source>Start Co&amp;lumn Selection</source>
+      <translation>开始列选择(&amp;L)</translation>
+    </message>
+    <message>
+      <source>Start a column selection at the cursor; extend it with Alt+Shift+Arrows</source>
+      <translation>从光标处开始列选择；用 Alt+Shift+方向键扩展</translation>
+    </message>
+    <message>
       <source>&amp;Find...</source>
       <translation>查找(&amp;F)...</translation>
     </message>

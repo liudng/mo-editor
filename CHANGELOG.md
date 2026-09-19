@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Column (rectangular) selection: start/extend it with Alt+Shift+Arrows or
+  the Edit menu item "Start Column Selection". While active, typing, Tab,
+  Backspace/Delete, cut, and paste apply to every selected row as a single
+  undo step; copy/cut operate on the rectangle. Editing operations keep the
+  multi-cursor alive (a block delete or cut collapses the rectangle to a
+  zero-width column, paste advances it past the inserted text); plain arrow
+  keys steer the whole group (rows shift with Up/Down, the column with
+  Left/Right, and a width selection collapses to its edge). Only Esc, a
+  mouse click, or another plain key exits column mode.
 - Support for `mo file1 file2 ...` command-line arguments: each file opens
   in its own tab, and when an instance is already running, the arguments are
   forwarded to it via D-Bus (`io.github.liudng.mo` `/io/github/liudng/mo`

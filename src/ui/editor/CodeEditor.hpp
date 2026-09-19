@@ -49,6 +49,19 @@ public:
 
     int lineNumberAreaWidth();
 
+    // ---- Column (rectangular) selection ----
+    // A pseudo-selection spanning the same character range on consecutive
+    // lines; started with Alt+Shift+Arrows or startColumnSelection(). Plain
+    // arrows steer the multi-cursor group; Esc / mouse click / other plain
+    // keys cancel it.
+    bool hasColumnSelection() const;
+    void startColumnSelection();
+    void cancelColumnSelection();
+    // Clipboard operations aware of the active column selection.
+    void columnCopy();
+    void columnCut();
+    void columnPaste();
+
 signals:
     void modificationChanged(bool modified);
     void titleChanged(const QString &title);
@@ -56,6 +69,8 @@ signals:
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -68,12 +83,31 @@ private:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     void updateTabTitle();
 
+    struct ColumnPoint {
+        int line = 0;
+        int column = 0;
+    };
+    int columnRectLeft() const;
+    int columnRectRight() const;
+    int columnFirstLine() const;
+    int columnLastLine() const;
+    void columnMoveCorner(int key);
+    void columnMoveCaret(int key);
+    void columnUpdateCaret();
+    void columnInsertText(const QString &text);
+    void columnDelete(bool forward);
+    void columnDeleteBlock();
+
     LineNumberArea *lineNumberArea_ = nullptr;
     QString filePath_;
     bool showLineNumbers_ = true;
     KSyntaxHighlighting::SyntaxHighlighter *highlighter_ = nullptr;
     KSyntaxHighlighting::Theme highlightingTheme_;
     static KSyntaxHighlighting::Repository *repository_;
+
+    bool columnActive_ = false;
+    ColumnPoint columnAnchor_;
+    ColumnPoint columnCorner_;
 };
 
 } // namespace mo::ui

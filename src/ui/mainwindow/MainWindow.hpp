@@ -51,6 +51,7 @@ public slots:
     void editCopy();
     void editPaste();
     void editSelectAll();
+    void editColumnSelection();
     void editFind();
     void editFindNext();
     void editFindPrev();
