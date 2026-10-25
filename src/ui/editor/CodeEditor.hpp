@@ -95,6 +95,11 @@ private:
     int columnRectRight() const;
     int columnFirstLine() const;
     int columnLastLine() const;
+    // Indents every line touched by the current selection when the selection
+    // spans whole lines or contains a line break; the selection is kept on
+    // the same characters. Returns false when the selection does not select
+    // whole lines, so Tab falls back to inserting text.
+    bool indentSelection(const QString &indent);
     void columnMoveCorner(int key);
     void columnMoveCaret(int key);
     void columnUpdateCaret();

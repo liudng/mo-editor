@@ -229,10 +229,13 @@ void CodeEditor::keyPressEvent(QKeyEvent *event)
         return;
     }
 
-    // Tab key: insert spaces according to tabWidth setting.
+    // Tab key: indent whole selected lines, or insert spaces according to
+    // tabWidth setting.
     if (event->key() == Qt::Key_Tab && !(event->modifiers() & Qt::ControlModifier)) {
-        const int tw = mo::core::Settings::instance().tabWidth();
-        insertPlainText(QString(tw, QLatin1Char(' ')));
+        const QString indent(mo::core::Settings::instance().tabWidth(), QLatin1Char(' '));
+        if (!indentSelection(indent)) {
+            insertPlainText(indent);
+        }
         return;
     }
 
@@ -518,6 +521,56 @@ void CodeEditor::findPrev(const QString &text)
     if (!cursor.isNull()) {
         setTextCursor(cursor);
     }
+}
+
+// ---- Tab indentation of selected lines ----
+
+bool CodeEditor::indentSelection(const QString &indent)
+{
+    const QTextCursor cur = textCursor();
+    if (!cur.hasSelection()) {
+        return false;
+    }
+    const int start = cur.selectionStart();
+    const int end = cur.selectionEnd();
+    // The last selected character decides the last touched line: a selection
+    // ending at column 0 (e.g. Shift+Down) selects nothing on that line.
+    const QTextBlock firstBlock = document()->findBlock(start);
+    const QTextBlock lastBlock = document()->findBlock(end - 1);
+
+    const QChar lastChar = document()->characterAt(end - 1);
+    const bool spansLines = firstBlock.blockNumber() != lastBlock.blockNumber()
+        || lastChar == QLatin1Char('\n') || lastChar == QChar::ParagraphSeparator;
+    if (!spansLines) {
+        // Selection inside one line: only a whole-line selection indents.
+        if (start != firstBlock.position()
+            || end != firstBlock.position() + firstBlock.text().size()) {
+            return false;
+        }
+    }
+
+    QTextCursor edit(document());
+    edit.beginEditBlock();
+    for (int line = lastBlock.blockNumber(); line >= firstBlock.blockNumber(); --line) {
+        const auto block = document()->findBlockByNumber(line);
+        if (!block.isValid()) {
+            continue;
+        }
+        QTextCursor cursor(document());
+        cursor.setPosition(block.position());
+        cursor.insertText(indent);
+    }
+    edit.endEditBlock();
+
+    // Keep the selection on the same characters, shifted with the indents;
+    // a selection that started at column 0 still does.
+    const int shift = indent.size();
+    const int lines = lastBlock.blockNumber() - firstBlock.blockNumber() + 1;
+    QTextCursor selection(document());
+    selection.setPosition(start == firstBlock.position() ? start : start + shift);
+    selection.setPosition(end + lines * shift, QTextCursor::KeepAnchor);
+    setTextCursor(selection);
+    return true;
 }
 
 // ---- Column (rectangular) selection ----

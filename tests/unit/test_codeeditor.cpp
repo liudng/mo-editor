@@ -9,6 +9,7 @@
 #include <QtTest>
 
 #include "editor/CodeEditor.hpp"
+#include "mo/core/Settings.hpp"
 
 class TestCodeEditor : public QObject {
     Q_OBJECT
@@ -27,6 +28,10 @@ class TestCodeEditor : public QObject {
     void testColumnArrowCollapseWidth();
     void testColumnCancel();
 
+    void testTabIndentsSelectedLines();
+    void testTabIndentsSingleSelectedLine();
+    void testTabReplacesPartialSelection();
+
   private:
     mo::ui::CodeEditor *makeEditor(const QString &text, int position);
     QPointer<mo::ui::CodeEditor> m_editor;
@@ -37,6 +42,8 @@ void TestCodeEditor::initTestCase() {
     // Settings away from the developer's real config.
     qputenv("QT_QPA_PLATFORM", "offscreen");
     QStandardPaths::setTestModeEnabled(true);
+    // The Tab-indent tests assert on the indent unit.
+    mo::core::Settings::instance().setTabWidth(4);
 }
 
 void TestCodeEditor::cleanup() {
@@ -243,6 +250,67 @@ void TestCodeEditor::testColumnCancel() {
     QVERIFY(editor->hasColumnSelection());
     QTest::mouseClick(editor->viewport(), Qt::LeftButton);
     QVERIFY(!editor->hasColumnSelection());
+}
+
+void TestCodeEditor::testTabIndentsSelectedLines() {
+    // Selection from mid line 0 to mid line 2: every touched line indents,
+    // the content is not replaced.
+    auto *editor = makeEditor(QStringLiteral("aaaa\nbbbb\ncccc\n"), 2);
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(11, QTextCursor::KeepAnchor); // line 2, col 1
+    editor->setTextCursor(sel);
+
+    QTest::keyClick(editor, Qt::Key_Tab);
+    QCOMPARE(editor->toPlainText(), QStringLiteral("    aaaa\n    bbbb\n    cccc\n"));
+
+    // The selection survives on the same characters, shifted with them.
+    QCOMPARE(editor->textCursor().selectionStart(), 6);
+    QCOMPARE(editor->textCursor().selectionEnd(), 23);
+
+    // One Tab is one undo step.
+    editor->undo();
+    QCOMPARE(editor->toPlainText(), QStringLiteral("aaaa\nbbbb\ncccc\n"));
+}
+
+void TestCodeEditor::testTabIndentsSingleSelectedLine() {
+    // Whole line selected without the trailing newline (Home, Shift+End).
+    auto *editor = makeEditor(QStringLiteral("hello\nworld\n"), 0);
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(5, QTextCursor::KeepAnchor); // "hello"
+    editor->setTextCursor(sel);
+
+    QTest::keyClick(editor, Qt::Key_Tab);
+    QCOMPARE(editor->toPlainText(), QStringLiteral("    hello\nworld\n"));
+
+    // The selection still covers the whole indented line: Tab indents again
+    // instead of overwriting the line.
+    QCOMPARE(editor->textCursor().selectionStart(), 0);
+    QCOMPARE(editor->textCursor().selectionEnd(), 9);
+    QTest::keyClick(editor, Qt::Key_Tab);
+    QCOMPARE(editor->toPlainText(), QStringLiteral("        hello\nworld\n"));
+
+    // A selection ending at column 0 (Home, Shift+Down) must not indent the
+    // line it only touches at its start.
+    editor->setPlainText(QStringLiteral("aaaa\nbbbb\ncccc\n"));
+    editor->cancelColumnSelection();
+    QTextCursor reset = editor->textCursor();
+    reset.setPosition(0);
+    reset.setPosition(5, QTextCursor::KeepAnchor); // "aaaa\n"
+    editor->setTextCursor(reset);
+
+    QTest::keyClick(editor, Qt::Key_Tab);
+    QCOMPARE(editor->toPlainText(), QStringLiteral("    aaaa\nbbbb\ncccc\n"));
+}
+
+void TestCodeEditor::testTabReplacesPartialSelection() {
+    // A selection inside one line keeps the classic typing-over behaviour.
+    auto *editor = makeEditor(QStringLiteral("hello\nworld\n"), 1);
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(4, QTextCursor::KeepAnchor); // "ell"
+    editor->setTextCursor(sel);
+
+    QTest::keyClick(editor, Qt::Key_Tab);
+    QCOMPARE(editor->toPlainText(), QStringLiteral("h    o\nworld\n"));
 }
 
 QTEST_MAIN(TestCodeEditor)
