@@ -101,6 +101,8 @@ void MainWindow::buildMenus()
                         tr("&New"), QKeySequence::New, this, &MainWindow::fileNew);
     fileMenu->addAction(QIcon::fromTheme(QStringLiteral("document-open")),
                         tr("&Open..."), QKeySequence::Open, this, &MainWindow::fileOpen);
+    recentFilesMenu_ = fileMenu->addMenu(QIcon::fromTheme(QStringLiteral("document-open-recent")),
+                                         tr("Recent &Files"));
     fileMenu->addSeparator();
     auto *saveAct = fileMenu->addAction(QIcon::fromTheme(QStringLiteral("document-save")),
                         tr("&Save"), QKeySequence::Save, this, &MainWindow::fileSave);
@@ -113,9 +115,6 @@ void MainWindow::buildMenus()
     saveAllAct->setData(QStringLiteral("document-save-all"));
     fileMenu->addSeparator();
     fileMenu->addAction(tr("Close Ta&b"), QKeySequence::Close, this, &MainWindow::fileCloseTab);
-    fileMenu->addSeparator();
-    recentFilesMenu_ = fileMenu->addMenu(QIcon::fromTheme(QStringLiteral("document-open-recent")),
-                                         tr("Recent &Files"));
     fileMenu->addSeparator();
     fileMenu->addAction(QIcon::fromTheme(QStringLiteral("application-exit")),
                         tr("&Quit"), QKeySequence::Quit, this, &MainWindow::fileQuit);
