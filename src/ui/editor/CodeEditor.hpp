@@ -62,6 +62,12 @@ public:
     int selectedWordCount() const;
     static int countWords(const QString &text);
 
+    // Character counting: every code point counts, including whitespace and
+    // newlines; a surrogate pair (e.g. emoji) is a single character.
+    int characterCount() const;
+    int selectedCharacterCount() const;
+    static int countCharacters(const QString &text);
+
     // ---- Column (rectangular) selection ----
     // A pseudo-selection spanning the same character range on consecutive
     // lines; started with Alt+Shift+Arrows or startColumnSelection(). Plain

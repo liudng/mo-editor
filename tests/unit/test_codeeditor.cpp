@@ -35,6 +35,9 @@ class TestCodeEditor : public QObject {
     void testWordCount();
     void testSelectedWordCount();
 
+    void testCharacterCount();
+    void testSelectedCharacterCount();
+
   private:
     mo::ui::CodeEditor *makeEditor(const QString &text, int position);
     QPointer<mo::ui::CodeEditor> m_editor;
@@ -362,6 +365,38 @@ void TestCodeEditor::testSelectedWordCount() {
     sel.setPosition(8, QTextCursor::KeepAnchor);
     editor->setTextCursor(sel);
     QCOMPARE(editor->selectedWordCount(), 1);
+}
+
+void TestCodeEditor::testCharacterCount() {
+    // Empty document has no characters.
+    QCOMPARE(makeEditor(QString(), 0)->characterCount(), 0);
+
+    // Every code point counts, including whitespace and newlines.
+    QCOMPARE(makeEditor(QStringLiteral("你好 world\n"), 0)->characterCount(), 9);
+
+    // A surrogate pair (e.g. emoji) is a single character, not two.
+    QCOMPARE(makeEditor(QStringLiteral("a👍b"), 0)->characterCount(), 3);
+}
+
+void TestCodeEditor::testSelectedCharacterCount() {
+    auto *editor = makeEditor(QStringLiteral("你好 world\n"), 0);
+
+    // No selection: nothing selected.
+    QCOMPARE(editor->selectedCharacterCount(), 0);
+
+    // "你好" — two characters.
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(0);
+    sel.setPosition(2, QTextCursor::KeepAnchor);
+    editor->setTextCursor(sel);
+    QCOMPARE(editor->selectedCharacterCount(), 2);
+
+    // " world\n" — spaces and the newline count too.
+    sel = editor->textCursor();
+    sel.setPosition(2);
+    sel.setPosition(9, QTextCursor::KeepAnchor);
+    editor->setTextCursor(sel);
+    QCOMPARE(editor->selectedCharacterCount(), 7);
 }
 
 QTEST_MAIN(TestCodeEditor)

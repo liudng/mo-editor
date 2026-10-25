@@ -71,9 +71,9 @@ private slots:
     void onSettingsChanged();
     void onEditorTitleChanged(const QString &title);
     void onEditorModificationChanged(bool modified);
-    // Refreshes the status-bar word count (full text + selection) from the
-    // current editor.
-    void updateWordCount();
+    // Refreshes the status-bar word and character counts (full text +
+    // selection) from the current editor.
+    void updateCounts();
 
 private:
     void buildMenus();
@@ -94,6 +94,7 @@ private:
     QAction *toggleToolBarAction_ = nullptr;
     FindReplaceDock *findDock_ = nullptr;
     QLabel *wordCountLabel_ = nullptr;
+    QLabel *charCountLabel_ = nullptr;
     QStringList recentFiles_;
 };
 

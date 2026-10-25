@@ -137,29 +137,35 @@ void TestMainWindow::testWordCountStatusBar() {
     auto *editor = qobject_cast<mo::ui::CodeEditor *>(tw->currentWidget());
     QVERIFY(editor != nullptr);
 
-    auto *label = m_window->findChild<QLabel *>(QStringLiteral("wordCountLabel"));
-    QVERIFY(label != nullptr);
+    auto *wordLabel = m_window->findChild<QLabel *>(QStringLiteral("wordCountLabel"));
+    QVERIFY(wordLabel != nullptr);
+    auto *charLabel = m_window->findChild<QLabel *>(QStringLiteral("charCountLabel"));
+    QVERIFY(charLabel != nullptr);
 
-    // A fresh empty tab shows zero words.
-    QCOMPARE(label->text(), QStringLiteral("0 words"));
+    // A fresh empty tab shows zero words and characters.
+    QCOMPARE(wordLabel->text(), QStringLiteral("0 words"));
+    QCOMPARE(charLabel->text(), QStringLiteral("0 characters"));
 
-    // Editing the current document refreshes the full count:
-    // 2 CJK characters + 1 latin word = 3.
+    // Editing the current document refreshes the full counts:
+    // 2 CJK characters + 1 latin word = 3 words, 8 characters.
     editor->setPlainText(QStringLiteral("你好 world"));
-    QCOMPARE(label->text(), QStringLiteral("3 words"));
+    QCOMPARE(wordLabel->text(), QStringLiteral("3 words"));
+    QCOMPARE(charLabel->text(), QStringLiteral("8 characters"));
 
-    // Selecting text adds the selected count.
+    // Selecting text adds the selected counts.
     QTextCursor sel = editor->textCursor();
     sel.setPosition(0);
     sel.setPosition(2, QTextCursor::KeepAnchor); // "你好"
     editor->setTextCursor(sel);
-    QCOMPARE(label->text(), QStringLiteral("3 words (2 selected)"));
+    QCOMPARE(wordLabel->text(), QStringLiteral("3 words (2 selected)"));
+    QCOMPARE(charLabel->text(), QStringLiteral("8 characters (2 selected)"));
 
-    // Collapsing the selection removes it again.
+    // Collapsing the selection removes them again.
     QTextCursor cur = editor->textCursor();
     cur.clearSelection();
     editor->setTextCursor(cur);
-    QCOMPARE(label->text(), QStringLiteral("3 words"));
+    QCOMPARE(wordLabel->text(), QStringLiteral("3 words"));
+    QCOMPARE(charLabel->text(), QStringLiteral("8 characters"));
 }
 
 QTEST_MAIN(TestMainWindow)

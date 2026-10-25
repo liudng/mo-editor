@@ -120,6 +120,29 @@ int CodeEditor::selectedWordCount() const
     return countWords(textCursor().selectedText());
 }
 
+int CodeEditor::characterCount() const
+{
+    return countCharacters(toPlainText());
+}
+
+int CodeEditor::selectedCharacterCount() const
+{
+    return countCharacters(textCursor().selectedText());
+}
+
+int CodeEditor::countCharacters(const QString &text)
+{
+    int chars = 0;
+    for (const QChar &ch : text) {
+        // Only count the high half of a surrogate pair, so an astral
+        // character (e.g. emoji) is one character, not two.
+        if (!ch.isLowSurrogate()) {
+            ++chars;
+        }
+    }
+    return chars;
+}
+
 int CodeEditor::countWords(const QString &text)
 {
     int words = 0;

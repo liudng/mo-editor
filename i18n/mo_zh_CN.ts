@@ -277,6 +277,14 @@
       <source>%1 words (%2 selected)</source>
       <translation>%1 字（选中 %2 字）</translation>
     </message>
+    <message>
+      <source>%1 characters</source>
+      <translation>%1 字符</translation>
+    </message>
+    <message>
+      <source>%1 characters (%2 selected)</source>
+      <translation>%1 字符（选中 %2 字符）</translation>
+    </message>
   </context>
   <context>
     <name>SettingsDialog</name>

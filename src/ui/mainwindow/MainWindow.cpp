@@ -53,12 +53,17 @@ MainWindow::MainWindow(const QStringList &filesToOpen, QWidget *parent)
     buildMenus();
     buildToolBar();
 
-    // Word count of the current document (and its selection) in the status
-    // bar; updated via editor signals in newTab()/openFile().
+    // Word/character counts of the current document (and its selection) in
+    // the status bar; updated via editor signals in newTab()/openFile().
     wordCountLabel_ = new QLabel(this);
     wordCountLabel_->setObjectName(QStringLiteral("wordCountLabel"));
+    wordCountLabel_->setContentsMargins(6, 0, 6, 0);
     statusBar()->addPermanentWidget(wordCountLabel_);
-    updateWordCount();
+    charCountLabel_ = new QLabel(this);
+    charCountLabel_->setObjectName(QStringLiteral("charCountLabel"));
+    charCountLabel_->setContentsMargins(6, 0, 6, 0);
+    statusBar()->addPermanentWidget(charCountLabel_);
+    updateCounts();
 
     applyTheme();
     applyIconTheme();
@@ -309,8 +314,8 @@ void MainWindow::newTab()
     auto *editor = new CodeEditor(this);
     connect(editor, &CodeEditor::titleChanged, this, &MainWindow::onEditorTitleChanged);
     connect(editor, &CodeEditor::modificationChanged, this, &MainWindow::onEditorModificationChanged);
-    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateWordCount);
-    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateWordCount);
+    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateCounts);
+    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateCounts);
     const int idx = tabWidget_->addTab(editor, editor->tabTitle());
     tabWidget_->setCurrentIndex(idx);
     editor->setFocus();
@@ -330,8 +335,8 @@ void MainWindow::openFile(const QString &path)
     auto *editor = new CodeEditor(this);
     connect(editor, &CodeEditor::titleChanged, this, &MainWindow::onEditorTitleChanged);
     connect(editor, &CodeEditor::modificationChanged, this, &MainWindow::onEditorModificationChanged);
-    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateWordCount);
-    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateWordCount);
+    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateCounts);
+    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateCounts);
     if (!editor->loadFile(path)) {
         delete editor;
         QMessageBox::warning(this, tr("Open File"), tr("Cannot read %1.").arg(path));
@@ -387,7 +392,7 @@ void MainWindow::updateTabTitle(int index)
 void MainWindow::onTabChanged(int index)
 {
     Q_UNUSED(index);
-    updateWordCount();
+    updateCounts();
 }
 
 void MainWindow::onTabCloseRequested(int index) { closeTab(index); }
@@ -420,7 +425,7 @@ void MainWindow::onEditorModificationChanged(bool modified)
     }
 }
 
-void MainWindow::updateWordCount()
+void MainWindow::updateCounts()
 {
     if (!wordCountLabel_) {
         return;
@@ -428,15 +433,24 @@ void MainWindow::updateWordCount()
     auto *editor = currentEditor();
     if (!editor) {
         wordCountLabel_->clear();
+        charCountLabel_->clear();
         return;
     }
-    const int total = editor->wordCount();
-    const int selected = editor->selectedWordCount();
-    if (selected > 0) {
+    const int totalWords = editor->wordCount();
+    const int selectedWords = editor->selectedWordCount();
+    if (selectedWords > 0) {
         wordCountLabel_->setText(
-            tr("%1 words (%2 selected)").arg(total).arg(selected));
+            tr("%1 words (%2 selected)").arg(totalWords).arg(selectedWords));
     } else {
-        wordCountLabel_->setText(tr("%1 words").arg(total));
+        wordCountLabel_->setText(tr("%1 words").arg(totalWords));
+    }
+    const int totalChars = editor->characterCount();
+    const int selectedChars = editor->selectedCharacterCount();
+    if (selectedChars > 0) {
+        charCountLabel_->setText(
+            tr("%1 characters (%2 selected)").arg(totalChars).arg(selectedChars));
+    } else {
+        charCountLabel_->setText(tr("%1 characters").arg(totalChars));
     }
 }
 
