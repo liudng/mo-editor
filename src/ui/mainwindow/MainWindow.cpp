@@ -452,6 +452,32 @@ void MainWindow::fileOpen()
     }
 }
 
+// Writes the editor content to path, keeping the file watcher coherent:
+// the path is unwatched during the write — QSaveFile replaces the target
+// via an atomic rename, which the watcher would otherwise report as an
+// external modification ("was modified by another program") — and the
+// saved path is watched again afterwards.
+bool MainWindow::saveEditorToPath(CodeEditor *editor, const QString &path)
+{
+    const QString watchKey = QFileInfo(path).absoluteFilePath();
+    const bool wasWatched = fileWatcher_->files().contains(watchKey);
+    if (wasWatched) {
+        fileWatcher_->removePath(watchKey);
+    }
+    const bool ok = (path == editor->filePath())
+                        ? editor->save()
+                        : editor->saveAs(path);
+    if (ok) {
+        if (!fileWatcher_->files().contains(watchKey)) {
+            fileWatcher_->addPath(watchKey);
+        }
+    } else if (wasWatched) {
+        // A failed write leaves the file on disk untouched; restore the watch.
+        fileWatcher_->addPath(watchKey);
+    }
+    return ok;
+}
+
 void MainWindow::fileSave()
 {
     auto *editor = currentEditor();
@@ -464,7 +490,7 @@ void MainWindow::fileSave()
         fileSaveAs();
         return;
     }
-    editor->save();
+    saveEditorToPath(editor, editor->filePath());
 }
 
 void MainWindow::fileSaveAs()
@@ -474,12 +500,15 @@ void MainWindow::fileSaveAs()
         return;
     }
     const auto path = QFileDialog::getSaveFileName(this, tr("Save File As"));
-    if (!path.isEmpty()) {
-        editor->saveAs(path);
-        const int idx = tabWidget_->currentIndex();
-        tabWidget_->setTabText(idx, editor->tabTitle());
-        tabWidget_->setTabToolTip(idx, QFileInfo(path).absoluteFilePath());
+    if (path.isEmpty()) {
+        return;
     }
+    if (!saveEditorToPath(editor, path)) {
+        return;
+    }
+    const int idx = tabWidget_->currentIndex();
+    tabWidget_->setTabText(idx, editor->tabTitle());
+    tabWidget_->setTabToolTip(idx, QFileInfo(path).absoluteFilePath());
 }
 
 void MainWindow::fileSaveAll()
@@ -492,7 +521,7 @@ void MainWindow::fileSaveAll()
                 tabWidget_->setCurrentIndex(i);
                 fileSaveAs();
             } else {
-                editor->save();
+                saveEditorToPath(editor, editor->filePath());
             }
         }
     }

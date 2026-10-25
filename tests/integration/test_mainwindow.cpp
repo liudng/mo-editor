@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: 2026 Liu Dong <liudng@hotmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#include <QFile>
+#include <QFileInfo>
+#include <QFileSystemWatcher>
 #include <QPointer>
 #include <QStandardPaths>
 #include <QTabWidget>
@@ -18,6 +21,7 @@ class TestMainWindow : public QObject {
     void testCreateWindow();
     void testOpenFile();
     void testOpenFilesFromCommandLine();
+    void testSaveDoesNotTriggerReloadPrompt();
 
   private:
     static int tabCount(const mo::ui::MainWindow &mw);
@@ -81,6 +85,45 @@ void TestMainWindow::testOpenFilesFromCommandLine() {
     // "Untitled" tab is created.
     m_window = new mo::ui::MainWindow(QStringList{tmp1.fileName(), tmp2.fileName()});
     QCOMPARE(tabCount(*m_window), 2);
+}
+
+void TestMainWindow::testSaveDoesNotTriggerReloadPrompt() {
+    QTemporaryFile tmp;
+    QVERIFY(tmp.open());
+    {
+        QTextStream out(&tmp);
+        out << QStringLiteral("mo save watch test\n");
+    }
+    tmp.close();
+
+    m_window = new mo::ui::MainWindow;
+    m_window->openFile(tmp.fileName());
+
+    auto *watcher = m_window->findChildren<QFileSystemWatcher *>().first();
+    const QString watchKey = QFileInfo(tmp.fileName()).absoluteFilePath();
+    QVERIFY(watcher->files().contains(watchKey));
+
+    // Detach the window's handler: if saving regressed to emitting
+    // fileChanged for its own write, the window would pop a modal
+    // "modified by another program" dialog and hang the headless suite.
+    // We count the raw events instead.
+    disconnect(watcher, nullptr, m_window, nullptr);
+    int events = 0;
+    connect(watcher, &QFileSystemWatcher::fileChanged,
+            [&events](const QString &) { ++events; });
+
+    m_window->fileSave();
+    QTest::qWait(200); // let queued watcher events arrive
+
+    // Our own save must not look like an external change...
+    QCOMPARE(events, 0);
+    // ...and the file must stay watched for real external changes (the
+    // atomic rename invalidates the old watch; MainWindow re-adds it).
+    QVERIFY(watcher->files().contains(watchKey));
+
+    QFile f(tmp.fileName());
+    QVERIFY(f.open(QIODevice::ReadOnly));
+    QCOMPARE(QString::fromUtf8(f.readAll()), QStringLiteral("mo save watch test\n"));
 }
 
 QTEST_MAIN(TestMainWindow)

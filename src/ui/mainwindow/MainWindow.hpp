@@ -83,6 +83,7 @@ private:
     void loadStyleSheet(const QString &name);
     void updateTabTitle(int index);
     CodeEditor *currentEditor() const;
+    bool saveEditorToPath(CodeEditor *editor, const QString &path);
 
     QTabWidget *tabWidget_ = nullptr;
     QToolBar *toolBar_ = nullptr;
