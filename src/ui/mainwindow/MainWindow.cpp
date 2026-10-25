@@ -305,6 +305,7 @@ void MainWindow::newTab()
     connect(editor, &CodeEditor::modificationChanged, this, &MainWindow::onEditorModificationChanged);
     const int idx = tabWidget_->addTab(editor, editor->tabTitle());
     tabWidget_->setCurrentIndex(idx);
+    editor->setFocus();
 }
 
 void MainWindow::openFile(const QString &path)
