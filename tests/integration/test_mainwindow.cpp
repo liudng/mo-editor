@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QFile>
+#include <QLabel>
 #include <QPointer>
 #include <QStandardPaths>
 #include <QTabWidget>
 #include <QTemporaryFile>
+#include <QTextCursor>
 #include <QTextStream>
 #include <QtTest>
 
@@ -21,6 +23,7 @@ class TestMainWindow : public QObject {
     void testOpenFile();
     void testOpenFilesFromCommandLine();
     void testSaveChecksExternalModification();
+    void testWordCountStatusBar();
 
   private:
     static int tabCount(const mo::ui::MainWindow &mw);
@@ -126,6 +129,37 @@ void TestMainWindow::testSaveChecksExternalModification() {
     QVERIFY(editor->loadFile(tmp.fileName()));
     QVERIFY(!editor->isExternallyModified());
     QCOMPARE(editor->toPlainText(), QStringLiteral("externally changed\n"));
+}
+
+void TestMainWindow::testWordCountStatusBar() {
+    m_window = new mo::ui::MainWindow;
+    auto *tw = m_window->findChildren<QTabWidget *>().first();
+    auto *editor = qobject_cast<mo::ui::CodeEditor *>(tw->currentWidget());
+    QVERIFY(editor != nullptr);
+
+    auto *label = m_window->findChild<QLabel *>(QStringLiteral("wordCountLabel"));
+    QVERIFY(label != nullptr);
+
+    // A fresh empty tab shows zero words.
+    QCOMPARE(label->text(), QStringLiteral("0 words"));
+
+    // Editing the current document refreshes the full count:
+    // 2 CJK characters + 1 latin word = 3.
+    editor->setPlainText(QStringLiteral("你好 world"));
+    QCOMPARE(label->text(), QStringLiteral("3 words"));
+
+    // Selecting text adds the selected count.
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(0);
+    sel.setPosition(2, QTextCursor::KeepAnchor); // "你好"
+    editor->setTextCursor(sel);
+    QCOMPARE(label->text(), QStringLiteral("3 words (2 selected)"));
+
+    // Collapsing the selection removes it again.
+    QTextCursor cur = editor->textCursor();
+    cur.clearSelection();
+    editor->setTextCursor(cur);
+    QCOMPARE(label->text(), QStringLiteral("3 words"));
 }
 
 QTEST_MAIN(TestMainWindow)

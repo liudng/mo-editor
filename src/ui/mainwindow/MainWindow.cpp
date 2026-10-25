@@ -20,9 +20,11 @@
 #include <QFileInfo>
 #include <QIcon>
 #include <QKeySequence>
+#include <QLabel>
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QStatusBar>
 #include <QTabWidget>
 #include <QToolBar>
 
@@ -50,6 +52,14 @@ MainWindow::MainWindow(const QStringList &filesToOpen, QWidget *parent)
 
     buildMenus();
     buildToolBar();
+
+    // Word count of the current document (and its selection) in the status
+    // bar; updated via editor signals in newTab()/openFile().
+    wordCountLabel_ = new QLabel(this);
+    wordCountLabel_->setObjectName(QStringLiteral("wordCountLabel"));
+    statusBar()->addPermanentWidget(wordCountLabel_);
+    updateWordCount();
+
     applyTheme();
     applyIconTheme();
 
@@ -299,6 +309,8 @@ void MainWindow::newTab()
     auto *editor = new CodeEditor(this);
     connect(editor, &CodeEditor::titleChanged, this, &MainWindow::onEditorTitleChanged);
     connect(editor, &CodeEditor::modificationChanged, this, &MainWindow::onEditorModificationChanged);
+    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateWordCount);
+    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateWordCount);
     const int idx = tabWidget_->addTab(editor, editor->tabTitle());
     tabWidget_->setCurrentIndex(idx);
     editor->setFocus();
@@ -318,6 +330,8 @@ void MainWindow::openFile(const QString &path)
     auto *editor = new CodeEditor(this);
     connect(editor, &CodeEditor::titleChanged, this, &MainWindow::onEditorTitleChanged);
     connect(editor, &CodeEditor::modificationChanged, this, &MainWindow::onEditorModificationChanged);
+    connect(editor, &QPlainTextEdit::textChanged, this, &MainWindow::updateWordCount);
+    connect(editor, &QPlainTextEdit::selectionChanged, this, &MainWindow::updateWordCount);
     if (!editor->loadFile(path)) {
         delete editor;
         QMessageBox::warning(this, tr("Open File"), tr("Cannot read %1.").arg(path));
@@ -370,7 +384,11 @@ void MainWindow::updateTabTitle(int index)
     }
 }
 
-void MainWindow::onTabChanged(int index) { Q_UNUSED(index); }
+void MainWindow::onTabChanged(int index)
+{
+    Q_UNUSED(index);
+    updateWordCount();
+}
 
 void MainWindow::onTabCloseRequested(int index) { closeTab(index); }
 
@@ -399,6 +417,26 @@ void MainWindow::onEditorModificationChanged(bool modified)
     const int idx = tabWidget_->indexOf(editor);
     if (idx >= 0) {
         tabWidget_->setTabText(idx, editor->tabTitle());
+    }
+}
+
+void MainWindow::updateWordCount()
+{
+    if (!wordCountLabel_) {
+        return;
+    }
+    auto *editor = currentEditor();
+    if (!editor) {
+        wordCountLabel_->clear();
+        return;
+    }
+    const int total = editor->wordCount();
+    const int selected = editor->selectedWordCount();
+    if (selected > 0) {
+        wordCountLabel_->setText(
+            tr("%1 words (%2 selected)").arg(total).arg(selected));
+    } else {
+        wordCountLabel_->setText(tr("%1 words").arg(total));
     }
 }
 

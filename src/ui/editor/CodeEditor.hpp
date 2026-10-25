@@ -53,6 +53,15 @@ public:
 
     int lineNumberAreaWidth();
 
+    // ---- Word counting ----
+    // Counts words the way word processors count "字数": every CJK character
+    // (Han, Hiragana, Katakana, Hangul) counts as one, every run of
+    // consecutive letters or numbers counts as one; whitespace and
+    // punctuation count zero.
+    int wordCount() const;
+    int selectedWordCount() const;
+    static int countWords(const QString &text);
+
     // ---- Column (rectangular) selection ----
     // A pseudo-selection spanning the same character range on consecutive
     // lines; started with Alt+Shift+Arrows or startColumnSelection(). Plain

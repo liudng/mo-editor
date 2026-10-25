@@ -11,6 +11,7 @@ class QMenu;
 class QTabWidget;
 class QToolBar;
 class QDockWidget;
+class QLabel;
 
 namespace mo::ui {
 
@@ -70,6 +71,9 @@ private slots:
     void onSettingsChanged();
     void onEditorTitleChanged(const QString &title);
     void onEditorModificationChanged(bool modified);
+    // Refreshes the status-bar word count (full text + selection) from the
+    // current editor.
+    void updateWordCount();
 
 private:
     void buildMenus();
@@ -89,6 +93,7 @@ private:
     QAction *toggleLineNumbersAction_ = nullptr;
     QAction *toggleToolBarAction_ = nullptr;
     FindReplaceDock *findDock_ = nullptr;
+    QLabel *wordCountLabel_ = nullptr;
     QStringList recentFiles_;
 };
 

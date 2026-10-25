@@ -269,6 +269,14 @@
       <source>Main</source>
       <translation>主工具栏</translation>
     </message>
+    <message>
+      <source>%1 words</source>
+      <translation>%1 字</translation>
+    </message>
+    <message>
+      <source>%1 words (%2 selected)</source>
+      <translation>%1 字（选中 %2 字）</translation>
+    </message>
   </context>
   <context>
     <name>SettingsDialog</name>

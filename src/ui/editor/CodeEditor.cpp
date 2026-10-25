@@ -110,6 +110,50 @@ int CodeEditor::lineNumberAreaWidth()
     return space;
 }
 
+int CodeEditor::wordCount() const
+{
+    return countWords(toPlainText());
+}
+
+int CodeEditor::selectedWordCount() const
+{
+    return countWords(textCursor().selectedText());
+}
+
+int CodeEditor::countWords(const QString &text)
+{
+    int words = 0;
+    bool inWord = false;
+    for (const QChar &ch : text) {
+        if (ch.isSpace()) {
+            inWord = false;
+            continue;
+        }
+        switch (ch.script()) {
+        case QChar::Script_Han:
+        case QChar::Script_Hiragana:
+        case QChar::Script_Katakana:
+        case QChar::Script_Hangul:
+            // Every CJK character is one word on its own.
+            ++words;
+            inWord = false;
+            break;
+        default:
+            if (ch.isLetterOrNumber()) {
+                // Consecutive letters/digits form one word.
+                if (!inWord) {
+                    ++words;
+                }
+                inWord = true;
+            } else {
+                inWord = false;
+            }
+            break;
+        }
+    }
+    return words;
+}
+
 void CodeEditor::updateLineNumberAreaWidth(int newBlockCount)
 {
     Q_UNUSED(newBlockCount);

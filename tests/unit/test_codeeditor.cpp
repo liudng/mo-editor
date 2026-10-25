@@ -32,6 +32,9 @@ class TestCodeEditor : public QObject {
     void testTabIndentsSingleSelectedLine();
     void testTabReplacesPartialSelection();
 
+    void testWordCount();
+    void testSelectedWordCount();
+
   private:
     mo::ui::CodeEditor *makeEditor(const QString &text, int position);
     QPointer<mo::ui::CodeEditor> m_editor;
@@ -311,6 +314,54 @@ void TestCodeEditor::testTabReplacesPartialSelection() {
 
     QTest::keyClick(editor, Qt::Key_Tab);
     QCOMPARE(editor->toPlainText(), QStringLiteral("h    o\nworld\n"));
+}
+
+void TestCodeEditor::testWordCount() {
+    // Empty document has no words.
+    QCOMPARE(makeEditor(QString(), 0)->wordCount(), 0);
+
+    // Every CJK character counts as one word, in all CJK scripts.
+    QCOMPARE(makeEditor(QStringLiteral("你好世界"), 0)->wordCount(), 4);
+    QCOMPARE(makeEditor(QStringLiteral("こんにちは"), 0)->wordCount(), 5);
+    QCOMPARE(makeEditor(QStringLiteral("안녕하세요"), 0)->wordCount(), 5);
+
+    // Each run of consecutive letters or digits counts as one word.
+    QCOMPARE(makeEditor(QStringLiteral("hello world 2026"), 0)->wordCount(), 3);
+
+    // Mixed text: 2 CJK characters + 2 latin words.
+    QCOMPARE(makeEditor(QStringLiteral("你好 world 2026"), 0)->wordCount(), 4);
+
+    // Whitespace and punctuation count zero.
+    QCOMPARE(makeEditor(QStringLiteral("hello, world!\n\n"), 0)->wordCount(), 2);
+}
+
+void TestCodeEditor::testSelectedWordCount() {
+    auto *editor = makeEditor(QStringLiteral("你好 world\n"), 0);
+
+    // No selection: nothing selected.
+    QCOMPARE(editor->selectedWordCount(), 0);
+
+    // "你好" — two CJK characters.
+    QTextCursor sel = editor->textCursor();
+    sel.setPosition(0);
+    sel.setPosition(2, QTextCursor::KeepAnchor);
+    editor->setTextCursor(sel);
+    QCOMPARE(editor->selectedWordCount(), 2);
+
+    // "好 w" — one CJK character plus one latin word.
+    sel = editor->textCursor();
+    sel.setPosition(1);
+    sel.setPosition(4, QTextCursor::KeepAnchor);
+    editor->setTextCursor(sel);
+    QCOMPARE(editor->selectedWordCount(), 2);
+
+    // " world" — a single latin word; separators inside or around a
+    // selection are not counted either.
+    sel = editor->textCursor();
+    sel.setPosition(2);
+    sel.setPosition(8, QTextCursor::KeepAnchor);
+    editor->setTextCursor(sel);
+    QCOMPARE(editor->selectedWordCount(), 1);
 }
 
 QTEST_MAIN(TestCodeEditor)
