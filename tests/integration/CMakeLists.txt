@@ -8,6 +8,7 @@ target_compile_features(test_mainwindow PRIVATE cxx_std_20)
 target_link_libraries(test_mainwindow PRIVATE
     Qt6::Test
     Mo::Ui
+    KF6::SyntaxHighlighting
 )
 
 # Run on the offscreen QPA platform so the suite works in headless CI.

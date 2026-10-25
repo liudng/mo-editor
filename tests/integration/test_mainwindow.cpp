@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QFile>
-#include <QFileInfo>
-#include <QFileSystemWatcher>
 #include <QPointer>
 #include <QStandardPaths>
 #include <QTabWidget>
@@ -11,6 +9,7 @@
 #include <QTextStream>
 #include <QtTest>
 
+#include "editor/CodeEditor.hpp"
 #include "mainwindow/MainWindow.hpp"
 
 class TestMainWindow : public QObject {
@@ -21,7 +20,7 @@ class TestMainWindow : public QObject {
     void testCreateWindow();
     void testOpenFile();
     void testOpenFilesFromCommandLine();
-    void testSaveDoesNotTriggerReloadPrompt();
+    void testSaveChecksExternalModification();
 
   private:
     static int tabCount(const mo::ui::MainWindow &mw);
@@ -87,43 +86,46 @@ void TestMainWindow::testOpenFilesFromCommandLine() {
     QCOMPARE(tabCount(*m_window), 2);
 }
 
-void TestMainWindow::testSaveDoesNotTriggerReloadPrompt() {
+void TestMainWindow::testSaveChecksExternalModification() {
     QTemporaryFile tmp;
     QVERIFY(tmp.open());
     {
         QTextStream out(&tmp);
-        out << QStringLiteral("mo save watch test\n");
+        out << QStringLiteral("original\n");
     }
     tmp.close();
 
     m_window = new mo::ui::MainWindow;
     m_window->openFile(tmp.fileName());
+    // The opened file is the current tab (the constructor also opens an
+    // "Untitled" tab, so findChildren().first() would be the wrong editor).
+    auto *tw = m_window->findChildren<QTabWidget *>().first();
+    auto *editor = qobject_cast<mo::ui::CodeEditor *>(tw->currentWidget());
+    QVERIFY(editor != nullptr);
+    QVERIFY(!editor->isExternallyModified());
 
-    auto *watcher = m_window->findChildren<QFileSystemWatcher *>().first();
-    const QString watchKey = QFileInfo(tmp.fileName()).absoluteFilePath();
-    QVERIFY(watcher->files().contains(watchKey));
-
-    // Detach the window's handler: if saving regressed to emitting
-    // fileChanged for its own write, the window would pop a modal
-    // "modified by another program" dialog and hang the headless suite.
-    // We count the raw events instead.
-    disconnect(watcher, nullptr, m_window, nullptr);
-    int events = 0;
-    connect(watcher, &QFileSystemWatcher::fileChanged,
-            [&events](const QString &) { ++events; });
-
+    // Our own save must not count as an external modification: the saved
+    // state becomes the new baseline.
     m_window->fileSave();
-    QTest::qWait(200); // let queued watcher events arrive
-
-    // Our own save must not look like an external change...
-    QCOMPARE(events, 0);
-    // ...and the file must stay watched for real external changes (the
-    // atomic rename invalidates the old watch; MainWindow re-adds it).
-    QVERIFY(watcher->files().contains(watchKey));
+    QVERIFY(!editor->isExternallyModified());
 
     QFile f(tmp.fileName());
     QVERIFY(f.open(QIODevice::ReadOnly));
-    QCOMPARE(QString::fromUtf8(f.readAll()), QStringLiteral("mo save watch test\n"));
+    QCOMPARE(QString::fromUtf8(f.readAll()), QStringLiteral("original\n"));
+    f.close();
+
+    // A change from outside is detected afterwards (content of a different
+    // length so the size alone distinguishes the versions regardless of
+    // filesystem timestamp granularity).
+    QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Truncate));
+    f.write("externally changed\n");
+    f.close();
+    QVERIFY(editor->isExternallyModified());
+
+    // Reloading the disk version resets the baseline.
+    QVERIFY(editor->loadFile(tmp.fileName()));
+    QVERIFY(!editor->isExternallyModified());
+    QCOMPARE(editor->toPlainText(), QStringLiteral("externally changed\n"));
 }
 
 QTEST_MAIN(TestMainWindow)

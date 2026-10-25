@@ -11,17 +11,18 @@
 #include "mo/core/Settings.hpp"
 #include "mo/services/SessionManager.hpp"
 
+#include <QAbstractButton>
 #include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
 #include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QFileSystemWatcher>
 #include <QIcon>
 #include <QKeySequence>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QTabWidget>
 #include <QToolBar>
 
@@ -39,10 +40,6 @@ MainWindow::MainWindow(const QStringList &filesToOpen, QWidget *parent)
     tabWidget_->setTabsClosable(true);
     tabWidget_->setMovable(true);
     setCentralWidget(tabWidget_);
-
-    fileWatcher_ = new QFileSystemWatcher(this);
-    connect(fileWatcher_, &QFileSystemWatcher::fileChanged,
-            this, &MainWindow::onFileChanged);
 
     // Find/Replace dock at the bottom edge.
     findDock_ = new FindReplaceDock(this);
@@ -331,11 +328,6 @@ void MainWindow::openFile(const QString &path)
     tabWidget_->setTabToolTip(idx, fi.absoluteFilePath());
     tabWidget_->setCurrentIndex(idx);
 
-    const auto absolute = fi.absoluteFilePath();
-    if (!fileWatcher_->files().contains(absolute)) {
-        fileWatcher_->addPath(absolute);
-    }
-
     recentFiles_.removeAll(path);
     recentFiles_.prepend(path);
     while (recentFiles_.size() > 10) {
@@ -383,35 +375,6 @@ void MainWindow::onTabChanged(int index) { Q_UNUSED(index); }
 
 void MainWindow::onTabCloseRequested(int index) { closeTab(index); }
 
-void MainWindow::onFileChanged(const QString &path)
-{
-    mo::core::Logger::info("File changed externally: " + path);
-    // Find the editor for this file and prompt the user.
-    for (int i = 0; i < tabWidget_->count(); ++i) {
-        auto *editor = qobject_cast<CodeEditor *>(tabWidget_->widget(i));
-        if (editor && editor->filePath() == path) {
-            if (!QFileInfo::exists(path)) {
-                auto ret = QMessageBox::question(this, tr("File Removed"),
-                    tr("\"%1\" was removed or renamed. Keep the tab open?")
-                        .arg(QFileInfo(path).fileName()),
-                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-                if (ret == QMessageBox::No) {
-                    closeTab(i);
-                }
-            } else {
-                auto ret = QMessageBox::question(this, tr("File Changed"),
-                    tr("\"%1\" was modified by another program. Reload?")
-                        .arg(QFileInfo(path).fileName()),
-                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-                if (ret == QMessageBox::Yes) {
-                    editor->loadFile(path);
-                }
-            }
-            break;
-        }
-    }
-}
-
 void MainWindow::onSettingsChanged()
 {
     applyTheme();
@@ -452,30 +415,35 @@ void MainWindow::fileOpen()
     }
 }
 
-// Writes the editor content to path, keeping the file watcher coherent:
-// the path is unwatched during the write — QSaveFile replaces the target
-// via an atomic rename, which the watcher would otherwise report as an
-// external modification ("was modified by another program") — and the
-// saved path is watched again afterwards.
+// Writes the editor content to path. When overwriting the file the editor
+// was loaded from, checks whether the file changed on disk since it was
+// opened (or last saved) and lets the user decide which version to keep:
+// the editor content, the file on disk, or cancel the save.
 bool MainWindow::saveEditorToPath(CodeEditor *editor, const QString &path)
 {
-    const QString watchKey = QFileInfo(path).absoluteFilePath();
-    const bool wasWatched = fileWatcher_->files().contains(watchKey);
-    if (wasWatched) {
-        fileWatcher_->removePath(watchKey);
-    }
-    const bool ok = (path == editor->filePath())
-                        ? editor->save()
-                        : editor->saveAs(path);
-    if (ok) {
-        if (!fileWatcher_->files().contains(watchKey)) {
-            fileWatcher_->addPath(watchKey);
+    if (path == editor->filePath() && editor->isExternallyModified()) {
+        QMessageBox box(this);
+        box.setIcon(QMessageBox::Warning);
+        box.setWindowTitle(tr("File Changed"));
+        box.setText(tr("\"%1\" was modified by another program after it "
+                        "was opened. Which version do you want to keep?")
+                        .arg(QFileInfo(path).fileName()));
+        auto *overwriteBtn = static_cast<QAbstractButton *>(box.addButton(
+            tr("Overwrite the file"), QMessageBox::AcceptRole));
+        auto *reloadBtn = static_cast<QAbstractButton *>(box.addButton(
+            tr("Reload from disk"), QMessageBox::DestructiveRole));
+        box.addButton(QMessageBox::Cancel);
+        box.exec();
+        if (box.clickedButton() != overwriteBtn) {
+            if (box.clickedButton() == reloadBtn) {
+                // Keep the version on disk; the editor content is discarded.
+                editor->loadFile(editor->filePath());
+            }
+            return false; // Cancel or Reload: nothing is written.
         }
-    } else if (wasWatched) {
-        // A failed write leaves the file on disk untouched; restore the watch.
-        fileWatcher_->addPath(watchKey);
+        // Overwrite chosen: fall through and save.
     }
-    return ok;
+    return (path == editor->filePath()) ? editor->save() : editor->saveAs(path);
 }
 
 void MainWindow::fileSave()

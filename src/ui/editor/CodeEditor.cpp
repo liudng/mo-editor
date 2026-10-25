@@ -371,11 +371,29 @@ bool CodeEditor::loadFile(const QString &path)
     file.close();
 
     filePath_ = path;
+    // Record the on-disk state so later saves can detect external changes.
+    const QFileInfo fi(path);
+    loadedMtimeMs_ = fi.lastModified().toMSecsSinceEpoch();
+    loadedSize_ = fi.size();
     setLanguage(QFileInfo(path).suffix());
     cancelColumnSelection();
     document()->setModified(false);
     updateTabTitle();
     return true;
+}
+
+bool CodeEditor::isExternallyModified() const
+{
+    if (filePath_.isEmpty()) {
+        return false;
+    }
+    const QFileInfo fi(filePath_);
+    if (!fi.exists()) {
+        // Removed externally: not a conflict; saving simply recreates it.
+        return false;
+    }
+    return fi.lastModified().toMSecsSinceEpoch() != loadedMtimeMs_
+        || fi.size() != loadedSize_;
 }
 
 bool CodeEditor::save()
@@ -398,6 +416,10 @@ bool CodeEditor::saveAs(const QString &path)
     out.flush();
     if (file.commit()) {
         filePath_ = path;
+        // The file we just wrote becomes the new baseline.
+        const QFileInfo fi(path);
+        loadedMtimeMs_ = fi.lastModified().toMSecsSinceEpoch();
+        loadedSize_ = fi.size();
         document()->setModified(false);
         updateTabTitle();
         return true;

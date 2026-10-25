@@ -234,20 +234,20 @@
       <translation>"%1" 已修改。仍要关闭吗？</translation>
     </message>
     <message>
-      <source>File Removed</source>
-      <translation>文件已删除</translation>
-    </message>
-    <message>
-      <source>"%1" was removed or renamed. Keep the tab open?</source>
-      <translation>"%1" 已被删除或重命名。保留标签页吗？</translation>
-    </message>
-    <message>
       <source>File Changed</source>
       <translation>文件已更改</translation>
     </message>
     <message>
-      <source>"%1" was modified by another program. Reload?</source>
-      <translation>"%1" 已被其他程序修改。重新加载吗？</translation>
+      <source>"%1" was modified by another program after it was opened. Which version do you want to keep?</source>
+      <translation>"%1" 在打开后被其他程序修改过。要保留哪一个版本？</translation>
+    </message>
+    <message>
+      <source>Overwrite the file</source>
+      <translation>覆盖文件</translation>
+    </message>
+    <message>
+      <source>Reload from disk</source>
+      <translation>从磁盘重新加载</translation>
     </message>
     <message>
       <source>Unsaved Changes</source>

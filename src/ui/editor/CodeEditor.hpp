@@ -28,6 +28,10 @@ public:
     QString filePath() const;
     QString tabTitle() const;
 
+    // True if the file on disk no longer matches the state recorded when it
+    // was last loaded or saved by this editor (mtime/size based heuristic).
+    bool isExternallyModified() const;
+
     bool loadFile(const QString &path);
     bool save();
     bool saveAs(const QString &path);
@@ -100,6 +104,10 @@ private:
 
     LineNumberArea *lineNumberArea_ = nullptr;
     QString filePath_;
+    // File state (mtime + size) recorded when filePath_ was last loaded or
+    // saved; used by isExternallyModified() to detect outside changes.
+    qint64 loadedMtimeMs_ = 0;
+    qint64 loadedSize_ = -1;
     bool showLineNumbers_ = true;
     KSyntaxHighlighting::SyntaxHighlighter *highlighter_ = nullptr;
     KSyntaxHighlighting::Theme highlightingTheme_;

@@ -7,7 +7,6 @@
 #include <QStringList>
 #include <memory>
 
-class QFileSystemWatcher;
 class QMenu;
 class QTabWidget;
 class QToolBar;
@@ -68,7 +67,6 @@ public slots:
 private slots:
     void onTabChanged(int index);
     void onTabCloseRequested(int index);
-    void onFileChanged(const QString &path);
     void onSettingsChanged();
     void onEditorTitleChanged(const QString &title);
     void onEditorModificationChanged(bool modified);
@@ -91,7 +89,6 @@ private:
     QAction *toggleLineNumbersAction_ = nullptr;
     QAction *toggleToolBarAction_ = nullptr;
     FindReplaceDock *findDock_ = nullptr;
-    QFileSystemWatcher *fileWatcher_ = nullptr;
     QStringList recentFiles_;
 };
 
