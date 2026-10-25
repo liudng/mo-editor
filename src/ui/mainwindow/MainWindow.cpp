@@ -455,9 +455,16 @@ void MainWindow::fileOpen()
 void MainWindow::fileSave()
 {
     auto *editor = currentEditor();
-    if (editor) {
-        editor->save();
+    if (!editor) {
+        return;
     }
+    if (editor->filePath().isEmpty()) {
+        // New document with no file yet: Save behaves as Save As so the
+        // user picks where to store it.
+        fileSaveAs();
+        return;
+    }
+    editor->save();
 }
 
 void MainWindow::fileSaveAs()
