@@ -6,12 +6,12 @@
 #include "editor/CodeEditor.hpp"
 
 #include <QCheckBox>
+#include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTabWidget>
-#include <QVBoxLayout>
 #include <QWidget>
 
 namespace mo::ui {
@@ -45,17 +45,30 @@ FindReplaceDock::FindReplaceDock(QWidget *parent)
     statusLabel_->setStyleSheet(QStringLiteral("color: gray;"));
 
     // --- Layout ---
-    auto *searchRow = new QHBoxLayout;
-    searchRow->addWidget(new QLabel(tr("Find:")));
-    searchRow->addWidget(searchEdit_);
-    searchRow->addWidget(findNextBtn_);
-    searchRow->addWidget(findPrevBtn_);
+    // A grid keeps the input rows aligned: the labels share the left
+    // column (right-aligned), the edits share a stretching column, and
+    // the buttons line up in two columns across both rows.
+    auto *findLabel = new QLabel(tr("Find:"), central);
+    findLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    auto *replaceLabel = new QLabel(tr("Replace:"), central);
+    replaceLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    auto *replaceRow = new QHBoxLayout;
-    replaceRow->addWidget(new QLabel(tr("Replace:")));
-    replaceRow->addWidget(replaceEdit_);
-    replaceRow->addWidget(replaceBtn_);
-    replaceRow->addWidget(replaceAllBtn_);
+    auto *grid = new QGridLayout(central);
+    grid->setContentsMargins(6, 4, 6, 4);
+    grid->setHorizontalSpacing(6);
+    grid->setVerticalSpacing(6);
+
+    grid->addWidget(findLabel, 0, 0);
+    grid->addWidget(searchEdit_, 0, 1);
+    grid->addWidget(findNextBtn_, 0, 2);
+    grid->addWidget(findPrevBtn_, 0, 3);
+
+    grid->addWidget(replaceLabel, 1, 0);
+    grid->addWidget(replaceEdit_, 1, 1);
+    grid->addWidget(replaceBtn_, 1, 2);
+    grid->addWidget(replaceAllBtn_, 1, 3);
+
+    grid->setColumnStretch(1, 1);
 
     auto *optionsRow = new QHBoxLayout;
     optionsRow->addWidget(caseSensitiveCheck_);
@@ -63,12 +76,7 @@ FindReplaceDock::FindReplaceDock(QWidget *parent)
     optionsRow->addWidget(regexCheck_);
     optionsRow->addStretch();
     optionsRow->addWidget(statusLabel_);
-
-    auto *mainLayout = new QVBoxLayout(central);
-    mainLayout->setContentsMargins(6, 4, 6, 4);
-    mainLayout->addLayout(searchRow);
-    mainLayout->addLayout(replaceRow);
-    mainLayout->addLayout(optionsRow);
+    grid->addLayout(optionsRow, 2, 0, 1, 4);
 
     connect(findNextBtn_, &QPushButton::clicked, this, [this]() {
         if (auto *e = currentEditor()) findNext(e);
