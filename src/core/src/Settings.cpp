@@ -34,6 +34,7 @@ void Settings::load()
     setFontSize(settings_->value(QStringLiteral("ui/fontSize"), fontSize_).toInt());
     setTheme(settings_->value(QStringLiteral("ui/theme"), theme_).toString());
     setIconTheme(settings_->value(QStringLiteral("ui/iconTheme"), iconTheme_).toString());
+    setWidgetStyle(settings_->value(QStringLiteral("ui/widgetStyle"), widgetStyle_).toString());
     setTabWidth(settings_->value(QStringLiteral("editor/tabWidth"), tabWidth_).toInt());
     setShowLineNumbers(settings_->value(QStringLiteral("editor/showLineNumbers"), showLineNumbers_).toBool());
     setAutoIndent(settings_->value(QStringLiteral("editor/autoIndent"), autoIndent_).toBool());
@@ -46,6 +47,7 @@ void Settings::save()
     settings_->setValue(QStringLiteral("ui/fontSize"), fontSize_);
     settings_->setValue(QStringLiteral("ui/theme"), theme_);
     settings_->setValue(QStringLiteral("ui/iconTheme"), iconTheme_);
+    settings_->setValue(QStringLiteral("ui/widgetStyle"), widgetStyle_);
     settings_->setValue(QStringLiteral("editor/tabWidth"), tabWidth_);
     settings_->setValue(QStringLiteral("editor/showLineNumbers"), showLineNumbers_);
     settings_->setValue(QStringLiteral("editor/autoIndent"), autoIndent_);
@@ -90,6 +92,16 @@ void Settings::setIconTheme(const QString &iconTheme)
     if (iconTheme_ != iconTheme) {
         iconTheme_ = iconTheme;
         emit iconThemeChanged(iconTheme_);
+    }
+}
+
+QString Settings::widgetStyle() const { return widgetStyle_; }
+
+void Settings::setWidgetStyle(const QString &widgetStyle)
+{
+    if (widgetStyle_ != widgetStyle) {
+        widgetStyle_ = widgetStyle;
+        emit widgetStyleChanged(widgetStyle_);
     }
 }
 

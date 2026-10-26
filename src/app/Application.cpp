@@ -14,6 +14,8 @@
 #include <QLocale>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QStyle>
+#include <QStyleFactory>
 #include <QTranslator>
 
 namespace mo::app {
@@ -57,6 +59,13 @@ Application::Application(int &argc, char **argv)
 
     mo::core::Settings::instance().load();
 
+    // Remember the platform default style so the "System Default" option can
+    // restore it after a runtime switch, then apply the configured style.
+    defaultStyleName_ = style()->objectName();
+    applyWidgetStyle();
+    connect(&mo::core::Settings::instance(), &mo::core::Settings::widgetStyleChanged,
+            this, &mo::app::Application::applyWidgetStyle);
+
     mainWindow_ = std::make_unique<mo::ui::MainWindow>(filesToOpen_);
     mainWindow_->show();
 }
@@ -79,6 +88,22 @@ void Application::saveSession()
         mainWindow_->saveSession();
     }
     mo::core::Settings::instance().save();
+}
+
+void Application::applyWidgetStyle()
+{
+    auto name = mo::core::Settings::instance().widgetStyle();
+    if (name.isEmpty()) {
+        name = defaultStyleName_;
+    }
+    if (name.compare(style()->objectName(), Qt::CaseInsensitive) == 0) {
+        return;
+    }
+    if (auto *newStyle = QStyleFactory::create(name)) {
+        setStyle(newStyle);
+    } else {
+        mo::core::Logger::warning(QStringLiteral("Unknown widget style: ") + name);
+    }
 }
 
 void Application::loadTranslation()

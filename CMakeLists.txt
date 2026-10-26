@@ -50,6 +50,11 @@ qt_standard_project_setup(
     I18N_TRANSLATED_LANGUAGES zh_CN
 )
 
+# qt_standard_project_setup() only enables AUTOMOC and AUTOUIC; enable AUTORCC
+# ourselves so .qrc files listed in target sources (styles, icons) are compiled
+# into the binaries.
+set(CMAKE_AUTORCC ON)
+
 # ---------------------------------------------------------------------------
 # Qt project policies
 # ---------------------------------------------------------------------------

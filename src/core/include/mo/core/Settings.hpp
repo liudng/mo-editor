@@ -19,6 +19,7 @@ class Settings : public QObject
     Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontSizeChanged)
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QString iconTheme READ iconTheme WRITE setIconTheme NOTIFY iconThemeChanged)
+    Q_PROPERTY(QString widgetStyle READ widgetStyle WRITE setWidgetStyle NOTIFY widgetStyleChanged)
     Q_PROPERTY(int tabWidth READ tabWidth WRITE setTabWidth NOTIFY tabWidthChanged)
     Q_PROPERTY(bool showLineNumbers READ showLineNumbers WRITE setShowLineNumbers NOTIFY showLineNumbersChanged)
     Q_PROPERTY(bool autoIndent READ autoIndent WRITE setAutoIndent NOTIFY autoIndentChanged)
@@ -45,6 +46,10 @@ public:
     QString iconTheme() const;
     void setIconTheme(const QString &iconTheme);
 
+    // Widget style name (e.g. "Fusion"); empty means the platform default.
+    QString widgetStyle() const;
+    void setWidgetStyle(const QString &widgetStyle);
+
     int tabWidth() const;
     void setTabWidth(int width);
 
@@ -64,6 +69,7 @@ signals:
     void fontSizeChanged(int size);
     void themeChanged(const QString &theme);
     void iconThemeChanged(const QString &iconTheme);
+    void widgetStyleChanged(const QString &widgetStyle);
     void tabWidthChanged(int width);
     void showLineNumbersChanged(bool show);
     void autoIndentChanged(bool enabled);
@@ -81,6 +87,7 @@ private:
     int fontSize_ = 11;
     QString theme_ = QStringLiteral("System");
     QString iconTheme_ = QStringLiteral("Breeze");
+    QString widgetStyle_;
     int tabWidth_ = 4;
     bool showLineNumbers_ = true;
     bool autoIndent_ = true;

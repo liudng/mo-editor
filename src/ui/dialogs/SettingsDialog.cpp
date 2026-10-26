@@ -17,6 +17,7 @@
 #include <QSet>
 #include <QSpinBox>
 #include <QStandardPaths>
+#include <QStyleFactory>
 #include <QVBoxLayout>
 
 namespace mo::ui {
@@ -33,6 +34,14 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
     themeCombo_->addItem(tr("System"), QStringLiteral("System"));
     themeCombo_->addItem(tr("Light"), QStringLiteral("Light"));
     themeCombo_->addItem(tr("Dark"), QStringLiteral("Dark"));
+
+    widgetStyleCombo_ = new QComboBox(this);
+    widgetStyleCombo_->setToolTip(tr("Look and feel used to draw controls."));
+    widgetStyleCombo_->addItem(tr("System Default"), QString());
+    const auto styleKeys = QStyleFactory::keys();
+    for (const auto &key : styleKeys) {
+        widgetStyleCombo_->addItem(key, key);
+    }
 
     iconThemeCombo_ = new QComboBox(this);
     iconThemeCombo_->setToolTip(tr("Fallback icon theme used when the system "
@@ -70,6 +79,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent)
     form->addRow(tr("Font:"), fontCombo_);
     form->addRow(tr("Font size:"), fontSizeSpin_);
     form->addRow(tr("Theme:"), themeCombo_);
+    form->addRow(tr("Widget style:"), widgetStyleCombo_);
     form->addRow(tr("Icon theme:"), iconThemeCombo_);
     form->addRow(tr("Tab width:"), tabWidthSpin_);
     form->addRow(lineNumbersCheck_);
@@ -101,6 +111,15 @@ void SettingsDialog::load()
         }
     }
 
+    const auto widgetStyle = s.widgetStyle();
+    for (int i = 0; i < widgetStyleCombo_->count(); ++i) {
+        const auto data = widgetStyleCombo_->itemData(i).toString();
+        if (data.compare(widgetStyle, Qt::CaseInsensitive) == 0) {
+            widgetStyleCombo_->setCurrentIndex(i);
+            break;
+        }
+    }
+
     const auto iconTheme = s.iconTheme();
     bool found = false;
     for (int i = 0; i < iconThemeCombo_->count(); ++i) {
@@ -128,6 +147,7 @@ void SettingsDialog::save()
     s.setFontFamily(fontCombo_->currentFont().family());
     s.setFontSize(fontSizeSpin_->value());
     s.setTheme(themeCombo_->currentData().toString());
+    s.setWidgetStyle(widgetStyleCombo_->currentData().toString());
     s.setIconTheme(iconThemeCombo_->currentData().toString());
     s.setTabWidth(tabWidthSpin_->value());
     s.setShowLineNumbers(lineNumbersCheck_->isChecked());

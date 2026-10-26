@@ -32,10 +32,12 @@ private:
     void loadTranslation();
     void initLogging();
     void parseCommandLine();
+    void applyWidgetStyle();
 
     std::unique_ptr<SingleInstance> singleInstance_;
     std::unique_ptr<mo::ui::MainWindow> mainWindow_;
     QStringList filesToOpen_;
+    QString defaultStyleName_;
 };
 
 } // namespace mo::app

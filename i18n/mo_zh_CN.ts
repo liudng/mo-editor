@@ -305,6 +305,14 @@
       <translation>主题：</translation>
     </message>
     <message>
+      <source>Widget style:</source>
+      <translation>控件样式：</translation>
+    </message>
+    <message>
+      <source>Look and feel used to draw controls.</source>
+      <translation>用于绘制控件的外观风格。</translation>
+    </message>
+    <message>
       <source>Icon theme:</source>
       <translation>图标主题：</translation>
     </message>
